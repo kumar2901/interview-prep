@@ -45,23 +45,33 @@ public class Patterns {
         if (currentRow > totalRows) {
             return;
         }
-        printSpaces(totalRows - currentRow, 0);
-        printStars(currentRow, 0);
+        printSpaces(totalRows - currentRow);
+        printStars(currentRow);
         System.out.println();
         printPyramidHelper(totalRows, currentRow + 1);
     }
 
-    private void printSpaces(int remaining, int c) {
-        if (c >= remaining) return;
-        System.out.print(" ");
-        printSpaces(remaining, c + 1);
+    private void printStars(int currentRow) {
+        if(currentRow==0){
+            return;
+        }
+        System.out.print("* ");
+        printStars(currentRow-1);
     }
 
-    private void printStars(int count, int c) {
-        if (c >= count) return;
-        System.out.print("*");
-        if (c < count - 1) System.out.print(" ");
-        printStars(count, c + 1);
+    /*
+     5-1 4 space
+     5-2 3
+     5-3
+     5-4
+     5-5
+     */
+    private void printSpaces(int remainingRows) {
+        if(remainingRows<=0){
+            return;
+        }
+        System.out.print(" ");
+        printSpaces(remainingRows-1);
     }
 
 
