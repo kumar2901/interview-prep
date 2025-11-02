@@ -3,8 +3,7 @@ package com.kumar.interview.prep.interview_prep.dsa.recursion;
 public class BinarySearch {
 
     /*
-     Search in rotated sorted array
-     may contains duplicates
+     * Search in rotated sorted array may contains duplicates
      */
     public int rotatedBinarySearch(int[] arr, int target, int left, int right) {
         if (left > right) {
@@ -26,7 +25,7 @@ public class BinarySearch {
             } else {
                 right = mid - 1;
             }
-        } else { //difficult part handling duplicates
+        } else { // difficult part handling duplicates
             left++;
 
         }
