@@ -214,6 +214,74 @@ public class SubsetsAndSubsequence {
         }
     }
 
+    /**
+     * Find all valid combinations of k numbers that sum up to n such that the following conditions are true:
+     *
+     * Only numbers 1 through 9 are used. Each number is used at most once.
+     * <p>
+     * Example 1 Input: k = 3, n = 7 Output: [[1,2,4]]
+     * <p/>
+     * <p>
+     * Example 2:
+     *
+     * Input: k = 3, n = 9 Output: [[1,2,6],[1,3,5],[2,3,4]]
+     * </p>
+     *
+     * @param k
+     *            size
+     * @param n
+     *            target
+     * @return result
+     */
+    public List<List<Integer>> combinationSum3(int k, int n) {
+
+        List<List<Integer>> result = new ArrayList<>();
+
+        combinationsIII(1, 0, new ArrayList<>(), result, k, n);
+
+        return result;
+
+    }
+
+    /**
+     * 216. Combination Sum III
+     *
+     * @param start
+     *            start
+     * @param pathSum
+     *            pathSum
+     * @param path
+     *            path
+     * @param result
+     *            result
+     * @param k
+     *            size
+     * @param target
+     *            target
+     */
+    private void combinationsIII(int start, int pathSum, List<Integer> path, List<List<Integer>> result, int k,
+            int target) {
+
+        if (path.size() > k) {
+            return;
+        }
+        if (path.size() == k && pathSum == target) {
+            result.add(new ArrayList<>(path));
+            return;
+        }
+
+        for (int i = start; i <= 9; i++) {
+            if (pathSum + i > target) {
+                break;
+            }
+            pathSum = pathSum + i;
+            path.add(i);
+            combinationsIII(i + 1, pathSum, path, result, k, target);
+            pathSum = pathSum - i;
+            path.removeLast();
+        }
+    }
+
     public void main(String[] args) {
         System.out.println(subsets(new int[]{1, 2, 3}));
         System.out.println(subsets(new int[]{1, 2}));
@@ -231,6 +299,8 @@ public class SubsetsAndSubsequence {
 
         // combination sum
         System.out.println("combination sum = " + combinationSum(new int[]{2, 3, 6, 7}, 7));
+
+        System.out.println("combination sum3 = " + combinationSum3(3, 9));
 
     }
 
