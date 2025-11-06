@@ -1,6 +1,7 @@
 package com.kumar.interview.prep.interview_prep.dsa.recursion;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class RecursionBasics {
@@ -131,13 +132,41 @@ public class RecursionBasics {
         return ways;
     }
 
+    public void permutations(char[] array, int length) {
+        // Write your code here
+        if (length >= array.length - 1) {
+            System.out.println(Arrays.toString(array));
+            return;
+        }
+        for (int i = length; i < array.length; i++) {
+            swap(array, i, length);
+            permutations(array, length + 1);
+            swap(array, length, i);
+
+        }
+    }
+
+    public String reverseString(String myStr) {
+        // Base case
+        if (myStr.isEmpty()) {
+            return myStr;
+        }
+
+        // Recursive case
+        else {
+            return reverseString(myStr.substring(1)) + myStr.charAt(0);
+        }
+    }
+
+    private void swap(char[] arr, int i, int j) {
+        char temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
     void main(String[] args) {
-        System.out.println(letterCombinations("234"));
-        System.out.println(letterCombinations("23014"));
-        System.out.println(numRollsToTarget(1, 6, 4));
-        System.out.println(numRollsToTarget(2, 6, 10));
-        System.out.println(numRollsToTarget(3, 6, 14));
-        System.out.println(numRollsToTarget(6, 6, 20));
-        System.out.println(numRollsToTarget(30, 6, 14972));
+
+        permutations(new char[]{'a', 'b', 'c'}, 0);
+        System.out.println(reverseString("cat"));
     }
 }
