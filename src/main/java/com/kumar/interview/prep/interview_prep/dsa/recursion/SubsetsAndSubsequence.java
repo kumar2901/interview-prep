@@ -1,7 +1,9 @@
 package com.kumar.interview.prep.interview_prep.dsa.recursion;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class SubsetsAndSubsequence {
 
@@ -282,6 +284,51 @@ public class SubsetsAndSubsequence {
         }
     }
 
+    public List<List<Integer>> nonDecreasingSubSequence(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        nonDecreasingSubsequence(nums, 0, new ArrayList<>(), result);
+        return result;
+    }
+
+    /**
+     * 491. Non-decreasing Subsequences
+     * <p/>
+     * Example 1:
+     *
+     * Input: nums = [4,6,7,7] Output: [[4,6],[4,6,7],[4,6,7,7],[4,7],[4,7,7],[6,7],[6,7,7],[7,7]]
+     * <p/>
+     * Example 2:
+     *
+     * Input: nums = [4,4,3,2,1] Output: [[4,4]]
+     *
+     * @param nums
+     *            input
+     * @param start
+     *            start index
+     * @param path
+     *            path
+     * @param result
+     *            result
+     */
+    private void nonDecreasingSubsequence(int[] nums, int start, List<Integer> path, List<List<Integer>> result) {
+        if (path.size() > 1) {
+            result.add(new ArrayList<>(path));
+        }
+        Set<Integer> set = new HashSet<>();
+        for (int i = start; i < nums.length; i++) {
+            if (!path.isEmpty() && nums[i] < path.getLast()) {
+                continue;
+            }
+            if (set.contains(nums[i])) {
+                continue;
+            }
+            path.add(nums[i]);
+            set.add(nums[i]);
+            nonDecreasingSubsequence(nums, i + 1, path, result);
+            path.removeLast();
+        }
+    }
+
     public void main(String[] args) {
         System.out.println(subsets(new int[]{1, 2, 3}));
         System.out.println(subsets(new int[]{1, 2}));
@@ -301,6 +348,7 @@ public class SubsetsAndSubsequence {
         System.out.println("combination sum = " + combinationSum(new int[]{2, 3, 6, 7}, 7));
 
         System.out.println("combination sum3 = " + combinationSum3(3, 9));
+        System.out.println("non decreasing subsequence = " + nonDecreasingSubSequence(new int[]{4, 6, 7, 7}));
 
     }
 
