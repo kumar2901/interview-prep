@@ -149,15 +149,68 @@ public class SubsetsAndSubsequence {
         }
 
         for (int i = start; i < candidates.length; i++) {
-
-            if (pathSum + candidates[i] <= target) {
-                path.add(candidates[i]);
-                pathSum = pathSum + candidates[i];
-                combinationsWithRepetition(candidates, i, pathSum, path, result, target);
-                path.removeLast();
-                pathSum = pathSum - candidates[i];
-
+            if (pathSum + candidates[i] > target) {
+                break;
             }
+
+            path.add(candidates[i]);
+            pathSum = pathSum + candidates[i];
+            combinationsWithRepetition(candidates, i, pathSum, path, result, target);
+            path.removeLast();
+            pathSum = pathSum - candidates[i];
+
+        }
+    }
+
+    /**
+     * 40. Combination Sum II
+     * <p>
+     * Example 1: Input: candidates = [10,1,2,7,6,1,5], target = 8 Output: [ [1,1,6], [1,2,5], [1,7], [2,6] ]
+     * <p/>
+     * <p>
+     * Example 2: Input: candidates = [2,5,2,1,2], target = 5 Output: [ [1,2,2], [5] ]
+     * </p>
+     *
+     * @param candidates
+     *            input
+     * @param start
+     *            start index
+     * @param pathSum
+     *            sum elements along the path
+     * @param path
+     *            elements along the path
+     * @param result
+     *            result
+     * @param target
+     *            target value
+     */
+    private void combinationsWithoutRepetition(int[] candidates, int start, int pathSum, ArrayList<Integer> path,
+            List<List<Integer>> result, int target) {
+
+        if (pathSum == target) {
+            result.add(new ArrayList<>(path));
+            return;
+        }
+        if (pathSum > target) {
+            return;
+        }
+
+        for (int i = start; i < candidates.length; i++) {
+
+            // pruning
+            if (pathSum + candidates[i] > target)
+                break;
+
+            // skip duplicates
+            if (i > start && candidates[i] == candidates[i - 1])
+                continue;
+
+            path.add(candidates[i]);
+            pathSum = pathSum + candidates[i];
+            combinationsWithoutRepetition(candidates, i + 1, pathSum, path, result, target);
+            path.removeLast();
+            pathSum = pathSum - candidates[i];
+
         }
     }
 
@@ -176,6 +229,7 @@ public class SubsetsAndSubsequence {
         int[] nums1 = {1, 2, 4, 5, 7, 9};
         System.out.println(subsetsSum(nums1, 9));
 
+        // combination sum
         System.out.println("combination sum = " + combinationSum(new int[]{2, 3, 6, 7}, 7));
 
     }
