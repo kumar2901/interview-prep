@@ -46,7 +46,7 @@ public class Backtracking {
 
     private boolean isSafe(boolean[][] board, int row, int c) {
 
-        // same vertical or same column
+        // check vertical or same column
         for (int i = 0; i < row; i++) {
             if (board[i][c]) {
                 return false;
