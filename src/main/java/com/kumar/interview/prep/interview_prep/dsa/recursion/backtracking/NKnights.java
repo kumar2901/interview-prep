@@ -14,7 +14,7 @@ public class NKnights {
      *
      * <p>
      * n=1 1 <br/>
-     * n=2 0 <br/>
+     * n=2 6 <br/>
      * n=3 36 <br/>
      * n=4 412 <br/>
      * </p>
@@ -87,15 +87,23 @@ public class NKnights {
     }
 
     public static void main(String[] args) {
-        NKnights nKnights = new NKnights();
 
-        System.out.println(nKnights.nKnights(3));
-        System.out.println(nKnights.totalCount);
+        NKnights nKnights2 = new NKnights();
 
-        NKnights nKnights1 = new NKnights();
+        System.out.println(nKnights2.nKnights(2));
+        System.out.println(nKnights2.totalCount);
 
-        System.out.println(nKnights1.nKnights(4));
-        System.out.println(nKnights1.totalCount);
+
+
+        NKnights nKnights3 = new NKnights();
+        System.out.println(nKnights3.nKnights(3));
+        System.out.println(nKnights3.totalCount);
+
+
+
+        NKnights nKnights4 = new NKnights();
+        System.out.println(nKnights4.nKnights(4));
+        System.out.println(nKnights4.totalCount);
 
     }
 }
