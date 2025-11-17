@@ -93,13 +93,9 @@ public class NKnights {
         System.out.println(nKnights2.nKnights(2));
         System.out.println(nKnights2.totalCount);
 
-
-
         NKnights nKnights3 = new NKnights();
         System.out.println(nKnights3.nKnights(3));
         System.out.println(nKnights3.totalCount);
-
-
 
         NKnights nKnights4 = new NKnights();
         System.out.println(nKnights4.nKnights(4));
