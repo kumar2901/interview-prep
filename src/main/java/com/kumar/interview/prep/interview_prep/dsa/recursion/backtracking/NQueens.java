@@ -1,9 +1,9 @@
-package com.kumar.interview.prep.interview_prep.dsa.recursion;
+package com.kumar.interview.prep.interview_prep.dsa.recursion.backtracking;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Backtracking {
+public class NQueens {
 
     /**
      * <p>
