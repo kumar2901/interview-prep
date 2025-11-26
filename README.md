@@ -53,9 +53,7 @@ Backend Developer interview preparation
 - **GraphExamples.java**
   - Valid tree check in undirected graphs (DFS for cycles + connectivity)
 - **TopologicalSortExamples.java**
-  - WIP
-- **GraphNode.java**
-  - Node class for weighted graphs (utility)
+  - WIP(Kahn's algorithm and DFS-based topological sort)
 
 ### Tree Utility
 - **TreeNode.java**
