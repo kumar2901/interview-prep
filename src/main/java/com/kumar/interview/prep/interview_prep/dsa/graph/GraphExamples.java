@@ -38,7 +38,7 @@ public class GraphExamples {
      */
     public boolean validTree(int n, int[][] edges) {
 
-        if (n != edges.length+1) {
+        if (n != edges.length + 1) {
             return false;
 
         }
@@ -67,10 +67,15 @@ public class GraphExamples {
 
     /**
      * DFS algorithm
-     * @param node currentNode
-     * @param parent parentNode
-     * @param graph graph
-     * @param visited visited
+     *
+     * @param node
+     *            currentNode
+     * @param parent
+     *            parentNode
+     * @param graph
+     *            graph
+     * @param visited
+     *            visited
      * @return cycle exists
      */
     private boolean detectCycle(int node, int parent, Map<Integer, List<Integer>> graph, boolean[] visited) {
