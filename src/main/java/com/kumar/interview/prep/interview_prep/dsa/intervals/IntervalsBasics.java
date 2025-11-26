@@ -51,47 +51,49 @@ public class IntervalsBasics {
     public void main(String[] args) {
         System.out.println("merge Intervals");
         int[][] intervals = {{1, 3}, {2, 6}, {8, 10}, {15, 18}};
-       print(mergeIntervals(intervals));
+        print(mergeIntervals(intervals));
 
         int[][] intervals1 = {{1, 3}, {4, 6}, {8, 10}, {15, 18}};
         System.out.println("insert Intervals");
-       print(insertInterval(intervals1,new int[] {5,7}));
+        print(insertInterval(intervals1, new int[]{5, 7}));
 
     }
 
-
     /**
      * <p>
-     * <br/>Input: intervals = [[1,3],[6,9]], newInterval = [2,5]
-     * <br/>Output: [[1,5],[6,9]]
+     * <br/>
+     * Input: intervals = [[1,3],[6,9]], newInterval = [2,5] <br/>
+     * Output: [[1,5],[6,9]]
      * </p>
-     * @param intervals existing intervals
-     * @param newInterval new interval
+     *
+     * @param intervals
+     *            existing intervals
+     * @param newInterval
+     *            new interval
      * @return upsert interval
      */
 
     private int[][] insertInterval(int[][] intervals, int[] newInterval) {
-        List<int[]>result=new ArrayList<>();
+        List<int[]> result = new ArrayList<>();
 
         Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
 
-
-        //add all interval before new intervals
-        int i=0;
-        while(i<intervals.length && intervals[i][1]<newInterval[0]){
+        // add all interval before new intervals
+        int i = 0;
+        while (i < intervals.length && intervals[i][1] < newInterval[0]) {
             result.add(intervals[i]);
             i++;
         }
 
-        //overlapping intervals
-        while(i<intervals.length && intervals[i][0]<=newInterval[1]){
-            newInterval[0]=Math.min(newInterval[0],intervals[i][0]);
-            newInterval[1]=Math.max(newInterval[1],intervals[i][1]);
+        // overlapping intervals
+        while (i < intervals.length && intervals[i][0] <= newInterval[1]) {
+            newInterval[0] = Math.min(newInterval[0], intervals[i][0]);
+            newInterval[1] = Math.max(newInterval[1], intervals[i][1]);
             i++;
 
         }
         result.add(newInterval);
-        while(i<intervals.length){
+        while (i < intervals.length) {
             result.add(intervals[i]);
             i++;
         }
