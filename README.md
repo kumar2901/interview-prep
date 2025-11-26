@@ -55,9 +55,5 @@ Backend Developer interview preparation
 - **TopologicalSortExamples.java**
   - WIP(Kahn's algorithm and DFS-based topological sort)
 
-### Tree Utility
-- **TreeNode.java**
-  - Basic binary tree node model
-
 ---
 **Directory:** `src/main/java/com/kumar/interview/prep/interview_prep/dsa/`
