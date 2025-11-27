@@ -52,6 +52,8 @@ Backend Developer interview preparation
   - Shortest path/network delay (Dijkstra's algorithm)
 - **GraphExamples.java**
   - Valid tree check in undirected graphs (DFS for cycles + connectivity)
+  - Number of islands (DFS)
+  - Clone graph (DFS)
 - **TopologicalSortExamples.java**
   - Kahn's Algorithm for topological sorting of a directed acyclic graph (DAG)
   - Cycle detection in a directed graph using Kahn's Algorithm (Course Schedule I)

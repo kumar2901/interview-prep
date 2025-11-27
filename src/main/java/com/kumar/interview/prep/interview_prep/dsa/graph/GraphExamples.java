@@ -107,8 +107,77 @@ public class GraphExamples {
         }
     }
 
+    /**
+     * Counts the number of islands in a 2D grid.
+     *
+     * <p>
+     * An island is defined as a group of connected '1's (land cells) that are adjacent horizontally or vertically. The
+     * grid contains '1' representing land and '0' representing water.
+     * </p>
+     *
+     * <p>
+     * The goal is to determine how many separate land masses (islands) exist in the grid. Each island must be
+     * surrounded by water or the grid boundary, and no diagonal connections count as adjacency.
+     * </p>
+     *
+     * <p>
+     * <b>Time Complexity:</b> O(m × n) <br>
+     * <b>Space Complexity:</b> O(m × n) in the worst case
+     * </p>
+     *
+     * @param grid
+     *            a 2D matrix containing '1' for land and '0' for water
+     * @return the total number of islands present in the grid
+     */
+    public int numIslands(char[][] grid) {
+
+        int count = 0;
+        int m = grid.length;
+        int n = grid[0].length;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == '1') {
+                    dfs(i, j, grid);
+                    count++;
+                }
+            }
+        }
+
+        return count;
+
+    }
+
+    private void dfs(int i, int j, char[][] grid) {
+        if (i < 0 || j < 0 || i >= grid.length || j >= grid[0].length) {
+            return;
+
+        }
+        if (grid[i][j] == '0') {
+            return;
+        }
+
+        grid[i][j] = '0';
+
+        // move horizontally
+        dfs(i, j - 1, grid);
+        dfs(i, j + 1, grid);
+
+        // move vertically
+        dfs(i + 1, j, grid);
+        dfs(i - 1, j, grid);
+
+    }
+
     public void main(String[] args) {
         int[][] edges = {{0, 1}, {0, 2}, {0, 3}, {3, 4}};
         System.out.println(validTree(5, edges));
+
+        char[][] grid = {{'1', '1', '1', '1', '0'}, {'1', '1', '0', '1', '0'}, {'1', '1', '0', '0', '0'},
+                {'0', '0', '0', '0', '0'}};
+        System.out.println(numIslands(grid));
+
+        char[][] grid2 = {{'1', '1', '0', '0', '0'}, {'1', '1', '0', '0', '0'}, {'0', '0', '1', '0', '0'},
+                {'0', '0', '0', '1', '1'}};
+        System.out.println(numIslands(grid2));
     }
 }
