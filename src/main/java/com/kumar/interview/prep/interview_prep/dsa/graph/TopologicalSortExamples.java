@@ -127,7 +127,7 @@ public class TopologicalSortExamples {
      *            array where each entry prerequisites[i] = [a, b] meaning course 'a' requires course 'b' first
      * @return true if all courses can be completed, false otherwise
      */
-    private boolean courseSchedule1(int numCourses, int[][] prerequisites) {
+    private boolean courseScheduleI(int numCourses, int[][] prerequisites) {
 
         List<List<Integer>> adjGraph = new ArrayList<>();
         for (int i = 0; i < numCourses; i++) {
@@ -249,15 +249,15 @@ public class TopologicalSortExamples {
 
     public void main(String[] args) {
         int[][] prerequisite = {{1, 0}};
-        System.out.println(courseSchedule1(2, prerequisite));
+        System.out.println(courseScheduleI(2, prerequisite));
         System.out.println("Ordering= " + courseScheduleII(2, prerequisite));
 
         int[][] prerequisite1 = {{1, 0}, {0, 1}};
-        System.out.println(courseSchedule1(2, prerequisite1));
+        System.out.println(courseScheduleI(2, prerequisite1));
         System.out.println("Ordering= " + courseScheduleII(2, prerequisite1));
 
         int[][] prerequisite2 = {{1, 0}, {2, 0}, {3, 1}};
-        System.out.println(courseSchedule1(4, prerequisite2));
+        System.out.println(courseScheduleI(4, prerequisite2));
         System.out.println("Ordering=" + courseScheduleII(4, prerequisite2));
 
     }
