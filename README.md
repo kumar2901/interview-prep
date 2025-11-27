@@ -53,7 +53,9 @@ Backend Developer interview preparation
 - **GraphExamples.java**
   - Valid tree check in undirected graphs (DFS for cycles + connectivity)
 - **TopologicalSortExamples.java**
-  - WIP(Kahn's algorithm and DFS-based topological sort)
+  - Kahn's Algorithm for topological sorting of a directed acyclic graph (DAG)
+  - Cycle detection in a directed graph using Kahn's Algorithm (Course Schedule I)
+  - topological sort using Kahn's Algorithm(course Schedule II)
 
 ---
 **Directory:** `src/main/java/com/kumar/interview/prep/interview_prep/dsa/`
