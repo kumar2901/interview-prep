@@ -47,4 +47,19 @@ public class BinaryTree {
 
         return result;
     }
+
+    void main() {
+        TreeNode root = new TreeNode(1);
+
+        TreeNode left = new TreeNode(2);
+        left.setRight(new TreeNode(5));
+
+        TreeNode right = new TreeNode(3);
+        right.setRight(new TreeNode(4));
+
+        root.setLeft(left);
+        root.setRight(right);
+
+        System.out.println(rightSideView(root));
+    }
 }
