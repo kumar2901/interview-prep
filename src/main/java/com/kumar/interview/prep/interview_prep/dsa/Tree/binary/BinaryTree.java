@@ -48,6 +48,46 @@ public class BinaryTree {
         return result;
     }
 
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+
+        if (p == null && q == null) {
+            return true;
+        }
+        if (p == null || q == null || p.getVal() != q.getVal()) {
+            return false;
+        }
+
+        boolean left = isSameTree(p.getLeft(), q.getLeft());
+        boolean right = isSameTree(p.getRight(), q.getRight());
+
+        return left && right;
+
+    }
+
+    public TreeNode invertTree(TreeNode root) {
+        if (null == root) {
+            return null;
+        }
+        TreeNode temp = root.getLeft();
+        root.setLeft(root.getRight());
+        root.setRight(temp);
+
+        invertTree(root.getLeft());
+        invertTree(root.getRight());
+
+        return root;
+    }
+
+    private void print(TreeNode root) {
+
+        if (root == null) {
+            return;
+        }
+        System.out.print(root.getVal() + " ");
+        print(root.getLeft());
+        print(root.getRight());
+    }
+
     void main() {
         TreeNode root = new TreeNode(1);
 
@@ -60,6 +100,23 @@ public class BinaryTree {
         root.setLeft(left);
         root.setRight(right);
 
-        System.out.println(rightSideView(root));
+        System.out.println("rightSideView " + rightSideView(root));
+
+        TreeNode root1 = new TreeNode(1);
+
+        TreeNode left1 = new TreeNode(2);
+        left.setRight(new TreeNode(5));
+
+        TreeNode right1 = new TreeNode(3);
+
+        root1.setLeft(left1);
+        root1.setRight(right1);
+        System.out.println("isSameTree=" + isSameTree(root, root1));
+
+        TreeNode invertRoot = invertTree(root1);
+        System.out.println("Invert Tree ");
+        print(invertRoot);
+        System.out.println("\nInvert tree complete");
+
     }
 }
