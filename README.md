@@ -37,8 +37,6 @@ Backend Developer interview preparation
   - Merge sort
 - **BinarySearch.java**
   - Rotated sorted array search (with duplicates)
-- **BinaryTree.java**
-  - Find Lowest Common Ancestor in a binary tree (if both nodes present)
 - **SubsetsAndSubsequence.java**
   - Subsets
   - Subsets with/without duplicates
@@ -47,17 +45,24 @@ Backend Developer interview preparation
   - Combination sum (several variants)
   - Non-decreasing subsequences
 
+### Binary Trees
+- **recursion/BinaryTree.java**
+  - Find Lowest Common Ancestor in a binary tree (if both nodes present)
+  - Right-side view of a binary tree
+  - Check if two binary trees are the same
+  - Invert a binary tree (mirror)
+  - Pre-order print of a binary tree
+
 ### Graph Algorithms
 - **DijkstraAlgoExamples.java**
   - Shortest path/network delay (Dijkstra's algorithm)
 - **GraphExamples.java**
   - Valid tree check in undirected graphs (DFS for cycles + connectivity)
   - Number of islands (DFS)
-  - Clone graph (DFS)
 - **TopologicalSortExamples.java**
   - Kahn's Algorithm for topological sorting of a directed acyclic graph (DAG)
   - Cycle detection in a directed graph using Kahn's Algorithm (Course Schedule I)
-  - topological sort using Kahn's Algorithm(course Schedule II)
+  - Topological sort using Kahn's Algorithm (Course Schedule II)
 
 ---
 **Directory:** `src/main/java/com/kumar/interview/prep/interview_prep/dsa/`

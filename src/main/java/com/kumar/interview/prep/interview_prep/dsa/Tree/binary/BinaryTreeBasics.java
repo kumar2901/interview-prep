@@ -1,10 +1,10 @@
-package com.kumar.interview.prep.interview_prep.dsa.recursion;
+package com.kumar.interview.prep.interview_prep.dsa.Tree.binary;
 
 import com.kumar.interview.prep.interview_prep.dsa.model.TreeNode;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class BinaryTree {
+public class BinaryTreeBasics {
 
     /**
      * You are given:
