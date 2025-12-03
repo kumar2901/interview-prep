@@ -4,7 +4,7 @@ import com.kumar.interview.prep.interview_prep.dsa.model.TreeNode;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class BinaryTreeBasics {
+public class BinaryTreeIntermediate {
 
     /**
      * You are given:
