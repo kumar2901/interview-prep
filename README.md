@@ -46,7 +46,6 @@ Backend Developer interview preparation
   - Non-decreasing subsequences
 
 ### Binary Trees
-- **recursion/BinaryTree.java**
   - Find Lowest Common Ancestor in a binary tree (if both nodes present)
   - Right-side view of a binary tree
   - Check if two binary trees are the same
