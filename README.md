@@ -55,7 +55,7 @@ Backend Developer interview preparation
   - Pre-order print of a binary tree
 
 ### Two Pointer / Sliding Window
-- **two_pointer/LongestSubstringWithoutRepeatingCharacters.java**
+- **LongestSubstringWithoutRepeatingCharacters.java**
   - Standard longest substring without repeating characters
   - Longest substring with at most k distinct characters
   - Longest substring where every character appears at least k times
