@@ -1,4 +1,4 @@
-package com.kumar.interview.prep.interview_prep.dsa.two_pointer;
+package com.kumar.interview.prep.interview_prep.dsa.sliding_window;
 
 import java.util.Arrays;
 import java.util.HashMap;

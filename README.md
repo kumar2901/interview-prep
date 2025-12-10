@@ -46,11 +46,19 @@ Backend Developer interview preparation
   - Non-decreasing subsequences
 
 ### Binary Trees
+- **recursion/BinaryTree.java**
   - Find Lowest Common Ancestor in a binary tree (if both nodes present)
+- **Tree/binary/BinaryTree.java**
   - Right-side view of a binary tree
   - Check if two binary trees are the same
   - Invert a binary tree (mirror)
   - Pre-order print of a binary tree
+
+### Two Pointer / Sliding Window
+- **two_pointer/LongestSubstringWithoutRepeatingCharacters.java**
+  - Standard longest substring without repeating characters
+  - Longest substring with at most k distinct characters
+  - Longest substring where every character appears at least k times
 
 ### Graph Algorithms
 - **DijkstraAlgoExamples.java**
