@@ -7,6 +7,8 @@ Backend Developer interview preparation
 - **VisaCodeSignal.java**
   - E-Scooter Distance on a Line
   - Text Justification
+- **MaxProdSubarray.java**
+  - Maximum product subarray
 
 ### Intervals
 - **IntervalsBasics.java**
@@ -53,12 +55,20 @@ Backend Developer interview preparation
   - Check if two binary trees are the same
   - Invert a binary tree (mirror)
   - Pre-order print of a binary tree
+- **Tree/binary/BinaryTreeIntermediate.java**
+  - Find Lowest Common Ancestor (LCA) only if both nodes exist in the tree
 
 ### Two Pointer / Sliding Window
 - **LongestSubstringWithoutRepeatingCharacters.java**
   - Standard longest substring without repeating characters
   - Longest substring with at most k distinct characters
   - Longest substring where every character appears at least k times
+- **ContainerWithMostWater.java**
+  - Container with most water (two pointer approach)
+
+### Dynamic Programming
+- **WordBreak.java**
+  - Determine if a string can be segmented into dictionary words
 
 ### Graph Algorithms
 - **DijkstraAlgoExamples.java**
