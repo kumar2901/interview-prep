@@ -19,7 +19,7 @@ public class MaxProdSubarray {
             currMax = Math.max(temp, Math.max(nums[i] * currMin, nums[i]));
             currMin = Math.min(temp, Math.min(nums[i] * currMin, nums[i]));
             maxProd = Math.max(maxProd, currMax);
-           // System.out.println("currMax=" + currMax + " currMin=" + currMin + " maxProd=" + maxProd + " i=" + i);
+            // System.out.println("currMax=" + currMax + " currMin=" + currMin + " maxProd=" + maxProd + " i=" + i);
 
         }
 
@@ -28,6 +28,6 @@ public class MaxProdSubarray {
 
     void main() {
         System.out.println("maxProduct=" + maxProduct(new int[]{2, 3, -2, 4}));
-        System.out.println("maxProduct=" + maxProduct(new int[]{-2,0,-1}));
+        System.out.println("maxProduct=" + maxProduct(new int[]{-2, 0, -1}));
     }
 }
