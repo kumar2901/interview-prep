@@ -81,5 +81,36 @@ Backend Developer interview preparation
   - Cycle detection in a directed graph using Kahn's Algorithm (Course Schedule I)
   - Topological sort using Kahn's Algorithm (Course Schedule II)
 
+### Trie (Prefix Tree)
+- **Trie.java** & **TrieNode.java**
+  - Insert word into trie
+  - Search for complete word
+  - Check if prefix exists (startsWith)
+
 ---
-**Directory:** `src/main/java/com/kumar/interview/prep/interview_prep/dsa/`
+
+## Game Projects
+
+### Tic-Tac-Toe with AI
+- **TicTocToe.java**
+  - Main entry point with mode selection (Human vs Human or Human vs AI)
+- **Game.java**
+  - Game flow and logic
+  - Player turn management
+  - Win/draw detection
+- **MinimaxAI.java**
+  - AI player implementation using Minimax algorithm
+  - Optimal move calculation for unbeatable AI
+- **model/Board.java**
+  - 3x3 game board representation
+  - Move placement and validation
+  - Win condition checking
+- **model/Player.java**
+  - Player representation with symbol (X/O)
+  - AI flag for distinguishing human vs AI players
+- **model/GameMode.java**
+  - Game mode enumeration (HUMAN vs AI)
+
+---
+**DSA Directory:** `src/main/java/com/kumar/interview/prep/interview_prep/dsa/`  
+**Game Directory:** `src/main/java/com/kumar/interview/prep/game/`
