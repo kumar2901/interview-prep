@@ -50,9 +50,7 @@ class Trie {
             }
             current = current.children[idx];
         }
-
         return true;
-
     }
 
     static void main() {
