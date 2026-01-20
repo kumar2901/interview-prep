@@ -1,6 +1,5 @@
 package com.kumar.interview.prep.interview_prep.dsa.trie;
 
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -8,50 +7,38 @@ import java.util.Set;
 /**
  * Problem: Longest Word with All Prefixes
  *
- * Given an array of strings {@code words}, find the longest word in the array such that
- * every prefix of the word is also present in the array.
+ * Given an array of strings {@code words}, find the longest word in the array such that every prefix of the word is
+ * also present in the array.
  *
- * If there are multiple answers with the same maximum length, return the word that is
- * lexicographically smallest.
- * If no such word exists, return an empty string.
+ * If there are multiple answers with the same maximum length, return the word that is lexicographically smallest. If no
+ * such word exists, return an empty string.
  *
- * Definition:
- * A prefix of a word is any leading substring that can be obtained by removing
- * zero or more characters from the end of the word.
+ * Definition: A prefix of a word is any leading substring that can be obtained by removing zero or more characters from
+ * the end of the word.
  *
- * Example:
- * Input:
- * words = ["a", "ap", "app", "appl", "apple", "apply"]
+ * Example: Input: words = ["a", "ap", "app", "appl", "apple", "apply"]
  *
- * Valid words with all prefixes present:
- * - "a"        -> prefixes: ["a"]
- * - "ap"       -> prefixes: ["a", "ap"]
- * - "app"      -> prefixes: ["a", "ap", "app"]
- * - "appl"     -> prefixes: ["a", "ap", "app", "appl"]
- * - "apple"    -> prefixes: ["a", "ap", "app", "appl", "apple"]
+ * Valid words with all prefixes present: - "a" -> prefixes: ["a"] - "ap" -> prefixes: ["a", "ap"] - "app" -> prefixes:
+ * ["a", "ap", "app"] - "appl" -> prefixes: ["a", "ap", "app", "appl"] - "apple" -> prefixes: ["a", "ap", "app", "appl",
+ * "apple"]
  *
- * Output:
- * "apple"
+ * Output: "apple"
  *
- * Explanation:
- * Both "apple" and "apply" have the same length, but "apple" is lexicographically smaller.
+ * Explanation: Both "apple" and "apply" have the same length, but "apple" is lexicographically smaller.
  *
- * Constraints:
- * - 1 <= words.length <= 10^5
- * - 1 <= words[i].length <= 100
- * - words[i] consists of lowercase English letters only
+ * Constraints: - 1 <= words.length <= 10^5 - 1 <= words[i].length <= 100 - words[i] consists of lowercase English
+ * letters only
  */
 
 public class WordWithAllPrefixes {
 
     private final TrieNode root;
 
-    private String result="";
+    private String result = "";
 
-    public  WordWithAllPrefixes(){
-        root=new TrieNode();
+    public WordWithAllPrefixes() {
+        root = new TrieNode();
     }
-
 
     public void insert(String word) {
         TrieNode current = root;
@@ -66,36 +53,34 @@ public class WordWithAllPrefixes {
         current.isEndOfWord = true;
     }
 
-
     public String longestWord(String[] words) {
 
-        for(String word:words){
+        for (String word : words) {
             insert(word);
         }
 
-       dfs(root,new StringBuilder());
+        dfs(root, new StringBuilder());
 
-       return result;
+        return result;
 
     }
 
     private void dfs(TrieNode node, StringBuilder path) {
-        if(path.length()>result.length()){
-            result= path.toString();
+        if (path.length() > result.length()) {
+            result = path.toString();
         }
 
-        for(int i=0;i<26;i++){
-            TrieNode child=node.children[i];
+        for (int i = 0; i < 26; i++) {
+            TrieNode child = node.children[i];
 
-            if(child!=null && child.isEndOfWord){
-                char ch=(char)('a'+i);
+            if (child != null && child.isEndOfWord) {
+                char ch = (char) ('a' + i);
                 path.append(ch);
-                dfs(child,path);
-                path.deleteCharAt(path.length()-1);
+                dfs(child, path);
+                path.deleteCharAt(path.length() - 1);
             }
         }
     }
-
 
     public String longestWordWithoutTrie(String[] words) {
         // Sort words lexicographically
@@ -119,10 +104,15 @@ public class WordWithAllPrefixes {
         return result;
     }
 
+    static void main() {
+        String[] words = new String[]{"a", "ap", "app", "appl", "apple", "apply", "applixy"};
+        WordWithAllPrefixes wordWithAllPrefixes = new WordWithAllPrefixes();
+        System.out.println(wordWithAllPrefixes.longestWord(words));
+        System.out.println(wordWithAllPrefixes.longestWordWithoutTrie(words));
 
-     void main() {
-        String[] words=new String[]{"a", "ap", "app", "appl", "apple", "apply","applixy"};
-         System.out.println(longestWord(words));
-         System.out.println(longestWordWithoutTrie(words));
+        WordWithAllPrefixes wordWithAllPrefixes1 = new WordWithAllPrefixes();
+        String[] words1 = new String[]{"a", "ap", "app", "appi", "apple", "apply", "applixy"};
+        System.out.println(wordWithAllPrefixes1.longestWord(words1));
+        System.out.println(wordWithAllPrefixes1.longestWordWithoutTrie(words1));
     }
 }
