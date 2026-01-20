@@ -86,6 +86,16 @@ Backend Developer interview preparation
   - Insert word into trie
   - Search for complete word
   - Check if prefix exists (startsWith)
+- **TrieWithCount.java** (LeetCode 1804)
+  - Insert word with duplicate support
+  - Count exact word occurrences (countWordsEqualTo)
+  - Count words starting with prefix (countWordsStartingWith)
+  - Erase one occurrence of a word
+  - Tracks prefix counts and word counts using prefixCount and wordCount fields
+- **WordWithAllPrefixes.java**
+  - Find longest word where all prefixes exist in the array
+  - Two approaches: Trie with DFS and HashSet-based solution
+  - Returns lexicographically smallest word if multiple have same length
 
 ---
 
