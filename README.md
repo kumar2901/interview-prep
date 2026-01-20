@@ -96,6 +96,10 @@ Backend Developer interview preparation
   - Find longest word where all prefixes exist in the array
   - Two approaches: Trie with DFS and HashSet-based solution
   - Returns lexicographically smallest word if multiple have same length
+- **WordSuggestions.java** (LeetCode 1268 - Search Suggestions System)
+  - **SearchSuggestions.java**: Classic approach using DFS for on-the-fly suggestions
+  - **SearchSuggestionsV2.java**: Optimized approach with precomputed suggestions at each node
+  - Returns top 3 lexicographically sorted products matching each prefix of search word
 
 ---
 
