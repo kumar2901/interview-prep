@@ -1,6 +1,6 @@
-package com.kumar.interview.prep.game;
+package com.kumar.interview.prep.game.tictoctoe;
 
-import com.kumar.interview.prep.game.model.Board;
+import com.kumar.interview.prep.game.tictoctoe.model.Board;
 
 public class MinimaxAI {
 

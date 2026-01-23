@@ -1,4 +1,4 @@
-package com.kumar.interview.prep.game.model;
+package com.kumar.interview.prep.game.tictoctoe.model;
 
 public class Board {
     private final char[][] grid = new char[3][3];

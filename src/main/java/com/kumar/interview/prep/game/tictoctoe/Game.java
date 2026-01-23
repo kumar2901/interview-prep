@@ -1,8 +1,8 @@
-package com.kumar.interview.prep.game;
+package com.kumar.interview.prep.game.tictoctoe;
 
-import com.kumar.interview.prep.game.model.Board;
-import com.kumar.interview.prep.game.model.GameMode;
-import com.kumar.interview.prep.game.model.Player;
+import com.kumar.interview.prep.game.tictoctoe.model.Board;
+import com.kumar.interview.prep.game.tictoctoe.model.GameMode;
+import com.kumar.interview.prep.game.tictoctoe.model.Player;
 
 import java.util.Scanner;
 

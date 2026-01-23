@@ -1,4 +1,4 @@
-package com.kumar.interview.prep.game.model;
+package com.kumar.interview.prep.game.tictoctoe.model;
 
 import lombok.Getter;
 
