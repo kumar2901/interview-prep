@@ -167,3 +167,66 @@ Backend Developer interview preparation
   - Enum: HUMAN, AI
 
 **Directory:** `src/main/java/com/kumar/interview/prep/interview_prep/dsa/`
+
+---
+
+## Design Patterns
+
+### Creational Patterns
+
+#### Singleton Pattern (in `design_pattern/creational/singleton/`)
+- **LoggerSingleThread.java**
+  - Lazy initialization singleton for single-threaded environments
+  - Creates instance only when first requested
+- **LoggerMultiThread.java**
+  - Eager initialization singleton (thread-safe)
+  - Instance created at class loading time
+- **LoggerMultiThreadDoubleLocking.java**
+  - Double-checked locking with volatile keyword
+  - Thread-safe lazy initialization with minimal synchronization overhead
+- **SingletonExample.java**
+  - Demo for single-threaded singleton usage
+- **MultiThreadExample.java**
+  - Demo for multi-threaded singleton implementations
+
+#### Simple Factory Pattern (in `design_pattern/creational/factory/simple/`)
+- **DatabaseConnectionFactory.java**
+  - Static factory method with enum-based type selection
+  - Creates MySQL, PostgreSQL, or MongoDB connections
+  - Encapsulates object creation logic
+- **DatabaseConnection.java**
+  - Interface defining connect(), disconnect(), executeQuery(), getDatabaseType()
+- **MySQLConnection.java**
+  - MySQL implementation with host/database configuration
+- **PostgreSQLConnection.java**
+  - PostgreSQL implementation
+- **MongoDBConnection.java**
+  - MongoDB implementation
+- **SimpleFactoryExample.java**
+  - Demo showcasing factory usage with different database types
+
+#### Abstract Factory Pattern (in `design_pattern/creational/factory/abstract_factory/`)
+- **CarFactory.java**
+  - Abstract factory interface: createCar(), createSpecification()
+- **NorthAmericaCarFactory.java**
+  - Concrete factory creating Sedan cars with North America specifications
+- **EuropeCarFactory.java**
+  - Concrete factory creating Hatchback cars with Europe specifications
+- **Car.java**
+  - Product interface with Sedan and Hatchback implementations
+- **CarSpecification.java**
+  - Product interface with NorthAmericaSpecification and EuropeSpecification
+- **CarFactoryClient.java**
+  - Demo client showing region-specific car creation
+
+#### Builder Pattern (in `design_pattern/creational/builder/`)
+- **House.java**
+  - Immutable House object with required (address, rooms) and optional properties
+  - Static nested HouseBuilder class with fluent API
+  - withGarage(), withSwimmingPool(), withGarden(), withColor(), withSquareFeet()
+  - build() returns immutable House instance
+- **BuilderPatternExample.java**
+  - Demo creating simple, luxury, and standard houses
+  - Demonstrates immutability and step-by-step construction
+
+**Directory:** `src/main/java/com/kumar/interview/prep/design_pattern/`
