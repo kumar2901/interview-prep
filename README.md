@@ -88,5 +88,8 @@ Backend Developer interview preparation
 ### Games
 - **BattleShipGameApplication.java** (in `game.battleship`)
   - Complete console-based Battleship game with two players, random firing strategy, turn-based play, and battlefield view.
+- **TicTocToe.java** (in `game.tictoctoe`)
+  - Console-based Tic Tac Toe game with Human vs Human and Human vs AI modes
+  - AI opponent using Minimax algorithm for optimal play
 
 **Directory:** `src/main/java/com/kumar/interview/prep/interview_prep/dsa/`
