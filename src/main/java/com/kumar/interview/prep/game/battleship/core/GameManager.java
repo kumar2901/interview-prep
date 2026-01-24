@@ -89,12 +89,14 @@ public class GameManager {
                 playTurn("PlayerA",fieldB);
                 if(fieldB.allShipsDestroyed()){
                     System.out.println("PlayerA Wins!");
+                    break;
                 }
-                break;
+
             }else{
                 playTurn("PlayerB",fieldA);
                 if(fieldA.allShipsDestroyed()){
                     System.out.println("PlayerB Wins!");
+                    break;
                 }
 
             }
