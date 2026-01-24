@@ -19,14 +19,32 @@ Backend Developer interview preparation
   - Find the maximum area of water that can be contained using vertical lines as sides
 
 ### Trie
+- **Trie.java**
+  - Basic Trie (Prefix Tree) implementation
+  - insert(): adds word to trie
+  - search(): checks if exact word exists
+  - startsWith(): checks if any word starts with given prefix
+- **TrieNode.java**
+  - Node class with children array (26 letters), isEndOfWord flag, wordCount, prefixCount
+- **TrieWithCount.java** (LeetCode 1804 - Implement Trie II)
+  - insert(): adds word with count tracking
+  - countWordsEqualTo(): returns count of exact word occurrences
+  - countWordsStartingWith(): returns count of words with given prefix
+  - erase(): removes one occurrence of word
+- **TrieNodeWithCount.java**
+  - Extended TrieNode with wordCount and prefixCount fields
+- **SearchSuggestions.java** (LeetCode 1268 - Search Suggestions System)
+  - Classic approach using startsWith + DFS
+  - Returns top 3 lexicographically smallest suggestions for each prefix
+- **SearchSuggestionsV2.java**
+  - Optimized approach with precomputed suggestions stored at each node
+  - O(1) lookup for suggestions per prefix
+- **WordSuggestions.java**
+  - Main entry point demonstrating both SearchSuggestions approaches
 - **WordWithAllPrefixes.java**
-  - Longest word such that every prefix is also present in the array (Trie & non-Trie solutions)
-
-### Sliding Window
-- **LongestSubstringWithoutRepeatingCharacters.java**
-  - Find the length of the longest substring without repeating characters
-  - Length of longest substring with at most k distinct characters
-  - Length of longest substring where every character appears at least k times
+  - Find longest word where every prefix is also present in the array
+  - Trie-based solution using DFS
+  - Non-Trie solution using sorting and HashSet
 
 ### Intervals
 - **IntervalsBasics.java**
