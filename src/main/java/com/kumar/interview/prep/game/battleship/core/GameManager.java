@@ -1,6 +1,7 @@
 package com.kumar.interview.prep.game.battleship.core;
 
 import com.kumar.interview.prep.game.battleship.model.BattleField;
+import com.kumar.interview.prep.game.battleship.model.Coordinate;
 import com.kumar.interview.prep.game.battleship.model.Ship;
 import com.kumar.interview.prep.game.battleship.strategy.FiringStrategy;
 import lombok.Data;
@@ -81,5 +82,40 @@ public class GameManager {
 
 
     public void startGame() {
+        boolean isATurn=true;
+
+        while(true){
+            if(isATurn){
+                playTurn("PlayerA",fieldB);
+                if(fieldB.allShipsDestroyed()){
+                    System.out.println("PlayerA Wins!");
+                }
+                break;
+            }else{
+                playTurn("PlayerB",fieldA);
+                if(fieldA.allShipsDestroyed()){
+                    System.out.println("PlayerB Wins!");
+                }
+
+            }
+            isATurn=!isATurn;
+            System.out.println("-----------------------------------");
+        }
+
     }
+
+    private void playTurn(String player, BattleField enemyField) {
+        Coordinate c=firingStrategy.fire(size,enemyField.getXStart(),enemyField.getXEnd());
+
+        System.out.println(player+" fires at "+c);
+
+        Ship hit =enemyField.fire(c.x(),c.y());
+        if(hit!=null){
+            System.out.println("Hit! Ship"+hit.getId()+" destroyed");
+        }else{
+            System.out.println("Miss");
+        }
+    }
+
+
 }

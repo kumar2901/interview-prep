@@ -13,8 +13,8 @@ public class BattleShipGameApplication {
 
         gameService.viewBattleField();
 
-       /* gameService.startGame();
-        gameService.viewBattleField();*/
+        gameService.startGame();
+        gameService.viewBattleField();
 
     }
 }
