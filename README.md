@@ -86,10 +86,24 @@ Backend Developer interview preparation
 ---
 
 ### Games
-- **BattleShipGameApplication.java** (in `game.battleship`)
-  - Complete console-based Battleship game with two players, random firing strategy, turn-based play, and battlefield view.
-- **TicTocToe.java** (in `game.tictoctoe`)
-  - Console-based Tic Tac Toe game with Human vs Human and Human vs AI modes
-  - AI opponent using Minimax algorithm for optimal play
+
+#### Battleship (in `game.battleship`)
+- **BattleShipGameApplication.java** - Main entry point to initialize and start the game
+- **BattleShipGameService.java** - Service layer to manage game initialization, ship placement, and gameplay
+- **GameManager.java** - Core game logic: manages two battlefields, turn-based play, and win detection
+- **BattleField.java** - Represents a player's grid, handles ship placement, firing, and state
+- **Ship.java** - Ship model with id, size, cell positions, and destroyed status
+- **Coordinate.java** - Record for (x, y) coordinate representation
+- **MissileTracker.java** - Tracks fired coordinates to prevent duplicate shots
+- **FiringStrategy.java** - Interface for pluggable firing strategies
+- **RandomFiringStrategy.java** - Random coordinate selection for AI firing
+
+#### Tic Tac Toe (in `game.tictoctoe`)
+- **TicTocToe.java** - Main entry point allowing user to choose game mode (Human or AI)
+- **Game.java** - Core game loop: manages turns, input, win/draw detection
+- **MinimaxAI.java** - AI opponent using Minimax algorithm for optimal move selection
+- **Board.java** - 3x3 grid model with move placement, win check, and print utilities
+- **Player.java** - Player model with symbol (X/O) and AI flag
+- **GameMode.java** - Enum for HUMAN and AI modes
 
 **Directory:** `src/main/java/com/kumar/interview/prep/interview_prep/dsa/`
