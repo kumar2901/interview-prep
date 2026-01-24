@@ -8,7 +8,25 @@ Backend Developer interview preparation
   - E-Scooter Distance on a Line
   - Text Justification
 - **MaxProdSubarray.java**
-  - Maximum product subarray
+  - Maximum product subarray in an integer array
+
+### Sliding Window
+- **LongestSubstringWithoutRepeatingCharacters.java**
+  - Find the length of the longest substring without repeating characters
+  - Length of longest substring with at most k distinct characters
+  - Length of longest substring where every character appears at least k times
+- **ContainerWithMostWater.java**
+  - Find the maximum area of water that can be contained using vertical lines as sides
+
+### Trie
+- **WordWithAllPrefixes.java**
+  - Longest word such that every prefix is also present in the array (Trie & non-Trie solutions)
+
+### Sliding Window
+- **LongestSubstringWithoutRepeatingCharacters.java**
+  - Find the length of the longest substring without repeating characters
+  - Length of longest substring with at most k distinct characters
+  - Length of longest substring where every character appears at least k times
 
 ### Intervals
 - **IntervalsBasics.java**
@@ -48,27 +66,11 @@ Backend Developer interview preparation
   - Non-decreasing subsequences
 
 ### Binary Trees
-- **recursion/BinaryTree.java**
   - Find Lowest Common Ancestor in a binary tree (if both nodes present)
-- **Tree/binary/BinaryTree.java**
   - Right-side view of a binary tree
   - Check if two binary trees are the same
   - Invert a binary tree (mirror)
   - Pre-order print of a binary tree
-- **Tree/binary/BinaryTreeIntermediate.java**
-  - Find Lowest Common Ancestor (LCA) only if both nodes exist in the tree
-
-### Two Pointer / Sliding Window
-- **LongestSubstringWithoutRepeatingCharacters.java**
-  - Standard longest substring without repeating characters
-  - Longest substring with at most k distinct characters
-  - Longest substring where every character appears at least k times
-- **ContainerWithMostWater.java**
-  - Container with most water (two pointer approach)
-
-### Dynamic Programming
-- **WordBreak.java**
-  - Determine if a string can be segmented into dictionary words
 
 ### Graph Algorithms
 - **DijkstraAlgoExamples.java**
@@ -81,50 +83,10 @@ Backend Developer interview preparation
   - Cycle detection in a directed graph using Kahn's Algorithm (Course Schedule I)
   - Topological sort using Kahn's Algorithm (Course Schedule II)
 
-### Trie (Prefix Tree)
-- **Trie.java** & **TrieNode.java**
-  - Insert word into trie
-  - Search for complete word
-  - Check if prefix exists (startsWith)
-- **TrieWithCount.java** (LeetCode 1804)
-  - Insert word with duplicate support
-  - Count exact word occurrences (countWordsEqualTo)
-  - Count words starting with prefix (countWordsStartingWith)
-  - Erase one occurrence of a word
-  - Tracks prefix counts and word counts using prefixCount and wordCount fields
-- **WordWithAllPrefixes.java**
-  - Find longest word where all prefixes exist in the array
-  - Two approaches: Trie with DFS and HashSet-based solution
-  - Returns lexicographically smallest word if multiple have same length
-- **WordSuggestions.java** (LeetCode 1268 - Search Suggestions System)
-  - **SearchSuggestions.java**: Classic approach using DFS for on-the-fly suggestions
-  - **SearchSuggestionsV2.java**: Optimized approach with precomputed suggestions at each node
-  - Returns top 3 lexicographically sorted products matching each prefix of search word
-
 ---
 
-## Game Projects
+### Games
+- **BattleShipGameApplication.java** (in `game.battleship`)
+  - Complete console-based Battleship game with two players, random firing strategy, turn-based play, and battlefield view.
 
-### Tic-Tac-Toe with AI
-- **TicTocToe.java**
-  - Main entry point with mode selection (Human vs Human or Human vs AI)
-- **Game.java**
-  - Game flow and logic
-  - Player turn management
-  - Win/draw detection
-- **MinimaxAI.java**
-  - AI player implementation using Minimax algorithm
-  - Optimal move calculation for unbeatable AI
-- **model/Board.java**
-  - 3x3 game board representation
-  - Move placement and validation
-  - Win condition checking
-- **model/Player.java**
-  - Player representation with symbol (X/O)
-  - AI flag for distinguishing human vs AI players
-- **model/GameMode.java**
-  - Game mode enumeration (HUMAN vs AI)
-
----
-**DSA Directory:** `src/main/java/com/kumar/interview/prep/interview_prep/dsa/`  
-**Game Directory:** `src/main/java/com/kumar/interview/prep/game/`
+**Directory:** `src/main/java/com/kumar/interview/prep/interview_prep/dsa/`
