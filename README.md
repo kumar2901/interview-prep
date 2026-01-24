@@ -87,23 +87,65 @@ Backend Developer interview preparation
 
 ### Games
 
-#### Battleship (in `game.battleship`)
-- **BattleShipGameApplication.java** - Main entry point to initialize and start the game
-- **BattleShipGameService.java** - Service layer to manage game initialization, ship placement, and gameplay
-- **GameManager.java** - Core game logic: manages two battlefields, turn-based play, and win detection
-- **BattleField.java** - Represents a player's grid, handles ship placement, firing, and state
-- **Ship.java** - Ship model with id, size, cell positions, and destroyed status
-- **Coordinate.java** - Record for (x, y) coordinate representation
-- **MissileTracker.java** - Tracks fired coordinates to prevent duplicate shots
-- **FiringStrategy.java** - Interface for pluggable firing strategies
-- **RandomFiringStrategy.java** - Random coordinate selection for AI firing
+#### Battleship (in `game.battleship`) -Kotak Bank Interview Problem
+- **BattleShipGameApplication.java**
+  - Entry point: initializes game service, adds ships to both players, views battlefield, starts game
+- **BattleShipGameService.java**
+  - Validates grid size (must be even)
+  - Creates GameManager with RandomFiringStrategy
+  - Exposes initGame(), addShip(), viewBattleField(), startGame()
+- **GameManager.java**
+  - Creates two BattleFields (PlayerA and PlayerB) by splitting the grid
+  - Adds ships to both player fields
+  - Prints individual and combined battlefield views
+  - Runs turn-based game loop alternating between players
+  - Detects winner when all enemy ships are destroyed
+  - Delegates firing to FiringStrategy
+- **BattleField.java**
+  - Stores ships in a HashMap
+  - Validates ship placement (bounds check, overlap detection)
+  - Handles fire() to check hit/miss and mark ship as destroyed
+  - Checks if all ships are destroyed
+  - Prints grid state
+- **Ship.java**
+  - Stores id, destroyed status, and set of cell coordinates
+  - Constructor generates cells based on size and starting position
+- **Coordinate.java**
+  - Java record for (x, y) coordinate representation
+- **MissileTracker.java**
+  - Static tracker storing fired coordinates
+  - alreadyFired() checks if coordinate was already targeted
+  - markFired() records new shot
+- **FiringStrategy.java**
+  - Interface defining fire() method returning Coordinate
+- **RandomFiringStrategy.java**
+  - Generates random coordinates within enemy field bounds
+  - Uses MissileTracker to avoid duplicate shots
 
 #### Tic Tac Toe (in `game.tictoctoe`)
-- **TicTocToe.java** - Main entry point allowing user to choose game mode (Human or AI)
-- **Game.java** - Core game loop: manages turns, input, win/draw detection
-- **MinimaxAI.java** - AI opponent using Minimax algorithm for optimal move selection
-- **Board.java** - 3x3 grid model with move placement, win check, and print utilities
-- **Player.java** - Player model with symbol (X/O) and AI flag
-- **GameMode.java** - Enum for HUMAN and AI modes
+- **TicTocToe.java**
+  - Entry point: prompts user to choose Human vs Human or Human vs AI mode
+  - Creates and starts Game with selected mode
+- **Game.java**
+  - Creates Board and two Players (X=human, O=human or AI based on mode)
+  - Alternates turns between players
+  - For AI turn: calls MinimaxAI.bestMove()
+  - For human turn: reads input and validates move
+  - Checks win/draw condition after each move
+- **MinimaxAI.java**
+  - bestMove(): tries all empty cells, evaluates with minimax, returns optimal position
+  - minimax(): recursive algorithm scoring +10 for AI win, -10 for human win, 0 for draw
+  - Maximizes AI score, minimizes human score for unbeatable play
+- **Board.java**
+  - 3x3 char grid for game state
+  - reset(): clears grid to empty
+  - placeMove(): validates position (1-9), places symbol if valid
+  - isFull(): checks if board is full (draw condition)
+  - checkWin(): checks rows, columns, and diagonals for three in a row
+  - print(): displays formatted grid with separators
+- **Player.java**
+  - Stores symbol (X or O) and isAI flag
+- **GameMode.java**
+  - Enum: HUMAN, AI
 
 **Directory:** `src/main/java/com/kumar/interview/prep/interview_prep/dsa/`
