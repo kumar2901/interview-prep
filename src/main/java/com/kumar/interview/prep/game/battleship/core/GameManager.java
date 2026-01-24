@@ -24,10 +24,11 @@ public class GameManager {
     }
 
     public void addShip(String id, int size, int ax, int ay, int bx, int by) {
-        fieldA.addShip(new Ship(id,size,ax,ay));
-        fieldB.addShip(new Ship(id,size,bx,by));
+        fieldA.addShip(new Ship(id, size, ax, ay));
+        fieldB.addShip(new Ship(id, size, bx, by));
     }
-    public void printBoard(){
+
+    public void printBoard() {
         fieldA.print();
         fieldB.print();
     }
@@ -54,7 +55,8 @@ public class GameManager {
         for (int y = N - 1; y >= 0; y--) {
             System.out.printf("%2d | ", y);
             for (int x = 0; x < N; x++) {
-                if (x == N / 2) System.out.print("| ");
+                if (x == N / 2)
+                    System.out.print("| ");
                 System.out.printf("%-5s", view[y][x]);
             }
             System.out.println();
@@ -63,7 +65,8 @@ public class GameManager {
         // X-axis
         System.out.print("    ");
         for (int x = 0; x < N; x++) {
-            if (x == N / 2) System.out.print("  ");
+            if (x == N / 2)
+                System.out.print("  ");
             System.out.printf("%-5d", x);
         }
         System.out.println("\n       PlayerA        PlayerB\n");
@@ -80,44 +83,42 @@ public class GameManager {
         }
     }
 
-
     public void startGame() {
-        boolean isATurn=true;
+        boolean isATurn = true;
 
-        while(true){
-            if(isATurn){
-                playTurn("PlayerA",fieldB);
-                if(fieldB.allShipsDestroyed()){
+        while (true) {
+            if (isATurn) {
+                playTurn("PlayerA", fieldB);
+                if (fieldB.allShipsDestroyed()) {
                     System.out.println("PlayerA Wins!");
                     break;
                 }
 
-            }else{
-                playTurn("PlayerB",fieldA);
-                if(fieldA.allShipsDestroyed()){
+            } else {
+                playTurn("PlayerB", fieldA);
+                if (fieldA.allShipsDestroyed()) {
                     System.out.println("PlayerB Wins!");
                     break;
                 }
 
             }
-            isATurn=!isATurn;
+            isATurn = !isATurn;
             System.out.println("-----------------------------------");
         }
 
     }
 
     private void playTurn(String player, BattleField enemyField) {
-        Coordinate c=firingStrategy.fire(size,enemyField.getXStart(),enemyField.getXEnd());
+        Coordinate c = firingStrategy.fire(size, enemyField.getXStart(), enemyField.getXEnd());
 
-        System.out.println(player+" fires at "+c);
+        System.out.println(player + " fires at " + c);
 
-        Ship hit =enemyField.fire(c.x(),c.y());
-        if(hit!=null){
-            System.out.println("Hit! Ship"+hit.getId()+" destroyed");
-        }else{
+        Ship hit = enemyField.fire(c.x(), c.y());
+        if (hit != null) {
+            System.out.println("Hit! Ship" + hit.getId() + " destroyed");
+        } else {
             System.out.println("Miss");
         }
     }
-
 
 }

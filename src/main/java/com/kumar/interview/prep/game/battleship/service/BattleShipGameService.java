@@ -7,12 +7,11 @@ public class BattleShipGameService {
 
     private GameManager game;
 
-
     public void initGame(int size) {
         if (size % 2 == 1) {
             throw new RuntimeException("Battlefield size must be even");
         }
-        game=new GameManager(size,new RandomFiringStrategy());
+        game = new GameManager(size, new RandomFiringStrategy());
     }
 
     public void addShip(String id, int size, int ax, int ay, int bx, int by) {
