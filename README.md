@@ -190,6 +190,40 @@ Backend Developer interview preparation
   - Demo for multi-threaded singleton implementations
 
 #### Simple Factory Pattern (in `design_pattern/creational/factory/simple/`)
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        SIMPLE FACTORY PATTERN                           │
+└─────────────────────────────────────────────────────────────────────────┘
+
+                    ┌─────────────────────────────┐
+                    │  DatabaseConnectionFactory  │
+                    ├─────────────────────────────┤
+                    │ +createConnection(type)     │──────┐
+                    └─────────────────────────────┘      │
+                                                         │ creates
+                                                         ▼
+                           ┌─────────────────────────────────────┐
+                           │    «interface» DatabaseConnection   │
+                           ├─────────────────────────────────────┤
+                           │ +connect()                          │
+                           │ +disconnect()                       │
+                           │ +executeQuery(query)                │
+                           │ +getDatabaseType()                  │
+                           └─────────────────────────────────────┘
+                                          △
+                                          │ implements
+              ┌───────────────────────────┼───────────────────────────┐
+              │                           │                           │
+   ┌──────────┴──────────┐    ┌──────────┴──────────┐    ┌──────────┴──────────┐
+   │   MySQLConnection   │    │ PostgreSQLConnection│    │  MongoDBConnection  │
+   ├─────────────────────┤    ├─────────────────────┤    ├─────────────────────┤
+   │ +connect()          │    │ +connect()          │    │ +connect()          │
+   │ +disconnect()       │    │ +disconnect()       │    │ +disconnect()       │
+   │ +executeQuery()     │    │ +executeQuery()     │    │ +executeQuery()     │
+   └─────────────────────┘    └─────────────────────┘    └─────────────────────┘
+```
+
 - **DatabaseConnectionFactory.java**
   - Static factory method with enum-based type selection
   - Creates MySQL, PostgreSQL, or MongoDB connections
@@ -206,6 +240,45 @@ Backend Developer interview preparation
   - Demo showcasing factory usage with different database types
 
 #### Abstract Factory Pattern (in `design_pattern/creational/factory/abstract_factory/`)
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                       ABSTRACT FACTORY PATTERN                          │
+└─────────────────────────────────────────────────────────────────────────┘
+
+                      ┌────────────────────────────┐
+                      │  «interface» CarFactory    │
+                      ├────────────────────────────┤
+                      │ +createCar(): Car          │
+                      │ +createSpecification()     │
+                      └────────────────────────────┘
+                                    △
+                                    │ implements
+                 ┌──────────────────┴──────────────────┐
+                 │                                     │
+   ┌─────────────┴─────────────┐         ┌─────────────┴─────────────┐
+   │  NorthAmericaCarFactory   │         │    EuropeCarFactory       │
+   ├───────────────────────────┤         ├───────────────────────────┤
+   │ +createCar(): Sedan       │         │ +createCar(): Hatchback   │
+   │ +createSpecification():   │         │ +createSpecification():   │
+   │   NorthAmericaSpec        │         │   EuropeSpec              │
+   └───────────────────────────┘         └───────────────────────────┘
+                 │                                     │
+                 │ creates                             │ creates
+                 ▼                                     ▼
+   ┌─────────────────────────────────────────────────────────────────┐
+   │                         PRODUCTS                                │
+   └─────────────────────────────────────────────────────────────────┘
+
+   «interface» Car                        «interface» CarSpecification
+        △                                          △
+        │                                          │
+   ┌────┴────┐                               ┌─────┴─────┐
+   │         │                               │           │
+ Sedan   Hatchback                   NorthAmerica    Europe
+                                     Specification  Specification
+```
+
 - **CarFactory.java**
   - Abstract factory interface: createCar(), createSpecification()
 - **NorthAmericaCarFactory.java**
