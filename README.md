@@ -302,4 +302,61 @@ Backend Developer interview preparation
   - Demo creating simple, luxury, and standard houses
   - Demonstrates immutability and step-by-step construction
 
+### Structural Patterns
+
+#### Adapter Pattern (in `design_pattern/structural/`)
+- **AdapterExample.java**
+  - Allows incompatible classes to work together by converting interface of one class into another
+  - Useful for integrating legacy code or third-party libraries
+  - Client code uses Printer interface, adapter wraps LegacyPrinter
+- **Printer** (interface)
+  - Target interface expected by client
+  - Defines print() method
+- **LegacyPrinter** (class)
+  - Adaptee with incompatible interface (printDocument() method)
+- **PrinterAdapter** (class)
+  - Adapter implementing Printer interface
+  - Wraps LegacyPrinter and delegates calls to printDocument()
+
+#### Decorator Pattern (in `design_pattern/structural/`)
+- **DecoratorExample.java**
+  - Dynamically enhances object behavior without subclassing
+  - Wrapper pattern for extending functionality at runtime
+  - Demonstrates pizza with toppings (cheese, pepperoni)
+- **Pizza** (interface)
+  - Component interface with getDescription() and getCost() methods
+- **PlainPizza** (class)
+  - Concrete component - base pizza implementation
+- **PizzaDecorator** (abstract class)
+  - Base decorator holding reference to Pizza object
+  - Provides default implementation that delegates to wrapped pizza
+- **CheeseDecorator** (class)
+  - Adds cheese topping with additional cost ($1.5)
+  - Extends description and cost
+- **PepperoniDecorator** (class)
+  - Adds pepperoni topping with additional cost ($2.5)
+  - Extends description and cost
+
+#### Facade Pattern (in `design_pattern/structural/`)
+- **FacadeExample.java**
+  - Provides simplified interface to complex subsystem
+  - Hides complexity of multiple subsystems behind single facade
+  - Boeing autopilot system example
+- **AutopilotFacade** (class)
+  - Facade coordinating multiple Boeing subsystems
+  - autopilotOn(): coordinates altitude monitoring, engine control, fuel monitoring, navigation
+  - autopilotOff(): turns off all subsystems in sequence
+- **BoeingAltitudeMonitor** (class)
+  - Subsystem: monitors and controls altitude
+  - autoMonitor(), turnOff() methods
+- **BoeingEngineController** (class)
+  - Subsystem: controls engine speed
+  - setEngineSpeed(), turnOff() methods
+- **BoeingFuelMonitor** (class)
+  - Subsystem: tracks remaining fuel in gallons
+  - getRemainingFeulInGallons(), turnOff() methods
+- **BoeingNavigationSystem** (class)
+  - Subsystem: sets direction based on engine speed and fuel
+  - setDirectionBasedOnSpeedAndFeul(), turnOff() methods
+
 **Directory:** `src/main/java/com/kumar/interview/prep/design_pattern/`
