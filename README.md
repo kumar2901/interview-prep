@@ -10,6 +10,27 @@ Backend Developer interview preparation
 - **MaxProdSubarray.java**
   - Maximum product subarray in an integer array
 
+### eBay CodeSignal
+- **BankingSystem.java** - Complete banking system implementation with account management and scheduled payments
+  - `createAccount(accountId, timestamp)`: Create new account with initial balance of 0
+  - `deposit(accountId, amount, timestamp)`: Deposit money into account
+  - `transfer(fromId, toId, timestamp, amount)`: Transfer funds between accounts with validation
+  - `topSpenders(timestamp, n)`: Get top n spenders sorted by spent amount (ties broken alphabetically)
+  - `schedulePayment(accountId, targetAccId, timestamp, amount, cashbackPercentage)`: Schedule payment for future execution
+  - `getPaymentStatus(accountId, timestamp, paymentId)`: Retrieve status of scheduled payment
+  - `processScheduledPayments(currentTimestamp)`: Process all scheduled payments due at current timestamp with cashback
+  - `mergeAccounts(sourceAccount, targetAccount, timestamp)`: Merge two accounts combining balance and spent amount
+  - **Features:**
+    - Timestamp-based transaction validation (prevents expired transactions)
+    - PriorityQueue for efficient scheduled payment processing
+    - Automatic cashback calculation on scheduled payments
+    - Payment status tracking (SCHEDULED, PROCESSING, COMPLETED, FAILED)
+    - Account balance and spending tracking
+- **Account.java** - Account model with id, balance, spent amount, and last update timestamp
+- **SchedulePayment.java** - Payment model with payment id, source/target accounts, timestamp, amount, cashback percentage, and status
+- **PaymentStatus.java** - Enum for payment states: SCHEDULED, PROCESSING, COMPLETED, FAILED
+- **BankingSystemApplication.java** - Demo application showcasing all BankingSystem operations
+
 ### Sliding Window
 - **LongestSubstringWithoutRepeatingCharacters.java**
   - Find the length of the longest substring without repeating characters
