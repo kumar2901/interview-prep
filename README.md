@@ -30,6 +30,10 @@ Backend Developer interview preparation
 - **SchedulePayment.java** - Payment model with payment id, source/target accounts, timestamp, amount, cashback percentage, and status
 - **PaymentStatus.java** - Enum for payment states: SCHEDULED, PROCESSING, COMPLETED, FAILED
 - **BankingSystemApplication.java** - Demo application showcasing all BankingSystem operations
+- **EbayCodeSignal.java**
+  - `blurImage(int[][] image, int radius)`: Applies a box blur effect to a grayscale image by averaging pixel intensities in a square neighborhood
+  - `batteryAndRecharge(int[] capacity, int[] recharge, int T)`: Simulates battery usage in cyclic order with recharge times, returns number of usages to reach T minutes or -1 if impossible
+  - `isSingable(String[] notes, String lowest, String highest)`: Determines if a singer can perform a song based on vocal range (notes from C0 to B7)
 
 ### Sliding Window
 - **LongestSubstringWithoutRepeatingCharacters.java**
@@ -380,4 +384,24 @@ Backend Developer interview preparation
   - Subsystem: sets direction based on engine speed and fuel
   - setDirectionBasedOnSpeedAndFeul(), turnOff() methods
 
-**Directory:** `src/main/java/com/kumar/interview/prep/design_pattern/`
+---
+
+## System Design
+
+### Billing Service
+- Design diagram: `Billing Service_.drawio.png`
+  - Comprehensive billing system architecture
+
+### Distributed Cache
+- Design diagram: `Distributed cache.drawio.png`
+  - Scalable distributed caching solution
+
+### Notification Service
+- Design diagram: `Notification System Design.drawio.png`
+  - Event-driven notification system architecture
+
+### URL Shortener
+- Design diagrams: `tinyUrls.png`, `tiny_urls_educative.png`
+  - High-level and detailed URL shortening service designs
+
+**Directory:** `src/main/java/com/kumar/interview/prep/system/design/`
