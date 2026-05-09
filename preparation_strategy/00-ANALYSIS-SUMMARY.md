@@ -1,4 +1,4 @@
-# Gap Analysis & Study Guide: Interview Prep for Senior Engineers
+# Study Guide: Interview Prep for Senior Engineers
 
 ## Overview
 
