@@ -19,17 +19,6 @@
 
 ---
 
-## Additional senior prompts
-
-11. **Meeting scheduler / calendar** — recurring rules, conflicts, free/busy, time zones.
-12. **Hotel / flight / seat booking** — inventory holds (TTL), overbooking policy, concurrency on rows.
-13. **Splitwise-style ledger** — balances, simplified debts, idempotent settlements (invariant: sum zero per group).
-14. **Notification service** — channels (push/email/SMS), user preferences, dedupe, rate caps.
-15. **Ride / delivery matcher (simplified)** — dispatch rules, cancellation, driver state machine.
-16. **Consistent hashing ring (API-level)** — add/remove node, virtual nodes—explain how you’d **simulate** or unit-test placement.
-
----
-
 ## LLD checklist
 
 - Nouns → candidate classes; verbs → methods.

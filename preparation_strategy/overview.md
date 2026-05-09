@@ -1,6 +1,12 @@
 # FAANG Preparation — Overview & Schedule
 
-Structured prep across coding, LLD, system design, and core concepts. Topic files live alongside this document—see [faang-interview-preparation-strategy.md](faang-interview-preparation-strategy.md) for the full index.
+Structured prep across coding, LLD, system design, and core concepts.
+
+**Document order (read this folder without getting lost):** open [**faang-interview-preparation-strategy.md**](faang-interview-preparation-strategy.md) first — it lists **step 1 → 12** for every file in `preparation_strategy/`, plus short paths if you only have 20 minutes or one evening.
+
+This page (**overview.md**) is **step 2** in that sequence: timeline, rhythm, and behavioral baseline.
+
+**Senior / Staff extras** (steps 8–12 in the index): [MISSING-SENIOR-CONCEPTS.md](MISSING-SENIOR-CONCEPTS.md), [ROLE-AND-COMPANY-GUIDE.md](ROLE-AND-COMPANY-GUIDE.md), [SENIOR-INTERVIEW-GAP-REVIEW.md](SENIOR-INTERVIEW-GAP-REVIEW.md), [QUICK-REFERENCE-STUDY-MAP.md](QUICK-REFERENCE-STUDY-MAP.md), [00-ANALYSIS-SUMMARY.md](00-ANALYSIS-SUMMARY.md).
 
 ---
 
@@ -25,39 +31,17 @@ Structured prep across coding, LLD, system design, and core concepts. Topic file
 
 ---
 
-## Senior behavioral and leadership
-
-Prepare **two polished STAR stories** each for:
-
-- **Ambiguity / zero-to-one:** vague goals → clarified success metrics, phased delivery.
-- **Conflict:** disagreement with PM/design/peers → data, tradeoffs, outcome—avoid “I was right” without reflection.
-- **Technical debt:** negotiated scope vs velocity; measurable payoff (incidents down, latency).
-- **Mentoring / leveling:** concrete feedback or ramp-up you drove.
-- **Incident / firefight:** customer impact, mitigation, postmortem actions you owned.
-- **Org-wide influence:** RFC, ADR, or cross-team standard that stuck.
-
-**Frameworks (optional hook):** impact × confidence vs effort for prioritization; tie roadmap bets to **SLOs** / risk reduction when credible.
-
-**Company-specific prep:** if targeting **Amazon**, map examples to **Leadership Principles**; **Google**, emphasize ambiguity + collaboration; adjust tone once you pick shortlist employers.
-
-**Artifacts:** be ready to describe **review culture**, **testing discipline**, and **how you give/receive hard feedback**.
-
----
-
 ## Weekly review template
 
 1. List topics still weak from timed sessions.
 2. Redo 2 missed problems cold.
 3. One LLD whiteboard from [lld.md](lld.md) checklist.
 4. One system design deep dive with notes saved ([system-design.md](system-design.md)).
-5. Refine one behavioral story with metrics (see [Senior behavioral and leadership](#senior-behavioral-and-leadership)).
-6. One row from [senior-gap-checklist.md](senior-gap-checklist.md).
+5. Refine one behavioral story with metrics.
 
 ---
 
 ## References
-
-Strategy index: [faang-interview-preparation-strategy.md](faang-interview-preparation-strategy.md). Senior gap sweep: [senior-gap-checklist.md](senior-gap-checklist.md).
 
 Problem IDs refer to [LeetCode](https://leetcode.com/problemset/all/). Filter by tag and difficulty; supplement with company-tagged lists only after fundamentals are solid.
 

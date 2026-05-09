@@ -38,84 +38,50 @@
 
 ---
 
-## Observability and SLOs
+## Edge and traffic management
 
-**SLI** — quantitative measure of service behavior (e.g., availability = successful requests / total).
-
-**SLO** — internal target on SLIs (e.g., 99.9% success monthly).
-
-**SLA** — contractual promise to customers (often stricter penalties).
-
-**Error budget** — allowable unreliability (\(1 -\) SLO); when exhausted, prioritize reliability over features.
-
-**Golden signals** (Google): **latency**, **traffic**, **errors**, **saturation**. **RED** (microservices): rate, errors, duration.
-
-**Metrics vs logs vs traces:** metrics aggregate (cheap alerts); logs explain *what* happened for a request id; **distributed traces** show cross-service path (spans, parent span id). Propagate **trace context** (e.g., W3C traceparent); **sample** in prod to control cost.
-
-**Interview hooks:** symptom-based alerts (“checkout failing”) vs noisy infra; dashboards per user journey; **correlation IDs** end-to-end.
-
----
-
-## Reliability and operations
-
-**Incident:** severity, commander/on-call, comms channel, **rollback vs fix-forward**, stakeholder updates.
-
-**Blameless postmortem:** timeline, root cause (technical + systemic), what went well, action items with owners.
-
-**DR:** **RPO** (max acceptable data loss window), **RTO** (max downtime). Patterns: backup/restore; warm standby; **active-passive** vs **active-active** multi-region (conflict cost).
-
-**Interview hooks:** game days / chaos exercises; dependency failure drills; **capacity buffer** for spikes.
+- **DNS:** failover, TTL tradeoffs (low TTL ↔ more churn and load on DNS).
+- **Load balancing:** L4 (connection-aware) vs L7 (routing by path/host/header); health checks (**liveness vs readiness**).
+- **Sticky sessions:** when needed (cart colocation caution) vs preference for **stateless** tiers + shared session store.
+- **TLS termination** at LB/ingress; optionally **mTLS** service-to-service.
+- **CDN** for static and cacheable APIs; origin shield; cache keys and **purge** semantics.
+- **API gateway:** authN/Z at edge, **rate limiting**, request size limits—see **§24** in [MISSING-SENIOR-CONCEPTS.md](MISSING-SENIOR-CONCEPTS.md) for hierarchical limits.
 
 ---
 
 ## Deployment and change safety
 
-**Rolling:** gradual instance replacement—simple; bad deploy poisons subset until halt.
-
-**Blue/green:** two pools; instant switch; needs double capacity or scaled-down idle.
-
-**Canary:** route small % to new version; promote or rollback on metrics—pairs well with **feature flags** for gradual enablement.
-
-**Backward-compatible APIs:** additive changes first; deprecate with sunset headers/docs.
-
-**Zero-downtime schema:** **expand/contract**—add new column/table → dual-write or backfill → switch reads → remove old (never drop in same release as code relying on absence).
-
----
-
-## Real-time APIs and webhooks
-
-| Mechanism | Tradeoff |
-|-----------|-----------|
-| **Long polling** | Simple; higher latency / connection overhead at scale |
-| **SSE** | One-way server→browser over HTTP; reconnect semantics |
-| **WebSocket** | Full duplex; connection state, sticky routing, **backpressure** |
-
-**Webhooks:** **sign** payloads (HMAC shared secret); **retries with backoff**; receivers **idempotent** (event id dedup).
+- **Rolling:** incremental instance replacement—simple; watch **draining** during deploy.
+- **Blue/green:** two environments; fast cutover + fast rollback—cost of duplicate capacity.
+- **Canary / progressive rollout:** subset of traffic/version; automate promotion on **SLO/regression guards**; ties to **feature flags** ([MISSING-SENIOR-CONCEPTS.md](MISSING-SENIOR-CONCEPTS.md) §19).
+- **Schema changes:** **expand / contract** pattern for zero/low downtime ([MISSING-SENIOR-CONCEPTS.md](MISSING-SENIOR-CONCEPTS.md) §13).
+- **Backward compatibility:** version negotiation, deprecation windows ([MISSING-SENIOR-CONCEPTS.md](MISSING-SENIOR-CONCEPTS.md) §16).
 
 ---
 
 ## Streaming and long-running work
 
-**Logs vs streams:** bounded retention; **partitions** for parallelism; **key** for per-entity ordering.
-
-**Windows:** tumbling vs sliding; **watermarks** handle lateness (approximate completeness).
-
-**Durability:** compare **at-least-once** processing + idempotent sinks vs managed workflow (**Temporal**-class): sleeps, retries, visibility—pairs well with Saga discussions.
-
----
-
-## Edge and traffic management
-
-**DNS:** TTL, health-aware routing, latency-based routing.
-
-**CDN:** cache keys, **TTL**, stale-while-revalidate, origin shield, purge API.
-
-**API gateway:** authn/z, rate limits, routing, WAF hook—**edge** vs **mesh** division of labor.
-
-**BFF** (backend-for-frontend): tailor APIs per client; avoids one mega-graph for all surfaces.
-
-**Service mesh** (concept): mTLS between services, traffic policy, retries/timeouts—operational cost vs centralized libs.
+- Partitioned logs (**Kafka**/Pulsar-style): ordering **per partition**, replay, retention.
+- **Consumers:** consumer groups, **rebalancing** cost, poison messages → [**DLQ**](core-concepts.md#messaging--queues).
+- **Stream processors:** stateful aggregation, **watermarks** / late events—see [MISSING-SENIOR-CONCEPTS.md](MISSING-SENIOR-CONCEPTS.md) §12.
+- **Backpressure:** slow consumers must not wedge producers—bounded queues, drop/shed policy explicit.
 
 ---
 
-*Senior sweep checklist:* [senior-gap-checklist.md](senior-gap-checklist.md)
+## Observability and SLOs
+
+- **Golden signals:** latency, traffic, errors, saturation (Google SRE framing).
+- **SLI:** raw metric proxy for user happiness; **SLO:** target + window; **SLA:** customer-facing consequence.
+- **Error budgets:** tie release velocity and change risk to remaining budget.
+- **Logging:** structured, correlation/request IDs → pair with **distributed tracing** ([MISSING-SENIOR-CONCEPTS.md](MISSING-SENIOR-CONCEPTS.md) §17).
+- **Metrics:** counters/gauges/histograms; **percentiles** (p99) vs averages; cardinality risk ([MISSING-SENIOR-CONCEPTS.md](MISSING-SENIOR-CONCEPTS.md) §9).
+- **Dashboards vs alerts:** alert on **symptoms** user-impacting, reduce noise/flap (same §9).
+
+---
+
+## Reliability and operations
+
+- **Multi-AZ vs multi-region:** RTO/RPO, failover drills, **chaos / game days** ([MISSING-SENIOR-CONCEPTS.md](MISSING-SENIOR-CONCEPTS.md) §6).
+- **Runbooks**, on-call rotations, escalation; **severity** definitions.
+- **Blameless postmortems:** contributing factors, action items with owners ([MISSING-SENIOR-CONCEPTS.md](MISSING-SENIOR-CONCEPTS.md) §22).
+- **DR patterns:** backups + restore drills; replicated DB with failover caveats (**split brain** awareness from [core-concepts.md](core-concepts.md)).
