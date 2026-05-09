@@ -8,7 +8,7 @@ This file is the **audit outcome**: what the folder already covers, what [`MISSI
 
 | File | Role |
 |------|------|
-| [`faang-interview-preparation-strategy.md`](faang-interview-preparation-strategy.md) | Short index—start here |
+| [`faang-interview-preparation-strategy.md`](01-faang-interview-preparation-strategy.md) | Short index—start here |
 | [`overview.md`](00-overview.md) | Timeline, STAR, weekly template |
 | [`leetcode-topics.md`](leetcode-topics.md) | DSA topic → problem IDs |
 | [`lld.md`](lld.md) | LLD drills + checklist (**add more for staff+**, see §4) |
@@ -37,7 +37,7 @@ If a link inside an older doc 404s, prefer this index or search the filename in 
 
 - **`MISSING-SENIOR-CONCEPTS.md` § Microservices:** It lists **CQRS** and **event sourcing** as “covered” in core materials—they are **not** explained in [`core-concepts.md`](core-concepts.md) (only **Saga / outbox** adjacent ideas appear). Treat CQRS/ES as **still to study** (MISSING §8 + external resources) unless you add a dedicated note.
 - **`QUICK-REFERENCE-STUDY-MAP.md`** previously referenced **non-existent** files/anchors; Phase 1 should use [`MISSING-SENIOR-CONCEPTS.md`](MISSING-SENIOR-CONCEPTS.md) (priority matrix) and [`system-design.md`](system-design.md) section anchors that now exist (see expanded `system-design.md`).
-- **`00-ANALYSIS-SUMMARY.md`** mentions a central `README.md` under `preparation_strategy/`—that file may **not** exist; use [`faang-interview-preparation-strategy.md`](faang-interview-preparation-strategy.md) as the hub.
+- **`00-ANALYSIS-SUMMARY.md`** mentions a central `README.md` under `preparation_strategy/`—that file may **not** exist; use [`faang-interview-preparation-strategy.md`](01-faang-interview-preparation-strategy.md) as the hub.
 
 ---
 

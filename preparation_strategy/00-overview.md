@@ -1,7 +1,7 @@
 # FAANG / MAANG preparation — start here
 
 Use this file as the **single consolidated entry** for `preparation_strategy/`: what each document is for, in what order to read it, and how that ties to your timeline.  
-Deeper shortcuts and duplicate reference tables live in [**faang-interview-preparation-strategy.md**](faang-interview-preparation-strategy.md).
+Deeper shortcuts and duplicate reference tables live in [**faang-interview-preparation-strategy.md**](01-faang-interview-preparation-strategy.md).
 
 ---
 
@@ -41,7 +41,7 @@ Open [leetcode-topics.md](leetcode-topics.md) **or** [system-design.md](system-d
 
 | Order | Document | One-line summary |
 |------:|----------|------------------|
-| 0 | [**faang-interview-preparation-strategy.md**](faang-interview-preparation-strategy.md) | Compact index: same read order, **time-boxed shortcuts** (20 min / one evening / coding vs design sprint). |
+| 0 | [**faang-interview-preparation-strategy.md**](01-faang-interview-preparation-strategy.md) | Compact index: same read order, **time-boxed shortcuts** (20 min / one evening / coding vs design sprint). |
 | 1 | **overview.md** (this file) | **Master hub:** how to start, timeline, behavioral rhythm, weekly template, full doc catalog. |
 | 2 | [**leetcode-topics.md**](leetcode-topics.md) | Topic-wise **LeetCode** plan, **E/M/H** difficulty, problem IDs, practice discipline. |
 | 3 | [**core-concepts.md**](core-concepts.md) | Interview fundamentals: **ACID**, **CAP**, consistency, caches, queues, HTTP/auth, resilience, DB basics, etc. |
@@ -78,7 +78,7 @@ Use this checklist the first time; after that, use it as a **TOC** (“where did
 | 9 | [SENIOR-INTERVIEW-GAP-REVIEW.md](SENIOR-INTERVIEW-GAP-REVIEW.md) | Fill blind spots with the question list. |
 | 10 | [QUICK-REFERENCE-STUDY-MAP.md](QUICK-REFERENCE-STUDY-MAP.md) | Multi-week integration plan. |
 | 11 | [00-ANALYSIS-SUMMARY.md](00-ANALYSIS-SUMMARY.md) | Optional. |
-| — | [faang-interview-preparation-strategy.md](faang-interview-preparation-strategy.md) | Quick paths when you don’t want to re-read this whole overview. |
+| — | [faang-interview-preparation-strategy.md](01-faang-interview-preparation-strategy.md) | Quick paths when you don’t want to re-read this whole overview. |
 
 ---
 

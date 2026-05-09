@@ -13,7 +13,7 @@ Follow **Phase 1** once, then run **Phase 2** in parallel with your daily grind.
 | Step | Order | Document | Why |
 |------|------:|----------|-----|
 | **1** | 1 | [**overview.md**](00-overview.md) | **Main hub:** start sequence, all doc summaries, timeline mapping. |
-| **1** | 2 | [**faang-interview-preparation-strategy.md**](faang-interview-preparation-strategy.md) (this page) | Compact sequence + shortcuts; bookmark if you prefer a thin index. |
+| **1** | 2 | [**faang-interview-preparation-strategy.md**](01-faang-interview-preparation-strategy.md) (this page) | Compact sequence + shortcuts; bookmark if you prefer a thin index. |
 | **2** | 3 | [**leetcode-topics.md**](leetcode-topics.md) | DSA topic order + problem list (daily coding). |
 | **2** | 4 | [**core-concepts.md**](core-concepts.md) | Foundations for fundamentals + design discussions. |
 | **2** | 5 | [**system-design.md**](system-design.md) | Classic designs, traffic, deploy, observability, reliability. |
