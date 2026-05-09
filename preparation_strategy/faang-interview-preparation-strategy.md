@@ -1,6 +1,8 @@
 # FAANG Interview Preparation Strategy
 
-Central index for [`preparation_strategy/`](.). **If you only open one file after this, open it in the order below.**
+Companion index for [`preparation_strategy/`](.). **Consolidated “how to start,” document summaries, and timeline mapping live in [overview.md](overview.md)—read that first.**
+
+This page keeps the **numbered sequence**, **shortcut paths**, and **compact reference tables** for quick lookup.
 
 ---
 
@@ -10,8 +12,8 @@ Follow **Phase 1** once, then run **Phase 2** in parallel with your daily grind.
 
 | Step | Order | Document | Why |
 |------|------:|----------|-----|
-| **1** | 1 | [**faang-interview-preparation-strategy.md**](faang-interview-preparation-strategy.md) (this page) | Map of everything; pick your path. |
-| **1** | 2 | [**overview.md**](overview.md) | Timeline, daily rhythm, STAR, weekly review. |
+| **1** | 1 | [**overview.md**](overview.md) | **Main hub:** start sequence, all doc summaries, timeline mapping. |
+| **1** | 2 | [**faang-interview-preparation-strategy.md**](faang-interview-preparation-strategy.md) (this page) | Compact sequence + shortcuts; bookmark if you prefer a thin index. |
 | **2** | 3 | [**leetcode-topics.md**](leetcode-topics.md) | DSA topic order + problem list (daily coding). |
 | **2** | 4 | [**core-concepts.md**](core-concepts.md) | Foundations for fundamentals + design discussions. |
 | **2** | 5 | [**system-design.md**](system-design.md) | Classic designs, traffic, deploy, observability, reliability. |
@@ -23,7 +25,7 @@ Follow **Phase 1** once, then run **Phase 2** in parallel with your daily grind.
 | **3** | 11 | [**QUICK-REFERENCE-STUDY-MAP.md**](QUICK-REFERENCE-STUDY-MAP.md) | How senior topics attach to core docs + weekly-style structure. |
 | **4** | 12 | [**00-ANALYSIS-SUMMARY.md**](00-ANALYSIS-SUMMARY.md) | Narrative of the gap analysis; skim if meta/context helps. |
 
-**Mnemonic:** *Index → Overview → Core skills (DSA + concepts + system + LLD + concurrency) → Tailor role/company → Senior gap catalog → Gap review checklist → Study map layering → Optional analysis story.*
+**Mnemonic:** *Overview → Thin index → Core skills (DSA + concepts + system + LLD + concurrency) → Tailor role/company → Senior gap catalog → Gap review checklist → Study map layering → Optional analysis story.*
 
 Problem IDs reference [LeetCode](https://leetcode.com/problemset/all/).
 
@@ -33,9 +35,8 @@ Problem IDs reference [LeetCode](https://leetcode.com/problemset/all/).
 
 ### You have ~20 minutes today
 
-1. This index (steps **1–2** only).  
-2. [overview.md](overview.md) timeline + weekly template.  
-3. Open [leetcode-topics.md](leetcode-topics.md) or [system-design.md](system-design.md) depending on nearest interview round.
+1. [overview.md](overview.md) — timeline + weekly template strip.  
+2. [leetcode-topics.md](leetcode-topics.md) or [system-design.md](system-design.md) depending on your next round.
 
 ### You have one evening to orient (senior targeting MAANG)
 
