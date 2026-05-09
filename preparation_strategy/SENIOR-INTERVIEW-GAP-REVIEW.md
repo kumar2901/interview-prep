@@ -9,7 +9,7 @@ This file is the **audit outcome**: what the folder already covers, what [`MISSI
 | File | Role |
 |------|------|
 | [`faang-interview-preparation-strategy.md`](faang-interview-preparation-strategy.md) | Short index—start here |
-| [`overview.md`](overview.md) | Timeline, STAR, weekly template |
+| [`overview.md`](00-overview.md) | Timeline, STAR, weekly template |
 | [`leetcode-topics.md`](leetcode-topics.md) | DSA topic → problem IDs |
 | [`lld.md`](lld.md) | LLD drills + checklist (**add more for staff+**, see §4) |
 | [`system-design.md`](system-design.md) | Foundations, classic designs, sizing, observability/deploy/reliability sections |

@@ -40,7 +40,7 @@ This page ties **existing prep materials** to **missing concepts** and provides 
 ### Phase 1: Assessment (Before you start)
 **Time: 1-2 days**
 
-1. Read [overview.md](overview.md) (behavioral + weekly template)
+1. Read [overview.md](00-overview.md) (behavioral + weekly template)
 2. Skim **[SENIOR-INTERVIEW-GAP-REVIEW.md](SENIOR-INTERVIEW-GAP-REVIEW.md)** (audit + extra question checklist)
 3. Review [MISSING-SENIOR-CONCEPTS.md](MISSING-SENIOR-CONCEPTS.md) **Priority Matrix** section
 4. Find your role in [ROLE-AND-COMPANY-GUIDE.md](ROLE-AND-COMPANY-GUIDE.md)
