@@ -12,7 +12,7 @@ A rate limiter limits the number of requests a service can fulfill within a spec
 1. **Functional requirements:**
     - **Request counting:** Limit the number of requests a client can send within a time window (identify users by id, ip, or api key)
     - **Customizable policies:** Ensure request limits per window are configurable
-    - **Client notification:** Notify the client (via error or notification) when a threshold is crossed.
+    - **Client notification:** Notify the client (via error or notification) when a threshold is crossed(return proper error headers and status codes like 429 Too Many Requests)
 2. **Non Functional requirements:**
    - **Scalability:**  System should handle increasing traffic without performance degradation.(scale to 1M rps)
    - **Low latency:**  Should respond quickly to requests, ensuring minimal delay.(< 10ms)
