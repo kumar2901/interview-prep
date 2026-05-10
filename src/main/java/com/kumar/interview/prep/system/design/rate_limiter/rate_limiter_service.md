@@ -20,6 +20,7 @@ A rate limiter limits the number of requests a service can fulfill within a spec
    - **Configurability:** The rate limiter should allow flexible configuration of limits and policies.
 
 ## Types of throttling
-    - **Hard throttling:** This enforces a strict limit. Any request exceeding the threshold is discarded.
-    - **Soft throttling:** This allows requests to exceed the limit by a specific percentage. For example, a limit of 500 with a 5% buffer allows 525 requests.
-    - **Elastic or dynamic throttling:** Allows requests to exceed the limit if the system has free resources, without a fixed upper cap.
+
+**Hard throttling:** This enforces a strict limit. Any request exceeding the threshold is discarded.
+**Soft throttling:** This allows requests to exceed the limit by a specific percentage. For example, a limit of 500 with a 5% buffer allows 525 requests.
+**Elastic or dynamic throttling:** Allows requests to exceed the limit if the system has free resources, without a fixed upper cap.
