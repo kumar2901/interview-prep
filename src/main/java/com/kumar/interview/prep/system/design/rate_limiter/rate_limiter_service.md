@@ -29,3 +29,6 @@ A rate limiter limits the number of requests a service can fulfill within a spec
 1. **Global rate limiting:** This applies a single limit across all users. For example, a service might allow 1000 requests per minute regardless of the number of users.
 2. **Per user rate limiting:** This applies limits on a per-user basis. For example, each user might be allowed 100 requests per minute. This approach is more granular and can prevent a single user from consuming all resources, but it requires tracking individual user activity.
 3. **Hybrid approach:** Some systems use a combination of global and per-user rate limiting. For instance, there might be a global limit to protect overall system resources, while also enforcing per-user limits to ensure fair usage among users.
+
+## Can a load balancer be used as a rate limiter?
+A load balancer can perform basic rate limiting by distributing incoming requests across multiple servers and rejecting requests that exceed a certain threshold. However, it may not be sufficient for complex rate limiting needs, such as per-user limits or dynamic throttling based on system load. For more advanced rate limiting features, a dedicated rate limiter service is often necessary.
