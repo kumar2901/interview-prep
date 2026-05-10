@@ -45,4 +45,4 @@ A load balancer can perform basic rate limiting by distributing incoming request
 
 1. **Basic Solution**: In-process rate limiter -This is implemented within the application itself. It can be simple to implement but may not scale well and can lead to performance issues under high load.
 2. **Good Solution**: Dedicated Rate Limiter Service -This is an external service that handles rate limiting for multiple applications. It can be more scalable and flexible but adds complexity and potential latency.
-3. **Great Solution**: API Gateway/Load Balancer -Integrate rate limiter with API Gateway/Load Balancer (e.g., AWS API Gateway, Nginx, Envoy)
+3. **Great Solution**: API Gateway/Load Balancer -Integrate rate limiter with API Gateway/Load Balancer (e.g., AWS API Gateway, Nginx, Envoy). *Good Analogy: Bouncer at a club reject troublemaker at gate*.
