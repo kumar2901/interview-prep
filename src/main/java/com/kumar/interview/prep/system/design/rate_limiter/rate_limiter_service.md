@@ -43,6 +43,6 @@ A load balancer can perform basic rate limiting by distributing incoming request
 
 ## Where should we place the rate limiter?
 
-1. ** BAD Solution:**: In process
-2. ** GOOD Solution:**: Dedicated Rate Limiter Service (external to the application)
-3. ** Great Solution:**: Integrate rate limiter with API Gateway/Load Balancer (e.g., AWS API Gateway, Nginx, Envoy)
+1. ** BAD Solution**: In process
+2. ** GOOD Solution**: Dedicated Rate Limiter Service (external to the application)
+3. ** Great Solution**: Integrate rate limiter with API Gateway/Load Balancer (e.g., AWS API Gateway, Nginx, Envoy)
