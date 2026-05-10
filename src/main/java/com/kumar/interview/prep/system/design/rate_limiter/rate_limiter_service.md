@@ -40,3 +40,9 @@ A load balancer can perform basic rate limiting by distributing incoming request
 3. **Fixed window counter** - This algorithm counts the number of requests in a fixed time window (e.g., 1 minute). If the count exceeds the limit, further requests are rejected until the window resets. This can lead to burstiness at the edges of the window. *Least accurate algorithm & Easy to implement*.
 4. **Sliding window log** - This algorithm maintains a log of request timestamps and counts the number of requests in a sliding time window. It provides a more accurate count but can be memory-intensive.
 5. **Sliding window counter** - This algorithm is similar to the sliding window log but uses a counter instead of maintaining a log of timestamps.
+
+## Where should we place the rate limiter?
+
+1. ** BAD Solution:**: In process
+2. ** GOOD Solution:**: Dedicated Rate Limiter Service (external to the application)
+3. ** Great Solution:**: Integrate rate limiter with API Gateway/Load Balancer (e.g., AWS API Gateway, Nginx, Envoy)
