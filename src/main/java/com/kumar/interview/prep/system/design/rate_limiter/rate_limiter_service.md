@@ -10,14 +10,14 @@ A rate limiter limits the number of requests a service can fulfill within a spec
 
 ## Requirements
 1. **Functional requirements:**
-    - **Request counting:** Limit the number of requests a client can send within a time window
+    - **Request counting:** Limit the number of requests a client can send within a time window (identify users by id, ip, or api key)
     - **Customizable policies:** Ensure request limits per window are configurable
     - **Client notification:** Notify the client (via error or notification) when a threshold is crossed.
 2. **Non Functional requirements:**
-   - **Scalability:** The system should handle increasing traffic without performance degradation.
-   - **Low latency:** The rate limiter should respond quickly to requests, ensuring minimal delay.
-   - **High availability:** The system should be resilient and available even during high traffic or failures.
-   - **Configurability:** The rate limiter should allow flexible configuration of limits and policies.
+   - **Scalability:**  System should handle increasing traffic without performance degradation.(scale to 1M rps)
+   - **Low latency:**  Should respond quickly to requests, ensuring minimal delay.(< 10ms)
+   - **High availability:** Should be resilient and available even during high traffic or failures.(availability >> consistency)
+   - **Configurability:** Allow flexible configuration of limits and policies.
 
 ## Types of throttling
 
@@ -32,3 +32,11 @@ A rate limiter limits the number of requests a service can fulfill within a spec
 
 ## Can a load balancer be used as a rate limiter?
 A load balancer can perform basic rate limiting by distributing incoming requests across multiple servers and rejecting requests that exceed a certain threshold. However, it may not be sufficient for complex rate limiting needs, such as per-user limits or dynamic throttling based on system load. For more advanced rate limiting features, a dedicated rate limiter service is often necessary.
+
+
+## Rate Limiting Algorithms
+1. **Token bucket** - This algorithm uses a bucket that holds a certain number of tokens. Each request requires a token, and tokens are added to the bucket at a fixed rate. If the bucket is empty, requests are denied until new tokens are added.  *Most commonly used algorithm*.
+2. **Leaking bucket** - This algorithm also uses a bucket, but it leaks tokens at a constant rate. Requests are added to the bucket, and if the bucket overflows, requests are rejected. This smooths out bursts of traffic but can lead to higher latency during peak times. *Good for smoothing traffic*.
+3. **Fixed window counter** - This algorithm counts the number of requests in a fixed time window (e.g., 1 minute). If the count exceeds the limit, further requests are rejected until the window resets. This can lead to burstiness at the edges of the window. *Least accurate algorithm & Easy to implement*.
+4. **Sliding window log** - This algorithm maintains a log of request timestamps and counts the number of requests in a sliding time window. It provides a more accurate count but can be memory-intensive.
+5. **Sliding window counter** - This algorithm is similar to the sliding window log but uses a counter instead of maintaining a log of timestamps.
