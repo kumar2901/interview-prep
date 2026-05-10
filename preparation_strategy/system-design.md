@@ -16,17 +16,42 @@
 
 ## Classic problems (draw diagrams + back-of-envelope math)
 
+### Top 25 System Design Questions for Senior Engineers
+
+| # | System | Key talking points | Difficulty |
+|---|--------|-------------------|------------|
+| 1 | URL Shortener | Base62 ID, collision handling, redirect SLA, analytics | Medium |
+| 2 | Notification System | Multi-channel, delivery guarantees, retries, compliance | Hard |
+| 3 | Rate Limiter | Token bucket, distributed coordination, hierarchical limits | Medium |
+| 4 | Cache System (Redis) | Eviction policies, replication, thundering herd, consistency | Hard |
+| 5 | Search/Autocomplete | Trie/B-tree, ranking, sharding by prefix, fuzzy matching | Hard |
+| 6 | Chat System | Presence, ordering, deduplication, WebSocket, encryption | Hard |
+| 7 | Video Streaming | CDN, transcoding, adaptive bitrate, recommendation | Hard |
+| 8 | File Storage | Chunking, deduplication, sync, version history, sharing | Hard |
+| 9 | Payment Processing | Idempotency, PCI compliance, fraud detection, reconciliation | Hard |
+| 10 | Social Feed | Fan-out strategy, ranking, real-time updates, moderation | Hard |
+| 11 | Ride-Sharing | Geospatial indexing, matching algorithm, surge pricing, ETA | Hard |
+| 12 | Distributed Database | Sharding, replication, quorum, anti-entropy repair | Hard |
+| 13 | CDN | Edge placement, cache invalidation, origin shield, DDoS | Hard |
+| 14 | Recommendation Engine | Collaborative filtering, cold start, diversity, A/B testing | Hard |
+| 15 | Monitoring/Alerting | TSDB design, metrics aggregation, anomaly detection | Hard |
+| 16 | Job Scheduler | DAG workflows, dependencies, retries, resource allocation | Hard |
+| 17 | Real-Time Analytics | Event ingestion, aggregation, privacy, multi-tenancy | Hard |
+| 18 | Distributed Lock | Consensus (Raft/Paxos), leader election, network partitions | Hard |
+| 19 | API Gateway | Routing, auth/z, rate limiting, transformation | Medium |
+| 20 | Message Queue | Partitioning, consumer groups, exactly-once, retention | Hard |
+| 21 | Secrets Management | Encryption, rotation, audit logging, access control | Medium |
+| 22 | Distributed Tracing | Span propagation, sampling, storage, integration | Hard |
+| 23 | Feature Flags | Evaluation, rollout strategies, A/B testing, governance | Medium |
+| 24 | Container Orchestration | Scheduling, resource mgmt, service discovery, deployments | Hard |
+| 25 | Search Engine | Inverted index, query optimization, sharding, relevance | Hard |
+
+**Additional Classic Problems**
+
 | System | Key talking points |
 |--------|-------------------|
-| URL shortener | Base62 ID, collision handling, redirect SLA, analytics |
 | Pastebin | TTL, abuse detection, blob storage |
 | News feed | Fan-out on write vs read, ranking, cache |
-| Chat (WhatsApp-like) | Presence, delivery receipts, WebSocket/gRPC, ordering |
-| Search / typeahead | Trie/B-tree, ranking, sharding by prefix |
-| Ride matching | Geo indexes, supply/demand matching, surge |
-| Video streaming | CDN, transcoding pipeline, adaptive bitrate |
-| Distributed rate limiter | Redis sliding window, coordination |
-| Distributed cache | Eviction, thundering herd, consistency |
 
 ---
 
