@@ -35,9 +35,9 @@ A load balancer can perform basic rate limiting by distributing incoming request
 
 
 ## Rate Limiting Algorithms
-1. **Token bucket** - This algorithm uses a bucket that holds a certain number of tokens. Each request requires a token, and tokens are added to the bucket at a fixed rate. If the bucket is empty, requests are denied until new tokens are added.  *Most commonly used algorithm*.
-2. **Leaking bucket** - This algorithm also uses a bucket, but it leaks tokens at a constant rate. Requests are added to the bucket, and if the bucket overflows, requests are rejected. This smooths out bursts of traffic but can lead to higher latency during peak times. *Good for smoothing traffic*.
-3. **Fixed window counter** - This algorithm counts the number of requests in a fixed time window (e.g., 1 minute). If the count exceeds the limit, further requests are rejected until the window resets. This can lead to burstiness at the edges of the window. *Least accurate algorithm & Easy to implement*.
+1. **Token bucket** - This algorithm uses a bucket that holds a certain number of tokens. Each request requires a token, and tokens are added to the bucket at a fixed rate. If the bucket is empty, requests are denied until new tokens are added.  **Most commonly used algorithm**
+2. **Leaking bucket** - This algorithm also uses a bucket, but it leaks tokens at a constant rate. Requests are added to the bucket, and if the bucket overflows, requests are rejected. This smooths out bursts of traffic but can lead to higher latency during peak times. **Good for smoothing traffic**
+3. **Fixed window counter** - This algorithm counts the number of requests in a fixed time window (e.g., 1 minute). If the count exceeds the limit, further requests are rejected until the window resets. This can lead to burstiness at the edges of the window. **Least accurate algorithm & Easy to implement**
 4. **Sliding window log** - This algorithm maintains a log of request timestamps and counts the number of requests in a sliding time window. It provides a more accurate count but can be memory-intensive.
 5. **Sliding window counter** - This algorithm is similar to the sliding window log but uses a counter instead of maintaining a log of timestamps.
 
@@ -46,3 +46,10 @@ A load balancer can perform basic rate limiting by distributing incoming request
 1. **Basic Solution**: In-process rate limiter -This is implemented within the application itself. It can be simple to implement but may not scale well and can lead to performance issues under high load.
 2. **Good Solution**: Dedicated Rate Limiter Service -This is an external service that handles rate limiting for multiple applications. It can be more scalable and flexible but adds complexity and potential latency.
 3. **Great Solution**: API Gateway/Load Balancer -Integrate rate limiter with API Gateway/Load Balancer (e.g., AWS API Gateway, Nginx, Envoy). **Good Analogy: Bouncer at a club reject troublemaker at gate**
+
+## How should we identify clients for rate limiting?
+1. **IP Address**: This is a common method for identifying clients, but it can lead to issues with shared IP addresses (e.g., behind a NAT) and can be easily spoof
+2. **API Key**: This method requires clients to include an API key in their requests. It provides better granularity but requires clients to manage their keys securely.
+3. **User ID**: This method identifies clients based on their user accounts. It provides the most accurate way to enforce per-user limits but requires authentication and can be more complex to implement.
+
+**Note**: authenticated or premium users may have higher limits than anonymous users.
