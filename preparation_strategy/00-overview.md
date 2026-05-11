@@ -19,7 +19,7 @@ Deeper shortcuts and duplicate reference tables live in [**faang-interview-prepa
 | Daily | Primary docs |
 |--------|----------------|
 | Coding | [leetcode-topics.md](leetcode-topics.md) — follow topic order; mix **M** and **H** per your phase |
-| Design / fundamentals reading | [core-concepts.md](core-concepts.md) and/or [system-design.md](system-design.md) (alternate days) |
+| Design / fundamentals reading | [core-concepts.md](core-concepts.md) and/or [system-design.md](system-design.md) (alternate days); keep [back-of-envelope-sizing.md](back-of-envelope-sizing.md) / [back-of-envelope-calculations.md](back-of-envelope-calculations.md) open for sizing (same content; second is a short pointer) |
 | LLD (2× / week minimum) | [lld.md](lld.md) — one drill per session, timed |
 | Concurrency (if role needs it) | [concurrency-faqs.md](concurrency-faqs.md) — a few FAQs per day |
 
@@ -53,6 +53,7 @@ Open [leetcode-topics.md](leetcode-topics.md) **or** [system-design.md](system-d
 | 9 | [**SENIOR-INTERVIEW-GAP-REVIEW.md**](SENIOR-INTERVIEW-GAP-REVIEW.md) | **Audit** of the folder vs senior bar + **additional question checklist** not spelled out elsewhere. |
 | 10 | [**QUICK-REFERENCE-STUDY-MAP.md**](QUICK-REFERENCE-STUDY-MAP.md) | **Study sequencing:** connect MISSING topics to core files; phased deep-dive suggestions. |
 | 11 | [**00-ANALYSIS-SUMMARY.md**](00-ANALYSIS-SUMMARY.md) | **Meta write-up** of the gap-analysis effort; lowest priority unless you want the story. |
+| 12 | [**back-of-envelope-sizing.md**](back-of-envelope-sizing.md), [**back-of-envelope-calculations.md**](back-of-envelope-calculations.md) | **Sizing cheat sheet:** RPS → requests/day → storage/day @ 1 KiB → rough server count; DAU chains; peak multipliers. **Calculations** file points here (alias if you bookmark that name). |
 
 **Tracks:**
 
@@ -71,6 +72,7 @@ Use this checklist the first time; after that, use it as a **TOC** (“where did
 | 2 | [leetcode-topics.md](leetcode-topics.md) | Lock your coding roadmap. |
 | 3 | [core-concepts.md](core-concepts.md) | Vocabulary for system + fundamentals rounds. |
 | 4 | [system-design.md](system-design.md) | End-to-end design template + classics. |
+| — | [back-of-envelope-sizing.md](back-of-envelope-sizing.md) ([alias](back-of-envelope-calculations.md)) | Optional **capacity** sidecar while doing system design (RPS, storage, servers). |
 | 5 | [lld.md](lld.md) | LLD patterns + first whiteboard drills. |
 | 6 | [concurrency-faqs.md](concurrency-faqs.md) | If job is backend/systems-heavy. |
 | 7 | [ROLE-AND-COMPANY-GUIDE.md](ROLE-AND-COMPANY-GUIDE.md) | Filter what matters for *your* loop. |
@@ -88,7 +90,7 @@ Use this checklist the first time; after that, use it as a **TOC** (“where did
 |------------|--------|-------------------|----------------|
 | **1** | Patterns + mostly medium problems daily | 4–8 weeks | [leetcode-topics.md](leetcode-topics.md), start [core-concepts.md](core-concepts.md) |
 | **2** | Hard problems + timed contests / mixed sheets | 3–6 weeks | [leetcode-topics.md](leetcode-topics.md) (**H** column), [concurrency-faqs.md](concurrency-faqs.md) if needed |
-| **3** | LLD + system design + behavioral (parallel) | 4–8 weeks | [system-design.md](system-design.md), [lld.md](lld.md), this file (behavioral) |
+| **3** | LLD + system design + behavioral (parallel) | 4–8 weeks | [system-design.md](system-design.md), [back-of-envelope-sizing.md](back-of-envelope-sizing.md) / [back-of-envelope-calculations.md](back-of-envelope-calculations.md), [lld.md](lld.md), this file (behavioral) |
 | **4** | Full mocks (coding + design + stories) | 2–4 weeks | All Track A; add Track B topics you shortlisted |
 
 **Daily rhythm (example):** 1–2 coding problems (one pattern review), 30–60 minutes design or concepts reading **or** one LLD sketch, refine **one** behavioral story per week.
@@ -108,7 +110,7 @@ Use this checklist the first time; after that, use it as a **TOC** (“where did
 1. List topics still weak from timed sessions.  
 2. Redo two missed problems **cold**.  
 3. One LLD whiteboard from [lld.md](lld.md).  
-4. One system design deep dive with notes ([system-design.md](system-design.md)).  
+4. One system design deep dive with notes ([system-design.md](system-design.md)); sanity-check numbers with [back-of-envelope-sizing.md](back-of-envelope-sizing.md) or [back-of-envelope-calculations.md](back-of-envelope-calculations.md) (pointer to the same sheet).  
 5. Refine one behavioral story with **numbers** (latency, users, revenue, error rate—whatever fits).  
 6. If on Track B: one subsection from [MISSING-SENIOR-CONCEPTS.md](MISSING-SENIOR-CONCEPTS.md) + two mock questions from [SENIOR-INTERVIEW-GAP-REVIEW.md](SENIOR-INTERVIEW-GAP-REVIEW.md).
 
