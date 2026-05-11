@@ -2,6 +2,8 @@
 
 Order-of-magnitude only. Say **“roughly”**; pick assumptions you can defend (requests/user/day, peak factor, bytes/request, RPS/server).
 
+**Storage units (decimal SI):** **1 KB = 1000 B**, **1 MB = 1000 KB**, **1 GB = 1000 MB**, **1 TB = 1000 GB**, **1 PB = 1000 TB**. Payload size in tables is **1 KB per request** unless you scale with the adjustments section.
+
 ---
 
 ## Memorize this chain (one pass)
@@ -25,45 +27,49 @@ Order-of-magnitude only. Say **“roughly”**; pick assumptions you can defend 
 | **Seconds/day** | **86,400** (= 24 × 60 × 60) | Divides daily volume → average RPS |
 | **Peak factor** | **2×** (optional **3–10×** for spiky traffic) | Provisioning uses peak, not 24h average |
 | **RPS/server** | **10,000** (range **1k–50k**) | Stateless-ish app tier; tune in interview |
-| **GiB/day @ 1 KiB/req** | **≈ 0.08 × avg_RPS** | Because \(86{,}400 \times 1{,}024 / 2^{30} \approx 0.082\) |
+| **GB/day @ 1 KB/req** | **≈ avg_RPS × 0.086** | Because \(86{,}400 \times 1{,}000 / 10^9 \approx 0.0864\) |
 
-**Storage @ 1 KiB/request (tighter):** `GiB/day ≈ avg_RPS × 0.082` — round to **0.08** in your head.
+**Tighter:** **GB/day ≈ avg_RPS × 0.0864** (round to **0.086** in your head).
+
+**Same line in other units (1 KB/req):** **TB/day ≈ avg_RPS × 8.64 × 10⁻⁵** · **PB/day ≈ avg_RPS × 8.64 × 10⁻⁸**
 
 ---
 
-## Table 1 — From **average RPS** (1 KiB per request, **peak = 2× avg**, 10k RPS/server)
+## Table 1 — From **average RPS** (1 KB per request, **peak = 2× avg**, 10k RPS/server)
 
 Use when you already have **avg RPS** or read it off `requests_day / 86.4k`.
 
-| Avg RPS | Requests/day | GiB/day @ 1 KiB/req | Peak RPS (2×) | Servers (⌈peak/10k⌉) |
-|--------:|-------------:|--------------------:|--------------:|---------------------:|
-| 1 | ~86k | ~0.08 | ~2 | 1 |
-| 10 | ~860k | ~0.8 | ~20 | 1 |
-| 100 | ~8.6M | ~8 | ~200 | 1 |
-| 1,000 | ~86M | ~82 | ~2k | 1 |
-| 10,000 | ~860M | ~820 | ~20k | 2 |
-| 100,000 | ~8.6B | ~8,200 (~8 TB) | ~200k | 20 |
-| 1,000,000 | ~86B | ~82,000 (~80 TB) | ~2M | 200 |
+**Storage/day** uses the most readable of **KB / GB / TB / PB** (same underlying math).
+
+| Avg RPS | Requests/day | Storage/day (1 KB/req) | Peak RPS (2×) | Servers (⌈peak/10k⌉) |
+|--------:|-------------:|------------------------|--------------:|---------------------:|
+| 1 | ~86k | ~**86,400 KB** (~**0.09 GB**) | ~2 | 1 |
+| 10 | ~860k | ~**864,000 KB** (~**0.86 GB**) | ~20 | 1 |
+| 100 | ~8.6M | ~**8.6 GB** | ~200 | 1 |
+| 1,000 | ~86M | ~**86 GB** | ~2k | 1 |
+| 10,000 | ~860M | ~**864 GB** (~**0.86 TB**) | ~20k | 2 |
+| 100,000 | ~8.6B | ~**8.6 TB** | ~200k | 20 |
+| 1,000,000 | ~86B | ~**86 TB** (~**0.09 PB**) | ~2M | 200 |
 
 **Patterns to remember**
 
 - **Requests/day** ≈ **avg_RPS × 86k** (exact: × 86,400).
-- **GiB/day @ 1 KiB** ≈ **avg_RPS × 0.08** (same order as **82 GiB per 1k avg RPS**).
+- **GB/day @ 1 KB** ≈ **avg_RPS × 0.086** (≈ **86 GB per 1k avg RPS**).
 - **Peak RPS** = **2 × avg_RPS** (your default).
 - **Servers** ≈ **(2 × avg_RPS) / 10k** = **avg_RPS / 5k** when **k = 2** and **C = 10k**.
 
 ---
 
-## Table 2 — From **DAU** (fixed **u = 20** req/user/day, **k = 2**, **C = 10k**, **1 KiB**/req)
+## Table 2 — From **DAU** (fixed **u = 20** req/user/day, **k = 2**, **C = 10k**, **1 KB**/req)
 
 Change **u** by scaling: double u → double all columns (requests, RPS, storage, servers).
 
-| DAU | Requests/day | Avg RPS | Peak RPS (2×) | Servers (⌈peak/10k⌉) | GiB/day @ 1 KiB |
-|----:|-------------:|--------:|--------------:|---------------------:|----------------:|
-| 1M | 20M | ~230 | ~460 | 1 | ~19 |
-| 10M | 200M | ~2.3k | ~4.6k | 1 | ~190 |
-| 100M | 2B | ~23k | ~46k | 5 | ~1,900 (~1.9 TB) |
-| 1B | 20B | ~232k | ~463k | 47 | ~19,000 (~19 TB) |
+| DAU | Requests/day | Avg RPS | Peak RPS (2×) | Servers (⌈peak/10k⌉) | Storage/day (1 KB/req) |
+|----:|-------------:|--------:|--------------:|---------------------:|------------------------|
+| 1M | 20M | ~230 | ~460 | 1 | ~**20 GB** |
+| 10M | 200M | ~2.3k | ~4.6k | 1 | ~**200 GB** |
+| 100M | 2B | ~23k | ~46k | 5 | ~**2 TB** |
+| 1B | 20B | ~232k | ~463k | 47 | ~**20 TB** (~**0.02 PB**) |
 
 **Memory trick for this table only:** with **u = 20**, **avg_RPS ≈ DAU / 4,320** (because \(20/86{,}400 = 1/4320\)); still say **86,400** when you walk through the math in the interview.
 
@@ -73,13 +79,14 @@ Change **u** by scaling: double u → double all columns (requests, RPS, storage
 
 Round deliberately; don’t imply false precision.
 
-| Story | DAU | u (req/user/day) | Requests/day | Avg RPS | Peak (2×) | Servers @10k | GiB/day @1 KiB |
-|-------|----:|-----------------:|---------------:|--------:|----------:|-------------:|---------------:|
-| **Producty** | 10M | 20 | 200M | ~2.3k | ~4.6k | **1** | **~200 GiB** |
-| **Light social** | 100M | 10 | 1B | ~12k | ~23k | **3** | **~1 TB** |
-| **Global head product** | 1B | 5 | 5B | ~58k | ~116k | **12** | **~5 TB** |
+| Story | DAU | u (req/user/day) | Requests/day | Avg RPS | Peak (2×) | Servers @10k | Storage/day (1 KB/req) |
+|-------|----:|-----------------:|---------------:|--------:|----------:|-------------:|-------------------------|
+| **Producty** | 10M | 20 | 200M | ~2.3k | ~4.6k | **1** | ~**200 GB** |
+| **Light social** | 100M | 10 | 1B | ~12k | ~23k | **3** | ~**1000 GB** (~**1 TB**) |
+| **Global head product** | 1B | 5 | 5B | ~58k | ~116k | **12** | ~**5000 GB** (~**5 TB**) |
 
-If **u** or **k** changes, scale **Avg RPS**, **Peak**, **Servers**, and **GiB/day** proportionally (servers after ceiling).
+- **`u` or DAU ↑/↓:** **Requests/day**, **Avg RPS**, **Peak**, and **stored volume/day** scale together (linear in volume); **Servers** jumps in steps because of **`⌈·⌉`** and \(C\)—not strictly proportional.
+- **`k` (peak factor) ↑/↓ only:** scales **Peak RPS** and **Servers**; **Avg RPS** and **stored volume/day** unchanged (daily volume did not change).
 
 ---
 
@@ -87,7 +94,7 @@ If **u** or **k** changes, scale **Avg RPS**, **Peak**, **Servers**, and **GiB/d
 
 | Knob | Effect |
 |------|--------|
-| **Payload ≠ 1 KiB** | `storage_day × (your_size / 1 KiB)` |
+| **Payload ≠ 1 KB** | Multiply **bytes/day** by \((\text{your payload bytes}) / 1{,}000\) (or multiply **KB/day** by payload KB / 1) |
 | **Only w fraction of requests write bytes** | `storage_day × w` |
 | **Peak k** | multiply **Peak RPS** and **Servers** vs Table 1; **storage/day** usually still from **daily** volume, not peak |
 | **Server capacity C** | `servers = ⌈ peak_RPS / C ⌉` |
@@ -101,7 +108,7 @@ If **u** or **k** changes, scale **Avg RPS**, **Peak**, **Servers**, and **GiB/d
 
 ---
 
-## Detailed formulas (reference)
+## Detailed formulas (reference, decimal)
 
 | Quantity | Formula |
 |----------|---------|
@@ -109,8 +116,11 @@ If **u** or **k** changes, scale **Avg RPS**, **Peak**, **Servers**, and **GiB/d
 | Avg RPS | `requests_day / 86,400` |
 | Peak RPS | `avg_RPS × 2` (default **k = 2**) |
 | Servers | `⌈ peak_RPS / C ⌉` |
-| Bytes/day | `requests_day × bytes_per_request` |
-| GiB/day @ 1 KiB/req | `avg_RPS × 86,400 × 1024 / 2^30 ≈ avg_RPS × 0.082` |
+| Bytes/day @ 1 KB/req | `requests_day × 1,000` |
+| KB/day @ 1 KB/req | `requests_day` (each request adds **1 KB**) |
+| GB/day @ 1 KB/req | `requests_day / 10^6` |
+| TB/day @ 1 KB/req | `requests_day / 10^9` |
+| PB/day @ 1 KB/req | `requests_day / 10^12` |
 
 ---
 

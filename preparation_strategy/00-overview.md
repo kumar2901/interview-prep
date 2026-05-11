@@ -53,7 +53,7 @@ Open [leetcode-topics.md](leetcode-topics.md) **or** [system-design.md](system-d
 | 9 | [**SENIOR-INTERVIEW-GAP-REVIEW.md**](SENIOR-INTERVIEW-GAP-REVIEW.md) | **Audit** of the folder vs senior bar + **additional question checklist** not spelled out elsewhere. |
 | 10 | [**QUICK-REFERENCE-STUDY-MAP.md**](QUICK-REFERENCE-STUDY-MAP.md) | **Study sequencing:** connect MISSING topics to core files; phased deep-dive suggestions. |
 | 11 | [**00-ANALYSIS-SUMMARY.md**](00-ANALYSIS-SUMMARY.md) | **Meta write-up** of the gap-analysis effort; lowest priority unless you want the story. |
-| 12 | [**back-of-envelope-sizing.md**](back-of-envelope-calculations.md), [**back-of-envelope-calculations.md**](back-of-envelope-calculations.md) | **Sizing cheat sheet:** RPS → requests/day → storage/day @ 1 KiB → server count; **peak RPS = 2 × avg RPS** by default; DAU chains. (Both names point at the same file here.) |
+| 12 | [**back-of-envelope-sizing.md**](back-of-envelope-calculations.md), [**back-of-envelope-calculations.md**](back-of-envelope-calculations.md) | **Sizing cheat sheet:** RPS → requests/day → storage (KB / GB / TB / PB @ **decimal 1 KB**/req) → server count; **peak RPS = 2 × avg RPS** by default; DAU chains. (Both names point at the same file here.) |
 
 **Tracks:**
 
