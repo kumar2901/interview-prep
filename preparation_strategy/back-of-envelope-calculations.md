@@ -1,9 +1,6 @@
 # Back-of-envelope sizing — quick reference
 
-Order-of-magnitude only. Say **“roughly”**; pick assumptions you can defend (requests/user/day, peak factor, bytes/request, RPS/server).
-
-**Storage units (decimal SI):** **1 KB = 1000 B**, **1 MB = 1000 KB**, **1 GB = 1000 MB**, **1 TB = 1000 GB**, **1 PB = 1000 TB**. Payload size in tables is **1 KB per request** unless you scale with the adjustments section.
-
+Order-of-magnitude only. Say **“roughly”**; pick assumptions you can defend (requests/user/day, peak factor, bytes/request, RPS/server). 
 ---
 
 ## Memorize this chain (one pass)
