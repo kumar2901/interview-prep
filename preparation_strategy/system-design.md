@@ -63,7 +63,7 @@
 
 **Back-of-envelope sizing guide:** [back-of-envelope-sizing.md](back-of-envelope-calculations.md) ([alternate path](back-of-envelope-calculations.md))
 
-**Quick formula:** RPS = DAU × requests_per_user / 86,400 → Peak = RPS × 5 → Servers = Peak / 10K
+**Quick formula:** RPS = DAU × requests_per_user / 86,400 → Peak = RPS × 2 → Servers = Peak / 10K
 
 ---
 
