@@ -61,7 +61,7 @@
 - SSD random read ~100 µs–ms scale; cross-region RTT ~30–150 ms.
 - JSON overhead vs protobuf; compression on wire vs CPU.
 
-**Back-of-envelope sizing guide:** [back-of-envelope-sizing.md](back-of-envelope-sizing.md) ([alternate path](back-of-envelope-calculations.md))
+**Back-of-envelope sizing guide:** [back-of-envelope-sizing.md](back-of-envelope-calculations.md) ([alternate path](back-of-envelope-calculations.md))
 
 **Quick formula:** RPS = DAU × requests_per_user / 86,400 → Peak = RPS × 5 → Servers = Peak / 10K
 
