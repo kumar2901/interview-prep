@@ -36,12 +36,12 @@ Order-of-magnitude only. Say **“roughly”**; pick assumptions you can defend 
 
 Use when you already have **avg RPS** or read it off `requests_day / 86.4k`.
 
-**Storage/day** uses the most readable of **KB / GB / TB / PB** (same underlying math).
+**Storage/day** uses the most readable of **MB / GB / TB / PB** (decimal SI; **1 MB = 1000 KB**, same underlying math).
 
 | Avg RPS | Requests/day | Storage/day (1 KB/req) | Peak RPS (2×) | Servers (⌈peak/10k⌉) |
 |--------:|-------------:|------------------------|--------------:|---------------------:|
-| 1 | ~86k | ~**86,400 KB** (~**0.09 GB**) | ~2 | 1 |
-| 10 | ~860k | ~**864,000 KB** (~**0.86 GB**) | ~20 | 1 |
+| 1 | ~86k | ~**86 MB** | ~2 | 1 |
+| 10 | ~860k | ~**864 MB** | ~20 | 1 |
 | 100 | ~8.6M | ~**8.6 GB** | ~200 | 1 |
 | 1,000 | ~86M | ~**86 GB** | ~2k | 1 |
 | 10,000 | ~860M | ~**864 GB** (~**0.86 TB**) | ~20k | 2 |
@@ -115,6 +115,7 @@ Round deliberately; don’t imply false precision.
 | Servers | `⌈ peak_RPS / C ⌉` |
 | Bytes/day @ 1 KB/req | `requests_day × 1,000` |
 | KB/day @ 1 KB/req | `requests_day` (each request adds **1 KB**) |
+| MB/day @ 1 KB/req | `requests_day / 10^3` |
 | GB/day @ 1 KB/req | `requests_day / 10^6` |
 | TB/day @ 1 KB/req | `requests_day / 10^9` |
 | PB/day @ 1 KB/req | `requests_day / 10^12` |
