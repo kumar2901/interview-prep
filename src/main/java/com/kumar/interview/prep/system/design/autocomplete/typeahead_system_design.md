@@ -49,7 +49,7 @@ Ans: English only for now.
 3. **Server requirements**:   Assuming 1 server can handle 1000 QPS, so we need at least 20 servers to handle the peak load of 20k QPS. (Medium Server)
 
 
-** API Design:**
+**API Design:**
 1. **Get Suggestions API**:
     - Endpoint: `GET /v1/suggestions`
     - Query Parameters:
