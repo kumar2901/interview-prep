@@ -38,6 +38,259 @@ Requirements
 
 ---
 
+# Recommended Study Order (VERY IMPORTANT)
+
+Do NOT study system design randomly.
+
+Strong candidates learn concepts progressively.
+
+The best preparation path is:
+
+```text
+Single Node
+→ Caching
+→ Load Balancing
+→ Replication
+→ Messaging
+→ Sharding
+→ Real-Time Systems
+→ Distributed Coordination
+→ Multi-Region Systems
+→ ML/Ranking Systems
+```
+
+# Suggested Study Priority (Most Asked)
+
+Focus on these first:
+
+1. Social Feed
+2. Chat System
+3. Search/Autocomplete
+4. Notification System
+5. Distributed Cache
+6. Payment System
+7. Rate Limiter
+8. Distributed Queue
+9. Ride Sharing
+10. Recommendation Engine
+
+---
+
+The table below is organized intentionally so that each design teaches concepts required for later designs.
+
+---
+
+# Top 25 Most Frequently Asked Senior System Design Questions
+
+| Study Order | System Design Problem                | Why You Should Study It                   | Most Important Concepts Learned                   | Companies           | Difficulty |
+| ----------- | ------------------------------------ | ----------------------------------------- | ------------------------------------------------- | ------------------- | ---------- |
+| 1           | URL Shortener                        | Best beginner distributed system          | caching, DB sharding, ID generation, redirects    | Google, Amazon      | Medium     |
+| 2           | Distributed Rate Limiter             | Introduces distributed coordination       | Redis, token bucket, consistency, atomic counters | Google, Uber        | Medium     |
+| 3           | API Gateway                          | Foundation for microservices architecture | auth, throttling, routing, observability          | Amazon              | Medium     |
+| 4           | Distributed Cache (Redis)            | Core building block used everywhere       | replication, eviction, hot keys, persistence      | Google, Amazon      | Hard       |
+| 5           | Notification System                  | First event-driven architecture           | Kafka, retries, DLQ, async processing             | Meta, Amazon        | Hard       |
+| 6           | Distributed Message Queue            | Foundation for streaming systems          | partitions, ordering, replay, consumer groups     | LinkedIn, Amazon    | Hard       |
+| 7           | Chat System (WhatsApp/Slack)         | Best introduction to real-time systems    | WebSockets, ordering, presence, fanout            | Meta, Microsoft     | Hard       |
+| 8           | Google Docs / Collaborative Editing  | Most important consistency problem        | OT, CRDT, synchronization, conflict resolution    | Google, Microsoft   | Very Hard  |
+| 9           | Social Feed (Twitter/Facebook)       | Teaches large-scale fanout systems        | feed ranking, caching, celebrity problem          | Meta                | Hard       |
+| 10          | Search Autocomplete                  | Excellent for ranking + caching           | trie, ranking, personalization, streaming         | Google, Microsoft   | Hard       |
+| 11          | Search Engine                        | Core search infrastructure knowledge      | inverted index, relevance, indexing pipeline      | Google              | Hard       |
+| 12          | Recommendation Engine                | Introduces ML system design               | embeddings, ranking, candidate generation         | Netflix, Meta       | Hard       |
+| 13          | Video Streaming Platform             | Teaches CDN and media systems             | transcoding, edge caching, adaptive bitrate       | Netflix, Google     | Hard       |
+| 14          | CDN                                  | Best system for edge architecture         | edge routing, invalidation, DDoS protection       | Cloudflare, Netflix | Hard       |
+| 15          | File Storage (Dropbox/GDrive)        | Introduces metadata/blob separation       | chunking, sync, deduplication, versioning         | Google, Dropbox     | Hard       |
+| 16          | Payment System                       | Most important reliability system         | idempotency, reconciliation, ledger design        | Stripe, Amazon      | Very Hard  |
+| 17          | Ride Sharing System                  | Strong real-time geo system               | geospatial indexing, dispatching, ETA             | Uber                | Hard       |
+| 18          | Real-Time Analytics                  | Best streaming architecture problem       | Flink/Kafka, aggregation, late events             | Meta, Uber          | Hard       |
+| 19          | Monitoring & Alerting                | Critical operational system               | TSDB, metrics, tracing, SLOs                      | Datadog, Google     | Hard       |
+| 20          | Distributed Database                 | Most important distributed systems topic  | quorum, replication, CAP theorem                  | Amazon, Google      | Very Hard  |
+| 21          | Distributed Lock Service             | Deep distributed coordination problem     | Raft, Paxos, leader election                      | Google              | Very Hard  |
+| 22          | Feature Flag System                  | Strong operational excellence problem     | rollout safety, targeting, consistency            | Meta, Uber          | Medium     |
+| 23          | Job Scheduler                        | Good orchestration system                 | DAGs, retries, resource management                | Airbnb, Uber        | Hard       |
+| 24          | Secrets Management                   | Critical infrastructure system            | encryption, KMS, secret rotation                  | Amazon, Hashicorp   | Medium     |
+| 25          | Container Orchestration (Kubernetes) | One of the strongest L6 topics            | scheduling, orchestration, multi-cluster          | Google              | Very Hard  |
+
+---
+
+# Why This Study Order Works
+
+The order is intentional.
+
+Each system introduces concepts needed for future systems.
+
+Example:
+
+## URL Shortener
+
+Teaches:
+
+* caching
+* replication
+* sharding
+
+which are prerequisites for:
+
+* social feed
+* search systems
+* distributed DBs
+
+---
+
+## Chat System
+
+Teaches:
+
+* WebSockets
+* ordering
+* fanout
+* real-time communication
+
+which are required before:
+
+* Google Docs
+* ride sharing
+* collaborative systems
+
+---
+
+## Google Docs
+
+Teaches:
+
+* synchronization
+* distributed consistency
+* CRDT/OT
+* conflict resolution
+
+which are some of the hardest distributed systems topics.
+
+---
+
+## Distributed Database + Lock Service
+
+Should be studied later because they require understanding:
+
+* replication
+* consensus
+* consistency
+* partitions
+* failover
+
+These are advanced topics.
+
+---
+
+# Most Valuable Questions For Google L5/L6
+
+If time is limited, prioritize these:
+
+| Priority | Problem               | Why Important                 |
+| -------- | --------------------- | ----------------------------- |
+| 1        | Social Feed           | Fanout + ranking + caching    |
+| 2        | Google Docs           | Distributed consistency       |
+| 3        | Chat System           | Real-time distributed systems |
+| 4        | Search Autocomplete   | Ranking + streaming + caching |
+| 5        | Distributed Database  | Deep distributed systems      |
+| 6        | Recommendation Engine | ML ranking systems            |
+| 7        | Payment System        | Reliability + consistency     |
+| 8        | Distributed Queue     | Messaging architecture        |
+| 9        | CDN                   | Edge systems                  |
+| 10       | Monitoring System     | Operational excellence        |
+
+---
+
+# Most Important Concepts Learned Per Stage
+
+| Stage        | Topics                                            |
+| ------------ | ------------------------------------------------- |
+| Beginner     | caching, replication, APIs, DB basics             |
+| Intermediate | messaging, queues, retries, fanout                |
+| Advanced     | sharding, ranking, consistency, real-time sync    |
+| Senior       | consensus, multi-region, operational excellence   |
+| Staff/L6     | evolution strategy, cost optimization, ML systems |
+
+---
+
+# Biggest Mistake Candidates Make
+
+Weak candidates:
+
+* memorize architectures
+* memorize diagrams
+
+Strong candidates:
+
+* understand tradeoffs
+* identify bottlenecks
+* reason about scaling
+* discuss operational risks
+* explain evolution path
+
+Interviewers care far more about:
+
+```text
+WHY you chose something
+```
+
+than:
+
+```text
+WHICH technology you used
+```
+
+---
+
+# Suggested Weekly Study Plan
+
+## Week 1
+
+* URL Shortener
+* Rate Limiter
+* API Gateway
+* Cache
+
+---
+
+## Week 2
+
+* Notification System
+* Kafka / Queue
+* Chat System
+
+---
+
+## Week 3
+
+* Google Docs
+* Social Feed
+* Search Autocomplete
+
+---
+
+## Week 4
+
+* Search Engine
+* Recommendation Engine
+* CDN
+
+---
+
+## Week 5
+
+* Payment System
+* Distributed DB
+* Lock Service
+
+---
+
+## Week 6
+
+* Monitoring System
+* Kubernetes
+* Real-Time Analytics
+
+---
+
 # Top 25 Most Frequently Asked Senior System Design Questions
 
 | #  | System Design Problem             | Companies           | Difficulty | Most Important Discussion Topics    |
@@ -862,6 +1115,429 @@ and:
 
 ---
 
+# Critical Gaps Most Candidates Miss (Strong L5/L6 Signals)
+
+These topics are frequently missed even by experienced engineers.
+
+Interviewers often use these to differentiate:
+
+* mid-level engineers
+  from
+* strong senior/staff engineers.
+
+---
+
+# 1. Backpressure Handling
+
+Most candidates forget this.
+
+Interviewers LOVE asking:
+
+```text
+What happens when downstream becomes slow?
+```
+
+You MUST discuss:
+
+* bounded queues
+* rate limiting
+* load shedding
+* retries with jitter
+* adaptive throttling
+* circuit breakers
+
+Example:
+
+Kafka consumers slower than producers.
+
+What happens?
+
+Strong answer:
+
+* lag monitoring
+* autoscaling consumers
+* temporary dropping
+* DLQ
+* replay strategy
+
+---
+
+# 2. Hot Partition / Hot Key Problem
+
+Extremely important at Google/Uber scale.
+
+Examples:
+
+* celebrity users
+* viral videos
+* trending hashtags
+* hot URLs
+* hot prefixes
+
+Solutions:
+
+* replication
+* key splitting
+* request coalescing
+* async fanout
+* cache prewarming
+
+This is one of the biggest L5 differentiators.
+
+---
+
+# 3. Data Lifecycle Management
+
+Most candidates discuss writes but forget:
+
+* archival
+* deletion
+* retention
+* compaction
+* GDPR deletion
+* TTL cleanup
+
+Strong engineers discuss:
+
+* cold storage
+* retention policies
+* legal compliance
+* storage cost optimization
+
+---
+
+# 4. Multi-Tenancy Isolation
+
+Very common at:
+
+* Microsoft
+* Google Cloud
+* AWS
+* Datadog
+
+Must discuss:
+
+* noisy neighbor problem
+* quota isolation
+* tenant-aware rate limits
+* tenant-aware storage
+* fairness
+
+---
+
+# 5. Deployment Safety
+
+Strong candidates proactively discuss:
+
+* canary rollout
+* blue-green deployment
+* rollback
+* schema migration safety
+* feature flags
+
+Especially important for:
+
+* payments
+* databases
+* infrastructure systems
+
+---
+
+# 6. Data Consistency Nuance
+
+Weak candidates say:
+
+```text
+Use eventual consistency
+```
+
+Strong candidates explain:
+
+* WHY eventual consistency is acceptable
+* WHICH operations require strong consistency
+* WHERE staleness is acceptable
+
+Example:
+
+Autocomplete:
+
+* eventual consistency OK
+
+Payment ledger:
+
+* strong consistency required
+
+This depth matters enormously.
+
+---
+
+# 7. Multi-Region Tradeoffs
+
+Most candidates simply say:
+
+```text
+Deploy multi-region
+```
+
+Weak answer.
+
+Strong answer discusses:
+
+* active-active vs active-passive
+* replication lag
+* geo routing
+* regional failover
+* split brain prevention
+* write conflicts
+* quorum latency
+
+This is a HUGE senior signal.
+
+---
+
+# 8. Observability Maturity
+
+Most candidates only say:
+
+* logs
+* metrics
+
+Strong candidates discuss:
+
+## Metrics
+
+* QPS
+* p99 latency
+* saturation
+* cache hit ratio
+* replication lag
+
+## Tracing
+
+* distributed tracing
+* correlation IDs
+
+## Alerting
+
+* symptom-based alerts
+* SLO alerts
+* burn-rate alerts
+
+This is very important for Google/Uber interviews.
+
+---
+
+# 9. Cost Optimization
+
+L6 interviewers heavily care about cost.
+
+Strong candidates discuss:
+
+* storage tiering
+* cache hit optimization
+* network egress reduction
+* compression
+* batching
+* adaptive replication
+
+Especially important at:
+
+* Netflix
+* Uber
+* AWS
+
+---
+
+# 10. Evolution Strategy
+
+This is a major staff-level signal.
+
+Strong engineers explain:
+
+```text
+How does the system evolve over 2 years?
+```
+
+Example:
+
+Stage 1:
+
+* monolith
+
+Stage 2:
+
+* caching
+* replicas
+
+Stage 3:
+
+* sharding
+* async pipelines
+
+Stage 4:
+
+* multi-region
+* ML ranking
+
+This demonstrates engineering maturity.
+
+---
+
+# FAANG Company-Specific Interview Focus
+
+# Google
+
+Google heavily emphasizes:
+
+* scalability
+* distributed systems depth
+* tradeoffs
+* consistency
+* fault tolerance
+* large-scale infrastructure
+
+Most common themes:
+
+* autocomplete
+* distributed storage
+* search
+* observability
+* Kubernetes-like systems
+
+Google interviewers LOVE:
+
+* bottleneck analysis
+* backpressure
+* hot partitions
+* operational concerns
+
+---
+
+# Meta
+
+Meta heavily emphasizes:
+
+* social systems
+* feed ranking
+* messaging
+* real-time systems
+* engagement optimization
+
+Most common themes:
+
+* social feed
+* Instagram
+* Messenger
+* WhatsApp
+* recommendation systems
+
+Meta interviewers LOVE:
+
+* fanout tradeoffs
+* ranking pipelines
+* caching
+* real-time updates
+
+---
+
+# Amazon
+
+Amazon heavily emphasizes:
+
+* APIs
+* operational excellence
+* reliability
+* idempotency
+* microservices
+
+Most common themes:
+
+* payment systems
+* e-commerce
+* inventory
+* API gateway
+* order systems
+
+Amazon interviewers LOVE:
+
+* failure scenarios
+* deployment safety
+* retries
+* monitoring
+* operational runbooks
+
+---
+
+# Microsoft
+
+Microsoft heavily emphasizes:
+
+* cloud systems
+* distributed services
+* enterprise reliability
+* multi-tenancy
+* observability
+
+Most common themes:
+
+* Teams/chat
+* Azure-like systems
+* telemetry
+* collaboration systems
+
+Microsoft interviewers LOVE:
+
+* service contracts
+* backward compatibility
+* enterprise scaling
+* operational simplicity
+
+---
+
+# Uber
+
+Uber heavily emphasizes:
+
+* real-time systems
+* geo systems
+* dispatching
+* stream processing
+* reliability under spikes
+
+Most common themes:
+
+* ride dispatch
+* ETA
+* pricing
+* Kafka pipelines
+
+Uber interviewers LOVE:
+
+* stream processing
+* event-driven systems
+* hot partition handling
+* backpressure
+
+---
+
+# Netflix
+
+Netflix heavily emphasizes:
+
+* CDN
+* recommendation systems
+* streaming pipelines
+* resiliency
+
+Netflix interviewers LOVE:
+
+* chaos engineering
+* edge caching
+* failover
+* cost optimization
+
+---
+
 # Most Important Concepts To Master Across ALL Questions
 
 ## 1. Capacity Estimation
@@ -1036,34 +1712,3 @@ That is usually the difference between:
 * strong senior/staff signal.
 
 ---
-
-# Suggested Study Priority (Most Asked)
-
-Focus on these first:
-
-1. Social Feed
-2. Chat System
-3. Search/Autocomplete
-4. Notification System
-5. Distributed Cache
-6. Payment System
-7. Rate Limiter
-8. Distributed Queue
-9. Ride Sharing
-10. Recommendation Engine
-
-These appear extremely frequently across:
-
-* Google
-* Meta
-* Amazon
-* Uber
-* Microsoft
-* LinkedIn
-* Airbnb
-* Stripe
-* Netflix
-
----
-
-Updated for 2026 Senior Engineer Interviews (Google L5/L6, Microsoft Senior, Meta E5/E6, Amazon SDE3/Principal Prep)
