@@ -1,377 +1,1069 @@
-# System Design
+# Top 25 Most Frequently Asked System Design Questions (Google / Microsoft / Meta / Amazon / Uber)
 
-**Progression:** single machine → replication → sharding → caching → messaging → observability.
-
----
-
-## Foundational reads / drills
-
-- CAP intuition (pick two under partition), **latency vs consistency** sliders.
-- Strong vs eventual consistency; **read/write quorums**.
-- **Idempotency** keys; **exactly-once** vs **at-least-once** in practice.
-- Load balancing (L4/L7), sticky sessions tradeoffs.
-- DB choice: OLTP row store vs wide-column vs document vs OLAP (when mentioned).
+## Senior Engineer (L5 / SDE3 / Staff-Equivalent) Interview Guide
 
 ---
 
-## Classic problems (draw diagrams + back-of-envelope math)
+# How Senior System Design Interviews Are Evaluated
 
-### Top 25 System Design Questions for Senior Engineers
+At senior level, interviewers are NOT evaluating whether you know technologies.
 
-| # | System | Key talking points | Difficulty |
-|---|--------|-------------------|------------|
-| 1 | URL Shortener | Base62 ID, collision handling, redirect SLA, analytics | Medium |
-| 2 | Notification System | Multi-channel, delivery guarantees, retries, compliance | Hard |
-| 3 | Rate Limiter | Token bucket, distributed coordination, hierarchical limits | Medium |
-| 4 | Cache System (Redis) | Eviction policies, replication, thundering herd, consistency | Hard |
-| 5 | Search/Autocomplete | Trie/B-tree, ranking, sharding by prefix, fuzzy matching | Hard |
-| 6 | Chat System | Presence, ordering, deduplication, WebSocket, encryption | Hard |
-| 7 | Video Streaming | CDN, transcoding, adaptive bitrate, recommendation | Hard |
-| 8 | File Storage | Chunking, deduplication, sync, version history, sharing | Hard |
-| 9 | Payment Processing | Idempotency, PCI compliance, fraud detection, reconciliation | Hard |
-| 10 | Social Feed | Fan-out strategy, ranking, real-time updates, moderation | Hard |
-| 11 | Ride-Sharing | Geospatial indexing, matching algorithm, surge pricing, ETA | Hard |
-| 12 | Distributed Database | Sharding, replication, quorum, anti-entropy repair | Hard |
-| 13 | CDN | Edge placement, cache invalidation, origin shield, DDoS | Hard |
-| 14 | Recommendation Engine | Collaborative filtering, cold start, diversity, A/B testing | Hard |
-| 15 | Monitoring/Alerting | TSDB design, metrics aggregation, anomaly detection | Hard |
-| 16 | Job Scheduler | DAG workflows, dependencies, retries, resource allocation | Hard |
-| 17 | Real-Time Analytics | Event ingestion, aggregation, privacy, multi-tenancy | Hard |
-| 18 | Distributed Lock | Consensus (Raft/Paxos), leader election, network partitions | Hard |
-| 19 | API Gateway | Routing, auth/z, rate limiting, transformation | Medium |
-| 20 | Message Queue | Partitioning, consumer groups, exactly-once, retention | Hard |
-| 21 | Secrets Management | Encryption, rotation, audit logging, access control | Medium |
-| 22 | Distributed Tracing | Span propagation, sampling, storage, integration | Hard |
-| 23 | Feature Flags | Evaluation, rollout strategies, A/B testing, governance | Medium |
-| 24 | Container Orchestration | Scheduling, resource mgmt, service discovery, deployments | Hard |
-| 25 | Search Engine | Inverted index, query optimization, sharding, relevance | Hard |
+They evaluate:
 
-**Additional Classic Problems**
+* scalability thinking
+* distributed systems depth
+* tradeoff analysis
+* operational maturity
+* failure handling
+* API and data modeling
+* evolution strategy
+* prioritization
+* product thinking
+* cost awareness
 
-| System | Key talking points |
-|--------|-------------------|
-| Pastebin | TTL, abuse detection, blob storage |
-| News feed | Fan-out on write vs read, ranking, cache |
+A strong answer should evolve from:
+
+```text
+Requirements
+→ Estimation
+→ High-Level Design
+→ Data Model
+→ APIs
+→ Scaling
+→ Bottlenecks
+→ Fault Tolerance
+→ Tradeoffs
+→ Operational Excellence
+```
 
 ---
 
-## Numbers to internalize (order-of-magnitude)
+# Top 25 Most Frequently Asked Senior System Design Questions
 
-- ~1M seconds ≈ 11.5 days; use for QPS × payload ≈ bandwidth.
-- SSD random read ~100 µs–ms scale; cross-region RTT ~30–150 ms.
-- JSON overhead vs protobuf; compression on wire vs CPU.
-
-**Back-of-envelope sizing guide:** [back-of-envelope-sizing.md](back-of-envelope-calculations.md) ([alternate path](back-of-envelope-calculations.md))
-
-**Quick formula:** RPS = DAU × requests_per_user / 86,400 → Peak = RPS × 2 → Servers = Peak / 10K
-
----
-
-## Edge and traffic management
-
-- **DNS:** failover, TTL tradeoffs (low TTL ↔ more churn and load on DNS).
-- **Load balancing:** L4 (connection-aware) vs L7 (routing by path/host/header); health checks (**liveness vs readiness**).
-- **Sticky sessions:** when needed (cart colocation caution) vs preference for **stateless** tiers + shared session store.
-- **TLS termination** at LB/ingress; optionally **mTLS** service-to-service.
-- **CDN** for static and cacheable APIs; origin shield; cache keys and **purge** semantics.
-- **API gateway:** authN/Z at edge, **rate limiting**, request size limits—see **§24** in [MISSING-SENIOR-CONCEPTS.md](MISSING-SENIOR-CONCEPTS.md) for hierarchical limits.
-
----
-
-## Deployment and change safety
-
-- **Rolling:** incremental instance replacement—simple; watch **draining** during deploy.
-- **Blue/green:** two environments; fast cutover + fast rollback—cost of duplicate capacity.
-- **Canary / progressive rollout:** subset of traffic/version; automate promotion on **SLO/regression guards**; ties to **feature flags** ([MISSING-SENIOR-CONCEPTS.md](MISSING-SENIOR-CONCEPTS.md) §19).
-- **Schema changes:** **expand / contract** pattern for zero/low downtime ([MISSING-SENIOR-CONCEPTS.md](MISSING-SENIOR-CONCEPTS.md) §13).
-- **Backward compatibility:** version negotiation, deprecation windows ([MISSING-SENIOR-CONCEPTS.md](MISSING-SENIOR-CONCEPTS.md) §16).
-
----
-
-## Streaming and long-running work
-
-- Partitioned logs (**Kafka**/Pulsar-style): ordering **per partition**, replay, retention.
-- **Consumers:** consumer groups, **rebalancing** cost, poison messages → [**DLQ**](core-concepts.md#messaging--queues).
-- **Stream processors:** stateful aggregation, **watermarks** / late events—see [MISSING-SENIOR-CONCEPTS.md](MISSING-SENIOR-CONCEPTS.md) §12.
-- **Backpressure:** slow consumers must not wedge producers—bounded queues, drop/shed policy explicit.
+| #  | System Design Problem             | Companies           | Difficulty | Most Important Discussion Topics    |
+| -- | --------------------------------- | ------------------- | ---------- | ----------------------------------- |
+| 1  | URL Shortener (TinyURL/Bitly)     | Google, Amazon      | Medium     | Base62, redirects, cache, analytics |
+| 2  | Distributed Rate Limiter          | Google, Uber        | Medium     | Token bucket, Redis, consistency    |
+| 3  | Notification System               | Meta, Amazon        | Hard       | Push/email/SMS, retries, queues     |
+| 4  | Search Autocomplete               | Google, Microsoft   | Hard       | Trie, ranking, personalization      |
+| 5  | Chat System (WhatsApp/Slack)      | Meta, Microsoft     | Hard       | WebSockets, ordering, presence      |
+| 6  | Social Feed (Twitter/Facebook)    | Meta                | Hard       | Fanout, ranking, caching            |
+| 7  | Video Streaming (Netflix/YouTube) | Netflix, Google     | Hard       | CDN, transcoding, adaptive bitrate  |
+| 8  | File Storage (Dropbox/GDrive)     | Google, Dropbox     | Hard       | Chunking, sync, metadata            |
+| 9  | Payment System                    | Stripe, Amazon      | Hard       | Idempotency, reconciliation         |
+| 10 | Ride Sharing (Uber/Lyft)          | Uber                | Hard       | Geo indexing, matching              |
+| 11 | Distributed Cache (Redis)         | Amazon, Google      | Hard       | Replication, eviction, persistence  |
+| 12 | Distributed Message Queue         | LinkedIn, Amazon    | Hard       | Kafka concepts, ordering            |
+| 13 | Search Engine                     | Google              | Hard       | Inverted index, ranking             |
+| 14 | Recommendation Engine             | Netflix, Meta       | Hard       | ML ranking, embeddings              |
+| 15 | API Gateway                       | Amazon              | Medium     | Routing, auth, throttling           |
+| 16 | Monitoring & Alerting             | Datadog, Google     | Hard       | TSDB, metrics, SLOs                 |
+| 17 | Job Scheduler                     | Airbnb, Uber        | Hard       | DAGs, retries, orchestration        |
+| 18 | Real-Time Analytics               | Meta, Uber          | Hard       | Streaming, aggregation              |
+| 19 | Distributed Database              | Amazon, Google      | Hard       | Sharding, quorum, consistency       |
+| 20 | CDN                               | Netflix, Cloudflare | Hard       | Edge caching, invalidation          |
+| 21 | Feature Flag System               | Meta, Uber          | Medium     | Rollouts, consistency               |
+| 22 | Distributed Lock Service          | Google              | Hard       | Raft, leader election               |
+| 23 | Container Orchestration           | Google              | Hard       | Kubernetes scheduling               |
+| 24 | Secrets Management                | Hashicorp, Amazon   | Medium     | Encryption, rotation                |
+| 25 | Distributed Tracing               | Google, Uber        | Hard       | Span propagation, sampling          |
 
 ---
 
-## Observability and SLOs
+# 1. Design URL Shortener (TinyURL)
 
-- **Golden signals:** latency, traffic, errors, saturation (Google SRE framing).
-- **SLI:** raw metric proxy for user happiness; **SLO:** target + window; **SLA:** customer-facing consequence.
-- **Error budgets:** tie release velocity and change risk to remaining budget.
-- **Logging:** structured, correlation/request IDs → pair with **distributed tracing** ([MISSING-SENIOR-CONCEPTS.md](MISSING-SENIOR-CONCEPTS.md) §17).
-- **Metrics:** counters/gauges/histograms; **percentiles** (p99) vs averages; cardinality risk ([MISSING-SENIOR-CONCEPTS.md](MISSING-SENIOR-CONCEPTS.md) §9).
-- **Dashboards vs alerts:** alert on **symptoms** user-impacting, reduce noise/flap (same §9).
+## Core Requirements
 
----
-
-## Reliability and operations
-
-- **Multi-AZ vs multi-region:** RTO/RPO, failover drills, **chaos / game days** ([MISSING-SENIOR-CONCEPTS.md](MISSING-SENIOR-CONCEPTS.md) §6).
-- **Runbooks**, on-call rotations, escalation; **severity** definitions.
-- **Blameless postmortems:** contributing factors, action items with owners ([MISSING-SENIOR-CONCEPTS.md](MISSING-SENIOR-CONCEPTS.md) §22).
-- **DR patterns:** backups + restore drills; replicated DB with failover caveats (**split brain** awareness from [core-concepts.md](core-concepts.md)).
+* shorten long URLs
+* fast redirects
+* custom aliases
+* expiration support
+* analytics tracking
 
 ---
 
-## Top 25 System Design Questions for Senior Engineers (FAANG)
+## Senior-Level Discussion Topics
 
-**These are the most frequently asked at L5+ interviews.** Each includes key talking points and senior-level depth. Practice explaining architecture, tradeoffs, and operational concerns.
+### ID Generation
 
-### 1. **Design a URL Shortener (TinyURL)**
-- Base62 encoding (62^7 ≈ 3.5T URLs)
-- Collision handling via counter or UUID
-- Sharding strategy by ID range
-- Redirect SLA (< 100ms, 99.9% availability)
-- Analytics layer for click tracking
-- Rate limiting and abuse detection
-- **Senior angle:** Global CDN for redirects, cost optimization, data durability
+Options:
 
-### 2. **Design a Notification System (Email/Push/SMS)**
-- Device/user preference management
-- Multi-channel delivery (FCM, APNs, Twilio)
-- Message queuing with reliability guarantees
-- Exponential backoff retry strategy
-- Per-user and global rate limiting
-- Real-time delivery status tracking
-- **Senior angle:** Multi-tenant isolation, compliance (GDPR), A/B testing
+* Base62 encoding
+* Snowflake IDs
+* random hash
 
-### 3. **Design a Rate Limiter (Distributed)**
-- Token bucket algorithm with sliding window
-- Redis-based coordination for consistency
-- Hierarchical limits (global, per-user, per-endpoint)
-- Burst allowance and sustained rate handling
-- 429 response with Retry-After headers
-- **Senior angle:** Dynamic scaling, cost-based throttling, fairness under load
+Tradeoffs:
 
-### 4. **Design a Cache (Redis-like)**
-- Eviction policies (LRU, LFU, TTL-based)
-- Single-threaded vs multi-threaded architecture
-- Replication and failover strategy
-- Cluster sharding and consistent hashing
-- Thundering herd prevention (singleflight)
-- **Senior angle:** Memory efficiency, persistence (RDB/AOF), client-side caching
-
-### 5. **Design a Search/Autocomplete System**
-- Trie data structure with prefix matching
-- Sharding by prefix ranges
-- Real-time index updates
-- Ranking and relevance scoring
-- Fuzzy matching and typo tolerance
-- **Senior angle:** Multi-language support, spellcheck integration, ranking personalization
-
-### 6. **Design a Chat System (WhatsApp/Slack)**
-- Message ordering and deduplication
-- Presence indicators (online/offline/typing)
-- WebSocket vs long polling trade-offs
-- Group chat fan-out strategy
-- Message history with efficient retrieval
-- **Senior angle:** End-to-end encryption, offline delivery queue, read receipts
-
-### 7. **Design a Video Streaming Platform (Netflix/YouTube)**
-- Adaptive bitrate streaming (HLS/DASH)
-- CDN and edge computing strategy
-- Transcoding pipeline (batch + on-demand)
-- Video recommendation engine
-- DRM and content protection
-- **Senior angle:** Cost optimization, global distribution, quality metrics (QoE)
-
-### 8. **Design File Storage (Dropbox/Google Drive)**
-- File chunking and deduplication
-- Metadata store and search indexing
-- Sync conflict resolution (CRDTs vs LWW)
-- Version history and point-in-time recovery
-- Cross-device synchronization protocol
-- **Senior angle:** Large file handling, sharing permissions, collaborative editing
-
-### 9. **Design a Payment Processing System**
-- PCI-DSS compliance and security
-- Idempotency keys for transaction replay
-- Payment state machine (pending→captured→settled)
-- Fraud detection and risk scoring
-- Multi-currency support and exchange rates
-- **Senior angle:** Regulatory compliance, chargeback handling, reconciliation
-
-### 10. **Design a Social Feed (Twitter/Facebook)**
-- Fan-out strategies (write vs read amplification)
-- Timeline ranking and personalization
-- Real-time updates via WebSockets
-- Content moderation and filtering
-- **Senior angle:** Algorithmic ranking, engagement metrics, misinformation detection
-
-### 11. **Design Ride-Sharing (Uber/Lyft)**
-- Geospatial indexing (quadtrees, S2 geometry)
-- Supply-demand matching algorithm
-- Surge pricing and dynamic pricing
-- ETA calculation and route optimization
-- **Senior angle:** Real-time matching at scale, driver incentives, regulatory compliance
-
-### 12. **Design a Distributed Database (Cassandra/DynamoDB)**
-- Consistent hashing for sharding
-- Replication factor and consistency levels
-- Read/write quorum semantics
-- Merkle tree-based anti-entropy repair
-- **Senior angle:** Multi-region deployment, backup strategy, operational monitoring
-
-### 13. **Design a CDN (Content Delivery Network)**
-- Edge server placement and intelligent routing
-- Cache invalidation and purge strategies
-- Origin shielding to reduce origin load
-- SSL termination and security at edge
-- **Senior angle:** Cost-aware routing, DDoS mitigation, performance optimization
-
-### 14. **Design a Recommendation Engine**
-- Collaborative filtering (matrix factorization)
-- Content-based and hybrid approaches
-- Real-time ranking vs batch processing
-- Cold start problem mitigation
-- **Senior angle:** A/B testing, diversity vs accuracy, user privacy, embedding cache
-
-### 15. **Design a Monitoring/Alerting System (Prometheus/DataDog)**
-- Time-series storage (TSDB design)
-- Metrics collection and aggregation
-- Alert rule evaluation and deduplication
-- Anomaly detection algorithms
-- **Senior angle:** Cardinality management, multi-tenant isolation, cost scaling
-
-### 16. **Design a Job Scheduler (Airflow/Cron)**
-- DAG-based workflow definitions
-- Task dependency resolution and ordering
-- Failure handling and retry mechanisms
-- Resource allocation and queue management
-- **Senior angle:** Distributed execution, scaling, monitoring compliance
-
-### 17. **Design Real-Time Analytics (Segment/Mixpanel)**
-- Event ingestion at scale (millions QPS)
-- Real-time vs batch aggregation
-- Data retention and partitioning strategy
-- Privacy (GDPR/CCPA) and PII handling
-- **Senior angle:** Cost optimization, multi-tenancy, data quality assurance
-
-### 18. **Design a Distributed Lock Service (etcd/Consul)**
-- Consensus algorithm (Raft/Paxos)
-- Leader election and failover
-- Lock acquisition/release and watch semantics
-- Network partition handling
-- **Senior angle:** Performance under contention, distributed deadlock prevention
-
-### 19. **Design an API Gateway**
-- Request routing and load balancing
-- Authentication/authorization enforcement
-- Request transformation and validation
-- Rate limiting and throttling
-- **Senior angle:** Plugin architecture, canary deployments, A/B routing
-
-### 20. **Design a Message Queue (Kafka/RabbitMQ)**
-- Topic partitioning and ordering guarantees
-- Consumer groups and rebalancing
-- Exactly-once delivery semantics
-- Durability and retention policies
-- **Senior angle:** Cross-datacenter replication, performance optimization, cost
-
-### 21. **Design Secrets/Configuration Management (Vault)**
-- Encrypted storage with access control
-- Secret rotation and expiration
-- Audit logging and compliance
-- Multi-datacenter replication
-- **Senior angle:** Key rotation strategies, integration with orchestration platforms
-
-### 22. **Design a Distributed Tracing System (Jaeger/Zipkin)**
-- Span propagation and trace context
-- Sampling strategies (percentage vs tail-based)
-- Storage backend (Elasticsearch/Cassandra)
-- Integration with logging and metrics
-- **Senior angle:** Performance impact, data retention, debugging distributed issues
-
-### 23. **Design Feature Flag System (LaunchDarkly)**
-- Flag evaluation and user targeting
-- Rollout strategies (percentage, gradual)
-- A/B testing and experimentation
-- Audit trails and change governance
-- **Senior angle:** Performance (edge evaluation), consistency, operational safety
-
-### 24. **Design Container Orchestration (Kubernetes-like)**
-- Pod scheduling and bin-packing
-- Resource management and QoS tiers
-- Service discovery and networking
-- Rolling updates and canary deployments
-- **Senior angle:** Multi-cluster federation, auto-scaling, security policies
-
-### 25. **Design Search Engine (Elasticsearch)**
-- Inverted index construction
-- Query parsing and optimization
-- Sharding strategy for large indices
-- Real-time vs batch indexing
-- **Senior angle:** Multi-tenancy isolation, geospatial queries, relevance tuning
+* sequential vs random
+* predictability
+* collision probability
 
 ---
 
-## Senior-Level Expectations for All Designs
+## Scaling
 
-**Always address these topics:**
+### Read Heavy
 
-1. **Scale & Capacity**
-   - "How many users/requests can it handle?"
-   - "What if it grows 10x?"
-   - Back-of-envelope calculations with justification
+Redirect traffic >> writes.
 
-2. **Reliability & Resilience**
-   - "What happens if a component fails?"
-   - Redundancy strategy, failover testing
-   - SLO/SLA targets and how to achieve them
+Use:
 
-3. **Cost & Efficiency**
-   - "What's the TCO?"
-   - Storage, compute, network cost breakdown
-   - How to optimize without sacrificing quality
-
-4. **Security**
-   - Data encryption (at rest and in transit)
-   - Authentication and authorization models
-   - Compliance and regulatory requirements
-
-5. **Observability**
-   - Monitoring strategy and key metrics
-   - Alerting thresholds and on-call runbooks
-   - Debugging and incident response
-
-6. **Operational Concerns**
-   - Deployment and rollback procedures
-   - Operational complexity and manual effort
-   - Team ownership and runbook maintenance
-
-7. **Trade-offs & Justification**
-   - Why this technology over alternatives?
-   - Consistency vs availability vs partition tolerance
-   - Latency vs throughput vs cost
-   - Complexity vs maintainability
+* CDN
+* Redis cache
+* read replicas
 
 ---
 
-## Practice Framework
+## Data Model
 
-**For each question (45-60 minutes):**
-1. **Clarify requirements** (5-10 min)
-   - Scale, SLA, constraints, existing systems
-2. **Propose high-level design** (15-20 min)
-   - Components, architecture, data flow
-3. **Deep dive into specifics** (15-20 min)
-   - Database choice, caching strategy, API design
-4. **Discuss trade-offs** (10-15 min)
-   - Alternative approaches and why you chose yours
-5. **Address failures** (5-10 min)
-   - Failure modes, monitoring, recovery
-
-**Mock interview tips:**
-- Draw diagrams (use [ROLE-AND-COMPANY-GUIDE.md](ROLE-AND-COMPANY-GUIDE.md) for role-specific prompts)
-- Mention concrete numbers (not vague "scale")
-- Discuss what you'd measure and monitor
-- Be honest about trade-offs ("This approach trades consistency for availability because...")
-- Mention operational complexity upfront
+```text
+ShortURL
+LongURL
+CreatedAt
+TTL
+UserId
+```
 
 ---
 
-*Updated: May 2026 | Based on FAANG interview experiences and senior engineer expectations*
+## Failure Scenarios
+
+* cache miss storms
+* hot URLs
+* DB failure
+* abuse/spam
+
+---
+
+## Strong Senior Signals
+
+* multi-region redirects
+* geo routing
+* analytics pipeline
+* abuse detection
+* hot key mitigation
+
+---
+
+# 2. Design Distributed Rate Limiter
+
+## Algorithms
+
+* token bucket
+* leaky bucket
+* sliding window
+* fixed window
+
+Most common answer:
+
+Token bucket.
+
+---
+
+## Senior-Level Topics
+
+### Distributed Coordination
+
+Use:
+
+* Redis atomic counters
+* Lua scripts
+* sharded counters
+
+---
+
+## Important Tradeoffs
+
+### Accuracy vs Performance
+
+Global synchronization increases latency.
+
+Eventually consistent counters may slightly over-allow.
+
+---
+
+## Common Follow-Ups
+
+* per user limits
+* per API limits
+* hierarchical throttling
+* burst handling
+* Retry-After headers
+
+---
+
+# 3. Design Notification System
+
+## Channels
+
+* push
+* email
+* SMS
+* in-app
+
+---
+
+## Architecture
+
+```text
+API Gateway
+→ Notification Service
+→ Kafka
+→ Channel Workers
+→ Providers (FCM/APNs/Twilio)
+```
+
+---
+
+## Senior-Level Topics
+
+### Reliability
+
+* retries
+* DLQ
+* idempotency
+* delivery guarantees
+
+---
+
+## Important Follow-Ups
+
+* user preferences
+* quiet hours
+* GDPR deletion
+* deduplication
+* campaign scheduling
+
+---
+
+# 4. Design Search Autocomplete
+
+## Core Components
+
+* trie
+* ranking layer
+* cache
+* streaming pipeline
+
+---
+
+## MUST DISCUSS
+
+### Ranking
+
+Suggestions based on:
+
+* popularity
+* recency
+* personalization
+* trends
+* geo relevance
+
+---
+
+## Scaling Topics
+
+* distributed trie shards
+* top-K at trie nodes
+* incremental updates
+* hot prefixes
+
+---
+
+## Senior-Level Additions
+
+* typo tolerance
+* fuzzy search
+* ML ranking
+* multi-language support
+
+---
+
+# 5. Design Chat System (WhatsApp/Slack)
+
+## Important Topics
+
+* WebSockets
+* online presence
+* ordering
+* offline delivery
+* deduplication
+
+---
+
+## Architecture
+
+```text
+Gateway
+→ Chat Service
+→ Kafka
+→ Delivery Service
+→ WebSocket Gateway
+```
+
+---
+
+## Senior-Level Discussion
+
+### Message Ordering
+
+Global ordering impossible at scale.
+
+Use:
+
+* per conversation ordering
+* logical timestamps
+* sequence IDs
+
+---
+
+## MUST Mention
+
+* read receipts
+* typing indicators
+* push notifications
+* encryption
+* multi-device sync
+
+---
+
+# 6. Design Social Feed (Twitter/Facebook)
+
+## Core Debate
+
+### Fanout On Write
+
+vs
+
+### Fanout On Read
+
+This is THE key discussion.
+
+---
+
+## Scaling Topics
+
+* celebrity problem
+* timeline cache
+* ranking pipeline
+* content moderation
+
+---
+
+## Senior-Level Topics
+
+### Hybrid Fanout
+
+Most real systems use hybrid strategy.
+
+---
+
+## MUST Discuss
+
+* recommendation ranking
+* spam filtering
+* cache invalidation
+* eventual consistency
+
+---
+
+# 7. Design Video Streaming Platform
+
+## Core Components
+
+* object storage
+* transcoding pipeline
+* CDN
+* recommendation engine
+
+---
+
+## Important Topics
+
+### Adaptive Bitrate Streaming
+
+* HLS
+* DASH
+
+---
+
+## Senior-Level Topics
+
+* edge caching
+* transcoding cost
+* DRM
+* QoE metrics
+* upload pipeline
+
+---
+
+# 8. Design File Storage System
+
+## Core Topics
+
+* chunking
+* deduplication
+* metadata DB
+* sync engine
+
+---
+
+## MUST Discuss
+
+### Metadata vs Blob Separation
+
+Metadata:
+
+* SQL/NoSQL
+
+Blobs:
+
+* object storage
+
+---
+
+## Senior-Level Topics
+
+* sync conflicts
+* version history
+* collaborative editing
+* large file optimization
+
+---
+
+# 9. Design Payment Processing System
+
+## Most Important Topic
+
+### Idempotency
+
+Critical for duplicate prevention.
+
+---
+
+## MUST Discuss
+
+* payment state machine
+* reconciliation
+* fraud detection
+* PCI compliance
+* ledger design
+
+---
+
+## Strong Senior Signals
+
+* eventual settlement
+* double-entry accounting
+* distributed transactions avoidance
+
+---
+
+# 10. Design Ride Sharing System
+
+## Core Topics
+
+* geospatial indexing
+* nearest driver search
+* ETA prediction
+* surge pricing
+
+---
+
+## Senior-Level Topics
+
+### Geo Indexing
+
+Use:
+
+* S2 geometry
+* quadtrees
+* geohash
+
+---
+
+## MUST Discuss
+
+* driver/rider matching
+* real-time tracking
+* dispatch optimization
+
+---
+
+# 11. Design Distributed Cache
+
+## Important Topics
+
+* replication
+* eviction policy
+* persistence
+* consistent hashing
+
+---
+
+## Senior-Level Topics
+
+### Cache Stampede
+
+Solutions:
+
+* request collapsing
+* stale reads
+* async refresh
+
+---
+
+## MUST Discuss
+
+* hot keys
+* failover
+* memory fragmentation
+
+---
+
+# 12. Design Distributed Message Queue
+
+## Core Topics
+
+* partitioning
+* ordering guarantees
+* replay
+* retention
+
+---
+
+## Senior-Level Topics
+
+### Exactly Once
+
+Interviewers LOVE this topic.
+
+Reality:
+
+Usually:
+
+* at least once
+
+- idempotency
+
+---
+
+## MUST Discuss
+
+* consumer groups
+* rebalancing
+* backpressure
+* DLQ
+
+---
+
+# 13. Design Search Engine
+
+## Core Topics
+
+* crawling
+* indexing
+* ranking
+* query parsing
+
+---
+
+## MUST Discuss
+
+### Inverted Index
+
+Most important data structure.
+
+---
+
+## Senior-Level Topics
+
+* BM25 ranking
+* indexing pipeline
+* query optimization
+* distributed shards
+
+---
+
+# 14. Design Recommendation Engine
+
+## Important Topics
+
+* collaborative filtering
+* embeddings
+* ranking models
+* candidate generation
+
+---
+
+## Senior-Level Topics
+
+### Multi-Stage Ranking
+
+```text
+Candidate Generation
+→ Filtering
+→ Ranking
+→ Re-ranking
+```
+
+---
+
+## MUST Discuss
+
+* cold start problem
+* diversity
+* exploration vs exploitation
+
+---
+
+# 15. Design API Gateway
+
+## Core Topics
+
+* authentication
+* authorization
+* routing
+* throttling
+
+---
+
+## Senior-Level Topics
+
+* plugin architecture
+* service mesh integration
+* canary routing
+* observability
+
+---
+
+# 16. Design Monitoring & Alerting System
+
+## Core Topics
+
+* TSDB
+* metrics ingestion
+* alert engine
+
+---
+
+## MUST Discuss
+
+### Cardinality Explosion
+
+This is a favorite senior-level topic.
+
+---
+
+## Senior-Level Topics
+
+* p99 latency
+* distributed tracing
+* anomaly detection
+* SLO/error budgets
+
+---
+
+# 17. Design Job Scheduler
+
+## Core Topics
+
+* DAG execution
+* retries
+* orchestration
+
+---
+
+## Senior-Level Topics
+
+* distributed workers
+* fairness
+* queue prioritization
+* resource isolation
+
+---
+
+# 18. Design Real-Time Analytics
+
+## Core Topics
+
+* event ingestion
+* stream processing
+* aggregation
+
+---
+
+## MUST Discuss
+
+### Lambda vs Kappa Architecture
+
+Very common follow-up.
+
+---
+
+## Senior-Level Topics
+
+* late events
+* watermarks
+* exactly once semantics
+
+---
+
+# 19. Design Distributed Database
+
+## Core Topics
+
+* sharding
+* replication
+* quorum
+* consistency
+
+---
+
+## MUST Discuss
+
+### CAP Theorem
+
+and:
+
+### Leader-Based Replication
+
+---
+
+## Senior-Level Topics
+
+* anti-entropy repair
+* split brain
+* failover
+* multi-region replication
+
+---
+
+# 20. Design CDN
+
+## Core Topics
+
+* edge locations
+* cache invalidation
+* routing
+
+---
+
+## Senior-Level Topics
+
+* origin shielding
+* hot object replication
+* DDoS mitigation
+* edge compute
+
+---
+
+# 21. Design Feature Flag System
+
+## Core Topics
+
+* gradual rollout
+* A/B testing
+* targeting
+
+---
+
+## Senior-Level Topics
+
+* edge evaluation
+* consistency guarantees
+* rollback safety
+* governance
+
+---
+
+# 22. Design Distributed Lock Service
+
+## Core Topics
+
+* Raft/Paxos
+* consensus
+* leader election
+
+---
+
+## Senior-Level Topics
+
+* fencing tokens
+* lease expiry
+* network partitions
+
+---
+
+# 23. Design Container Orchestration System
+
+## Core Topics
+
+* scheduling
+* service discovery
+* deployment orchestration
+
+---
+
+## MUST Discuss
+
+### Kubernetes Concepts
+
+* control plane
+* scheduler
+* etcd
+* kubelet
+
+---
+
+## Senior-Level Topics
+
+* auto scaling
+* bin packing
+* multi-cluster federation
+
+---
+
+# 24. Design Secrets Management System
+
+## Core Topics
+
+* encryption
+* rotation
+* access control
+
+---
+
+## Senior-Level Topics
+
+* KMS integration
+* audit logs
+* secret leasing
+* zero trust architecture
+
+---
+
+# 25. Design Distributed Tracing System
+
+## Core Topics
+
+* trace propagation
+* spans
+* sampling
+
+---
+
+## Senior-Level Topics
+
+* tail-based sampling
+* trace storage scaling
+* correlation IDs
+* observability integration
+
+---
+
+# Most Important Concepts To Master Across ALL Questions
+
+## 1. Capacity Estimation
+
+You MUST estimate:
+
+* QPS
+* storage
+* bandwidth
+* memory
+* server count
+
+---
+
+## 2. Scaling Bottlenecks
+
+Always identify:
+
+* hot partitions
+* cache bottlenecks
+* DB bottlenecks
+* network bottlenecks
+
+---
+
+## 3. Reliability
+
+Always discuss:
+
+* replication
+* retries
+* failover
+* circuit breakers
+* deployment safety
+
+---
+
+## 4. Consistency Tradeoffs
+
+Strong candidates explicitly discuss:
+
+* strong consistency
+* eventual consistency
+* quorum models
+
+---
+
+## 5. Observability
+
+Discuss:
+
+* metrics
+* logs
+* traces
+* alerts
+* dashboards
+* SLOs
+
+---
+
+## 6. Cost Awareness
+
+Senior engineers discuss:
+
+* storage cost
+* network cost
+* compute cost
+* caching efficiency
+
+---
+
+## 7. Operational Excellence
+
+Mention:
+
+* blue-green deployment
+* canary rollout
+* rollback
+* chaos testing
+* runbooks
+
+---
+
+# Most Common Senior-Level Follow-Up Questions
+
+Interviewers almost always ask:
+
+1. What breaks at 10x scale?
+2. How do you shard this?
+3. What happens during region failure?
+4. How do you avoid hot partitions?
+5. What are the consistency guarantees?
+6. How do you monitor the system?
+7. How do you deploy safely?
+8. What are the biggest operational risks?
+9. How would you reduce cost?
+10. Which metrics would you track?
+
+---
+
+# Final Preparation Strategy
+
+For EACH system:
+
+## Step 1
+
+Clarify requirements.
+
+---
+
+## Step 2
+
+Estimate scale.
+
+---
+
+## Step 3
+
+Draw high-level architecture.
+
+---
+
+## Step 4
+
+Deep dive into:
+
+* DB
+* cache
+* messaging
+* APIs
+* scaling
+
+---
+
+## Step 5
+
+Discuss:
+
+* bottlenecks
+* failures
+* tradeoffs
+* operational concerns
+
+---
+
+# Final Interview Advice
+
+Senior system design interviews are NOT about perfect architecture.
+
+They are about:
+
+* structured thinking
+* prioritization
+* identifying bottlenecks early
+* reasoning about tradeoffs
+* demonstrating operational maturity
+
+Strong candidates proactively discuss:
+
+* failure handling
+* scaling limitations
+* deployment risks
+* observability
+* cost
+
+without interviewer prompting.
+
+That is usually the difference between:
+
+* mid-level engineer
+  and
+* strong senior/staff signal.
+
+---
+
+# Suggested Study Priority (Most Asked)
+
+Focus on these first:
+
+1. Social Feed
+2. Chat System
+3. Search/Autocomplete
+4. Notification System
+5. Distributed Cache
+6. Payment System
+7. Rate Limiter
+8. Distributed Queue
+9. Ride Sharing
+10. Recommendation Engine
+
+These appear extremely frequently across:
+
+* Google
+* Meta
+* Amazon
+* Uber
+* Microsoft
+* LinkedIn
+* Airbnb
+* Stripe
+* Netflix
+
+---
+
+Updated for 2026 Senior Engineer Interviews (Google L5/L6, Microsoft Senior, Meta E5/E6, Amazon SDE3/Principal Prep)
