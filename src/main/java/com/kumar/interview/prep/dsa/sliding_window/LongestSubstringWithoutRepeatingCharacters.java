@@ -61,7 +61,7 @@ public class LongestSubstringWithoutRepeatingCharacters {
      *             if {@code k} is less than 1
      */
 
-    public int lengthOfLongestSubstringKDistinct(String s, int k) {
+    public int lengthOfLongestSubstringAtMostKDistinct(String s, int k) {
         if (s.length() <= k) {
             return s.length();
         }
@@ -163,8 +163,8 @@ public class LongestSubstringWithoutRepeatingCharacters {
         System.out.println(findLongestSubstringWithoutRepeatingCharacters("abcabcbb"));
         System.out.println(findLongestSubstringWithoutRepeatingCharacters("bbbbb"));
         System.out.println(findLongestSubstringWithoutRepeatingCharacters("pwwkew"));
-        System.out.println("lengthOfLongestSubstringKDistinct= " + lengthOfLongestSubstringKDistinct("eceba", 2));
-        System.out.println("lengthOfLongestSubstringKDistinct= " + lengthOfLongestSubstringKDistinct("aa", 1));
+        System.out.println("lengthOfLongestSubstringKDistinct= " + lengthOfLongestSubstringAtMostKDistinct("eceba", 2));
+        System.out.println("lengthOfLongestSubstringKDistinct= " + lengthOfLongestSubstringAtMostKDistinct("aa", 1));
         System.out.println("lengthOfSubstringAtleastKRepeating= " + lengthOfSubstringAtleastKRepeating("aaabb", 3));
         System.out.println("lengthOfSubstringAtleastKRepeating= " + lengthOfSubstringAtleastKRepeating("ababbc", 2));
     }
