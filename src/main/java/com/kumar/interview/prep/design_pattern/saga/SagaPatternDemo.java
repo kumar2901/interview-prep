@@ -23,6 +23,8 @@ import java.util.Map;
  *   <li>Each step is a dedicated class with idempotent compensation guards</li>
  *   <li>Results are returned as {@link SagaExecutionResult} instead of unchecked exceptions</li>
  * </ul>
+ *
+ * <p>See {@code saga-pattern.md} in this package for full documentation.
  */
 public class SagaPatternDemo {
 

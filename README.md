@@ -384,6 +384,29 @@ Backend Developer interview preparation
   - Subsystem: sets direction based on engine speed and fuel
   - setDirectionBasedOnSpeedAndFeul(), turnOff() methods
 
+#### Saga Pattern (in `design_pattern/saga/`)
+- **SagaPatternDemo.java**
+  - Orchestration-based saga for distributed order placement
+  - Scenarios: successful order flow and failure with automatic compensation
+- **Documentation:** `design_pattern/saga/saga-pattern.md`
+  - Problem statement, saga vs 2PC/TCC, orchestration vs choreography
+  - Architecture, package structure, execution flows, production considerations
+- **Core framework (`core/`)**
+  - `SagaExecutionCoordinator` — runs steps forward, compensates in reverse on failure
+  - `SagaStep` — execute + compensate contract with idempotent compensation guards
+  - `SagaDefinition` — named ordered list of steps
+  - `SagaExecutionResult` — sealed `Success` | `Failure` with compensation outcomes
+  - `SagaExecutionListener` — observability hooks; `LoggingSagaExecutionListener` for demos
+- **Order domain (`order/`)**
+  - Workflow: CreateOrder → ProcessPayment → UpdateInventory → DeliverOrder
+  - `PlaceOrderCommand` (immutable input), `OrderSagaContext` (saga id + artifacts)
+  - Service ports: `OrderService`, `PaymentService`, `InventoryService`, `DeliveryService`
+  - `InMemoryOrderInfrastructure` — in-memory adapters for local demo and tests
+- **Run:**
+  ```bash
+  ./mvnw compile exec:java -Dexec.mainClass="com.kumar.interview.prep.design_pattern.saga.SagaPatternDemo"
+  ```
+
 ---
 
 ## System Design
