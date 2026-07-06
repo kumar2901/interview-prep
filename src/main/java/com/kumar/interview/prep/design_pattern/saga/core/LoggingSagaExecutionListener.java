@@ -41,8 +41,8 @@ public class LoggingSagaExecutionListener<T> implements SagaExecutionListener<T>
     }
 
     @Override
-    public void onCompensationCompleted(
-            SagaDefinition<T> saga, SagaStep<T> step, T context, CompensationOutcome outcome) {
+    public void onCompensationCompleted(SagaDefinition<T> saga, SagaStep<T> step, T context,
+            CompensationOutcome outcome) {
         if (outcome.success()) {
             System.out.println(indent + "<- Compensated " + step.name());
         } else {
@@ -53,12 +53,10 @@ public class LoggingSagaExecutionListener<T> implements SagaExecutionListener<T>
     @Override
     public void onSagaFinished(SagaDefinition<T> saga, SagaExecutionResult<T> result) {
         switch (result) {
-            case SagaExecutionResult.Success<T> success ->
-                    System.out.println(indent + "Saga '" + saga.name() + "' succeeded after "
-                            + success.completedSteps().size() + " step(s)");
-            case SagaExecutionResult.Failure<T> failure ->
-                    System.out.println(indent + "Saga '" + saga.name() + "' failed at "
-                            + failure.failedStep() + "; fullyCompensated=" + failure.fullyCompensated());
+            case SagaExecutionResult.Success < T > success -> System.out.println(indent + "Saga '" + saga.name()
+                    + "' succeeded after " + success.completedSteps().size() + " step(s)");
+            case SagaExecutionResult.Failure < T > failure -> System.out.println(indent + "Saga '" + saga.name()
+                    + "' failed at " + failure.failedStep() + "; fullyCompensated=" + failure.fullyCompensated());
         }
     }
 }

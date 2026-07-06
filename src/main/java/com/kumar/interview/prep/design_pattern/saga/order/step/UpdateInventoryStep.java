@@ -26,9 +26,7 @@ public final class UpdateInventoryStep implements SagaStep<OrderSagaContext> {
     public void execute(OrderSagaContext context) {
         try {
             String reservationId = inventoryService.reserveInventory(new InventoryService.ReservationRequest(
-                    context.sagaId().toString(),
-                    context.command().productId(),
-                    context.command().quantity()));
+                    context.sagaId().toString(), context.command().productId(), context.command().quantity()));
             context.artifacts().setInventoryReservationId(reservationId);
         } catch (RuntimeException ex) {
             throw new SagaStepException(STEP_NAME, ex.getMessage(), ex);

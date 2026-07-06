@@ -1,5 +1,7 @@
 package com.kumar.interview.prep.dsa.ebay_codesignal;
 
+import java.util.Arrays;
+
 public class EbayCodeSignal {
 
     /**
@@ -100,51 +102,72 @@ public class EbayCodeSignal {
      * impossible to keep the phone running due to recharge constraints.
      *
      * Notes: - Switching batteries takes no time. - The phone must run continuously without idle gaps. - All batteries
-     * are fully charged at time 0.
+     * are fully charged at time 0. Example: arr1 = [12, 3, 5, 18] arr2 = [8, 1, 4, 9] x = 16 output: 3
+     *
+     * <br/>
+     * input [12, 3, 5, 18], [8, 1, 4, 9], 16) # 3
+     *
+     *
+     * <br/>
+     * input ([12, 3, 5, 18], [8, 1, 4, 9], 46) # 5
+     *
+     * <br/>
+     * input ([12, 3, 2], [6,1, 1], 20) # -1
+     *
+     *
+     *
+     * Explanation: capacity = [2, 5, 6] // Battery backup recharge = [12, 1, 4] // Charging time x = 16 // Need phone
+     * for 16 minutes
+     *
+     *
+     *
+     * 1. remaining: 16
+     *
+     * ctime=2 AT:[14,0,0] count=1 i=1 use: min(2,16)=2 remaining=16-2=14
+     *
+     * 2. remaining: 14 ctime=2+5=7 count=2 used=min(5,14)=5 remaining=9 idx=2
+     *
+     *
+     * 3. remainging=9 ctime=13 used=min(6,9)=6 remaining=9-6=3 count=3 idx=3%3=0 availableTime[14,8,17] 4: remainging=3
+     * ctime=13+2=15
+     *
+     * cTime<14=-1
+     *
      */
 
     public static int batteryAndRecharge(int[] capacity, int[] recharge, int T) {
 
         int n = capacity.length;
-        long time = 0;
 
-        long[] ready = new long[n];
-        boolean[] used = new boolean[n];
+        long[] availableTime = new long[n];
 
-        int usedCount = 0;
-        int index = 0;
+        long currentTime = 0;
+        int count = 0;
+        int idx = 0;
+        int remaining = T;
 
-        while (time < T) {
+        while (remaining > 0) {
 
-            boolean found = false;
-
-            for (int i = 0; i < n; i++) {
-
-                int batt = (index + i) % n;
-
-                if (ready[batt] <= time) {
-
-                    found = true;
-
-                    if (!used[batt]) {
-                        used[batt] = true;
-                        usedCount++;
-                    }
-
-                    time += capacity[batt];
-                    ready[batt] = time + recharge[batt];
-
-                    index = (batt + 1) % n;
-                    break;
-                }
+            System.out.println("currentTime=" + currentTime + " count=" + count + " idx=" + idx + " remaining="
+                    + remaining + " AvailableTime=" + Arrays.toString(availableTime));
+            if (currentTime < availableTime[idx]) {
+                return -1;
             }
+            int use = Math.min(capacity[idx], remaining);
+            currentTime += use;
+            remaining -= use;
+            count++;
 
-            if (!found) {
-                return -1; // all batteries recharging
+            if (use == capacity[idx]) {
+                availableTime[idx] = currentTime + recharge[idx];
             }
+            System.out.println("currentTime=" + currentTime + " count=" + count + " idx=" + idx + " remaining="
+                    + remaining + " AvailableTime=" + Arrays.toString(availableTime));
+
+            idx = (idx + 1) % n;
         }
 
-        return usedCount;
+        return count;
 
     }
 
@@ -205,26 +228,25 @@ public class EbayCodeSignal {
     }
 
     static void main() {
-        int[][] image = {{100, 200, 100}, {200, 50, 200}, {100, 200, 100}};
-
-        int radius = 1;
-
-        int[][] blurred = blurImage(image, radius);
-
-        for (int[] ints : blurred) {
-            for (int j = 0; j < blurred[0].length; j++) {
-                System.out.print(ints[j] + " ");
-            }
-            System.out.println();
-        }
+        /*
+         * int[][] image = {{100, 200, 100}, {200, 50, 200}, {100, 200, 100}};
+         *
+         * int radius = 1;
+         *
+         * int[][] blurred = blurImage(image, radius);
+         *
+         * for (int[] ints : blurred) { for (int j = 0; j < blurred[0].length; j++) { System.out.print(ints[j] + " "); }
+         * System.out.println(); }
+         */
 
         int[] capacity = {2, 5, 6};
         int[] recharge = {12, 1, 4};
         int x = 16;
         System.out.println(batteryAndRecharge(capacity, recharge, x));
-
-        String[] notes = new String[]{"C3", "E3", "G3", "C4", "E4", "G4", "C5"};
-        System.out.println(isSingable(notes, "B2", "C5"));
+        /*
+         * String[] notes = new String[]{"C3", "E3", "G3", "C4", "E4", "G4", "C5"}; System.out.println(isSingable(notes,
+         * "B2", "C5"));
+         */
 
     }
 

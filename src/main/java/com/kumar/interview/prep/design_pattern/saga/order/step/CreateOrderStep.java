@@ -25,12 +25,9 @@ public final class CreateOrderStep implements SagaStep<OrderSagaContext> {
     @Override
     public void execute(OrderSagaContext context) {
         try {
-            String orderId = orderService.createOrder(new OrderService.PlaceOrderRequest(
-                    context.sagaId().toString(),
-                    context.command().customerId(),
-                    context.command().productId(),
-                    context.command().quantity(),
-                    context.command().amount()));
+            String orderId = orderService.createOrder(
+                    new OrderService.PlaceOrderRequest(context.sagaId().toString(), context.command().customerId(),
+                            context.command().productId(), context.command().quantity(), context.command().amount()));
             context.artifacts().setOrderId(orderId);
         } catch (RuntimeException ex) {
             throw new SagaStepException(STEP_NAME, "Unable to create order", ex);

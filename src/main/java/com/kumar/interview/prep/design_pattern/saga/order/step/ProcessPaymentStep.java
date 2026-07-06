@@ -24,16 +24,12 @@ public final class ProcessPaymentStep implements SagaStep<OrderSagaContext> {
 
     @Override
     public void execute(OrderSagaContext context) {
-        String orderId = context.artifacts()
-                .orderId()
+        String orderId = context.artifacts().orderId()
                 .orElseThrow(() -> new SagaStepException(STEP_NAME, "Order must exist before payment"));
 
         try {
             String paymentId = paymentService.capturePayment(new PaymentService.PaymentRequest(
-                    context.sagaId().toString(),
-                    context.command().customerId(),
-                    orderId,
-                    context.command().amount()));
+                    context.sagaId().toString(), context.command().customerId(), orderId, context.command().amount()));
             context.artifacts().setPaymentId(paymentId);
         } catch (RuntimeException ex) {
             throw new SagaStepException(STEP_NAME, "Unable to capture payment", ex);

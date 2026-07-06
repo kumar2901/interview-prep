@@ -12,8 +12,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * In-memory service implementations for local demos and integration tests.
- * Each operation is idempotent where compensation may be retried.
+ * In-memory service implementations for local demos and integration tests. Each operation is idempotent where
+ * compensation may be retried.
  */
 public final class InMemoryOrderInfrastructure {
 
@@ -25,17 +25,12 @@ public final class InMemoryOrderInfrastructure {
     }
 
     public static OrderServices create(Map<String, Integer> initialInventory, boolean failInventoryReservation) {
-        return new OrderServices(
-                new InMemoryOrderService(),
-                new InMemoryPaymentService(),
+        return new OrderServices(new InMemoryOrderService(), new InMemoryPaymentService(),
                 new InMemoryInventoryService(initialInventory, failInventoryReservation),
                 new InMemoryDeliveryService());
     }
 
-    public record OrderServices(
-            OrderService orders,
-            PaymentService payments,
-            InventoryService inventory,
+    public record OrderServices(OrderService orders, PaymentService payments, InventoryService inventory,
             DeliveryService deliveries) {
     }
 
@@ -118,8 +113,8 @@ public final class InMemoryOrderInfrastructure {
             inventory.put(request.productId(), available - request.quantity());
             String reservationId = "RES-" + sequence.incrementAndGet();
             reservations.put(reservationId, request.productId() + ":" + request.quantity());
-            log("InventoryService", "Reserved " + request.quantity() + " x " + request.productId()
-                    + " as " + reservationId + " (remaining=" + inventory.get(request.productId()) + ")");
+            log("InventoryService", "Reserved " + request.quantity() + " x " + request.productId() + " as "
+                    + reservationId + " (remaining=" + inventory.get(request.productId()) + ")");
             return reservationId;
         }
 
@@ -137,8 +132,8 @@ public final class InMemoryOrderInfrastructure {
             String[] parts = reservation.split(":");
             inventory.merge(parts[0], Integer.parseInt(parts[1]), Integer::sum);
             releasedReservations.add(reservationId);
-            log("InventoryService", "Released reservation " + reservationId
-                    + " (remaining=" + inventory.get(parts[0]) + ")");
+            log("InventoryService",
+                    "Released reservation " + reservationId + " (remaining=" + inventory.get(parts[0]) + ")");
         }
 
         @Override

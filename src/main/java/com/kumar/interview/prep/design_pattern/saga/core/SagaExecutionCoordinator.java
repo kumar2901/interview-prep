@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Orchestration-based saga coordinator. Executes steps sequentially and triggers
- * compensating transactions in reverse order when a forward step fails.
+ * Orchestration-based saga coordinator. Executes steps sequentially and triggers compensating transactions in reverse
+ * order when a forward step fails.
  */
 public class SagaExecutionCoordinator<T> {
 
@@ -44,25 +44,20 @@ public class SagaExecutionCoordinator<T> {
                 List<CompensationOutcome> compensationOutcomes = compensate(saga, completedSteps, context);
                 boolean fullyCompensated = compensationOutcomes.stream().allMatch(CompensationOutcome::success);
 
-                SagaExecutionResult.Failure<T> result = new SagaExecutionResult.Failure<>(
-                        context,
-                        step.name(),
-                        failure.getMessage(),
-                        compensationOutcomes,
-                        fullyCompensated);
+                SagaExecutionResult.Failure<T> result = new SagaExecutionResult.Failure<>(context, step.name(),
+                        failure.getMessage(), compensationOutcomes, fullyCompensated);
                 listener.onSagaFinished(saga, result);
                 return result;
             }
         }
 
-        SagaExecutionResult.Success<T> result =
-                new SagaExecutionResult.Success<>(context, List.copyOf(completedStepNames));
+        SagaExecutionResult.Success<T> result = new SagaExecutionResult.Success<>(context,
+                List.copyOf(completedStepNames));
         listener.onSagaFinished(saga, result);
         return result;
     }
 
-    private List<CompensationOutcome> compensate(
-            SagaDefinition<T> saga, Deque<SagaStep<T>> completedSteps, T context) {
+    private List<CompensationOutcome> compensate(SagaDefinition<T> saga, Deque<SagaStep<T>> completedSteps, T context) {
         List<CompensationOutcome> outcomes = new ArrayList<>();
 
         while (!completedSteps.isEmpty()) {
@@ -79,8 +74,7 @@ public class SagaExecutionCoordinator<T> {
                 outcomes.add(outcome);
                 listener.onCompensationCompleted(saga, step, context, outcome);
             } catch (RuntimeException compensationFailure) {
-                CompensationOutcome outcome = CompensationOutcome.failed(
-                        step.name(), compensationFailure.getMessage());
+                CompensationOutcome outcome = CompensationOutcome.failed(step.name(), compensationFailure.getMessage());
                 outcomes.add(outcome);
                 listener.onCompensationCompleted(saga, step, context, outcome);
             }

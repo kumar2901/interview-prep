@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * Declarative description of a saga workflow.
  */
-public record SagaDefinition<T>(String name, List<SagaStep<T>> steps) {
+public record SagaDefinition<T> (String name, List<SagaStep<T>> steps) {
 
     public SagaDefinition {
         Objects.requireNonNull(name, "name");

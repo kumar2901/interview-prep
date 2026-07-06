@@ -24,16 +24,12 @@ public final class DeliverOrderStep implements SagaStep<OrderSagaContext> {
 
     @Override
     public void execute(OrderSagaContext context) {
-        String orderId = context.artifacts()
-                .orderId()
+        String orderId = context.artifacts().orderId()
                 .orElseThrow(() -> new SagaStepException(STEP_NAME, "Order must exist before delivery"));
 
         try {
             String deliveryId = deliveryService.scheduleDelivery(new DeliveryService.DeliveryRequest(
-                    context.sagaId().toString(),
-                    orderId,
-                    context.command().customerId(),
-                    context.command().productId(),
+                    context.sagaId().toString(), orderId, context.command().customerId(), context.command().productId(),
                     context.command().quantity()));
             context.artifacts().setDeliveryId(deliveryId);
         } catch (RuntimeException ex) {

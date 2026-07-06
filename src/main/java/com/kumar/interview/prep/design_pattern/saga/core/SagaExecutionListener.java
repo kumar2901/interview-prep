@@ -20,8 +20,8 @@ public interface SagaExecutionListener<T> {
     default void onCompensationStarted(SagaDefinition<T> saga, SagaStep<T> step, T context) {
     }
 
-    default void onCompensationCompleted(
-            SagaDefinition<T> saga, SagaStep<T> step, T context, CompensationOutcome outcome) {
+    default void onCompensationCompleted(SagaDefinition<T> saga, SagaStep<T> step, T context,
+            CompensationOutcome outcome) {
     }
 
     default void onSagaFinished(SagaDefinition<T> saga, SagaExecutionResult<T> result) {

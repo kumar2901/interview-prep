@@ -1,7 +1,6 @@
 package com.kumar.interview.prep.design_pattern.saga.order;
 
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Immutable command that starts the place-order saga.

@@ -21,10 +21,8 @@ public final class OrderPlacementSaga {
     }
 
     public static SagaDefinition<OrderSagaContext> definition(OrderServices services) {
-        List<SagaStep<OrderSagaContext>> steps = List.of(
-                new CreateOrderStep(services.orders()),
-                new ProcessPaymentStep(services.payments()),
-                new UpdateInventoryStep(services.inventory()),
+        List<SagaStep<OrderSagaContext>> steps = List.of(new CreateOrderStep(services.orders()),
+                new ProcessPaymentStep(services.payments()), new UpdateInventoryStep(services.inventory()),
                 new DeliverOrderStep(services.deliveries()));
         return new SagaDefinition<>(SAGA_NAME, steps);
     }

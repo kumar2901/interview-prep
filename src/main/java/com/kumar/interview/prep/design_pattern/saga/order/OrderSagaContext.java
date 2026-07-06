@@ -7,8 +7,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * Mutable execution state for the place-order saga. Input is immutable; artifacts
- * produced by each step are tracked separately for safe compensation.
+ * Mutable execution state for the place-order saga. Input is immutable; artifacts produced by each step are tracked
+ * separately for safe compensation.
  */
 public final class OrderSagaContext {
 
@@ -63,9 +63,8 @@ public final class OrderSagaContext {
 
         @Override
         public String toString() {
-            return "SagaArtifacts{orderId='" + orderId + "', paymentId='" + paymentId
-                    + "', inventoryReservationId='" + inventoryReservationId
-                    + "', deliveryId='" + deliveryId + "'}";
+            return "SagaArtifacts{orderId='" + orderId + "', paymentId='" + paymentId + "', inventoryReservationId='"
+                    + inventoryReservationId + "', deliveryId='" + deliveryId + "'}";
         }
     }
 
