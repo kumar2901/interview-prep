@@ -37,8 +37,9 @@ A social feed system aggregates and displays content from friends and followed a
 **API Design:**
 
 1. create post:
-```POST /posts
- Request Body:{
+POST /posts
+```
+Request Body:{
    "userId": "123",
    "content": "Hello World!",
    "media": ["image1.jpg", "video1.mp4"]
@@ -50,13 +51,15 @@ Response Body: {
 }
 ```
 2. follow user:
-```PUT /follow/user/{followerId}/{followeeId}
+PUT /follow/user/{followerId}/{followeeId}
+```
 Response Body: {
   "message": "User 123 is now following User 456"
 }
 ```
 3. view feed:
-```GET /feed/{userId}?limit=10&cursor=<optional_base64_token>
+GET /me/feed/{userId}?limit=10&cursor=<_timestamp>
+```
 Response Body: {
   "posts": [
     {
