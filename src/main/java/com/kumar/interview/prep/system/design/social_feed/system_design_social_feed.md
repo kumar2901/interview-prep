@@ -58,7 +58,7 @@ Response Body: {
 }
 ```
 3. view feed:
-GET /me/feed/{userId}?limit=10&cursor=<_timestamp>
+GET /me/feed/{userId}?limit=10&cursor={cursor}
 ```
 Response Body: {
   "posts": [
