@@ -1,10 +1,10 @@
 package com.kumar.interview.prep.dsa.ebay_codesignal;
 
 /**
- * Represents a versioned field entry in the database.
- * Tracks the value, timestamp, TTL expiration, and deletion state.
+ * Represents a versioned field entry in the database. Tracks the value, timestamp, TTL expiration, and deletion state.
  *
- * @param expireAt null = never expires
+ * @param expireAt
+ *            null = never expires
  */
 public record FieldEntry(String value, int setAt, Integer expireAt, boolean deleted) {
     /**

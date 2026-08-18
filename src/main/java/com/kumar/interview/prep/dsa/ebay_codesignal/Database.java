@@ -5,10 +5,8 @@ import java.util.List;
 /**
  * Interface for an in-memory database with versioned field storage and TTL support.
  *
- * Level 1: Basic operations (set, get, compareAndSet, compareAndDelete)
- * Level 2: Scan operations (scan, scanByPrefix)
- * Level 3: TTL support (setWithTTL, compareAndSetWithTTL)
- * Level 4: Look-back operations (getWhen, getHistory)
+ * Level 1: Basic operations (set, get, compareAndSet, compareAndDelete) Level 2: Scan operations (scan, scanByPrefix)
+ * Level 3: TTL support (setWithTTL, compareAndSetWithTTL) Level 4: Look-back operations (getWhen, getHistory)
  */
 public interface Database {
 
@@ -37,14 +35,12 @@ public interface Database {
     // LEVEL 2: Scan Operations
 
     /**
-     * List all fields in a record with their values, sorted by field name.
-     * Format: "field(value)"
+     * List all fields in a record with their values, sorted by field name. Format: "field(value)"
      */
     List<String> scan(int timestamp, String key);
 
     /**
-     * List all fields in a record that start with a prefix, sorted by field name.
-     * Format: "field(value)"
+     * List all fields in a record that start with a prefix, sorted by field name. Format: "field(value)"
      */
     List<String> scanByPrefix(int timestamp, String key, String prefix);
 
@@ -63,8 +59,8 @@ public interface Database {
     // LEVEL 4: Look-back Operations
 
     /**
-     * Get the value that was valid for a field at a specific historical timestamp.
-     * Takes into account all writes and TTL expirations as of that point in time.
+     * Get the value that was valid for a field at a specific historical timestamp. Takes into account all writes and
+     * TTL expirations as of that point in time.
      */
     String getWhen(int timestamp, String key, String field, int atTimestamp);
 

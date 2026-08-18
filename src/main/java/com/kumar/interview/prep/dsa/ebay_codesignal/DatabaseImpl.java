@@ -3,8 +3,8 @@ package com.kumar.interview.prep.dsa.ebay_codesignal;
 import java.util.*;
 
 /**
- * In-memory implementation of the Database interface.
- * Supports versioned field storage with TTL and historical look-back.
+ * In-memory implementation of the Database interface. Supports versioned field storage with TTL and historical
+ * look-back.
  */
 public class DatabaseImpl implements Database {
 
@@ -93,8 +93,8 @@ public class DatabaseImpl implements Database {
     }
 
     @Override
-    public boolean compareAndSetWithTTL(
-            int timestamp, String key, String field, int expectedValue, int newValue, int ttl) {
+    public boolean compareAndSetWithTTL(int timestamp, String key, String field, int expectedValue, int newValue,
+            int ttl) {
         String current = get(timestamp, key, field);
         if (current == null || !current.equals(String.valueOf(expectedValue))) {
             return false;
@@ -128,9 +128,7 @@ public class DatabaseImpl implements Database {
     public List<String> getHistory(String key, String field) {
         List<String> formatted = new ArrayList<>();
         for (FieldEntry entry : getHistoryEntries(key, field)) {
-            formatted.add("setAt=" + entry.setAt()
-                    + ",value=" + entry.value()
-                    + ",expireAt=" + entry.expireAt()
+            formatted.add("setAt=" + entry.setAt() + ",value=" + entry.value() + ",expireAt=" + entry.expireAt()
                     + ",deleted=" + entry.deleted());
         }
         return formatted;
@@ -143,9 +141,7 @@ public class DatabaseImpl implements Database {
      */
     private void writeField(int timestamp, String key, String field, FieldEntry entry) {
         database.computeIfAbsent(key, _ -> new HashMap<>()).put(field, entry);
-        history.computeIfAbsent(key, _ -> new HashMap<>())
-                .computeIfAbsent(field, _ -> new ArrayList<>())
-                .add(entry);
+        history.computeIfAbsent(key, _ -> new HashMap<>()).computeIfAbsent(field, _ -> new ArrayList<>()).add(entry);
     }
 
     /**
@@ -160,9 +156,7 @@ public class DatabaseImpl implements Database {
             }
         }
         FieldEntry deleted = new FieldEntry(null, timestamp, null, true);
-        history.computeIfAbsent(key, _ -> new HashMap<>())
-                .computeIfAbsent(field, _ -> new ArrayList<>())
-                .add(deleted);
+        history.computeIfAbsent(key, _ -> new HashMap<>()).computeIfAbsent(field, _ -> new ArrayList<>()).add(deleted);
     }
 
     /**
