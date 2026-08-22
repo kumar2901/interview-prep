@@ -1,4 +1,4 @@
-package com.kumar.interview.prep.dsa.hash_map;
+package com.kumar.interview.prep.dsa.cache;
 
 import java.util.HashMap;
 import java.util.Map;
