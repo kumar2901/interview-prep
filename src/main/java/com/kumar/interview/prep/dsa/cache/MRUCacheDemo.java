@@ -49,7 +49,6 @@ class MRUCache<K, V> {
     }
 
     public V get(K key) {
-
         MRUSegment<K, V> segment = getSegment(key);
         if (segment == null) {
             return null;
@@ -129,7 +128,6 @@ class MRUSegment<K, V> {
             node.value = value;
             moveToHead(node);
         } else {
-
             if (map.size() >= CAPACITY) {
                 Node<K, V> mruNode = head.next;
                 removeNode(mruNode);
@@ -144,7 +142,7 @@ class MRUSegment<K, V> {
 }
 public class MRUCacheDemo {
     static void main() {
-        MRUCache<Integer,String> cache=new MRUCache<>(3);
+        MRUCache<Integer,String> cache=new MRUCache<>(3,1);
 
         cache.put(1, "1");
         cache.put(2, "2");
@@ -153,6 +151,7 @@ public class MRUCacheDemo {
         System.out.println(cache.get(2));
         System.out.println(cache.get(3));
         cache.put(4, "4");
+        cache.put(5, "5");
 
         System.out.println(cache.get(3));
         System.out.println(cache.get(4));
