@@ -130,7 +130,7 @@ class Segment<K, V> {
         return (value != null) ? value : defaultValue;
     }
 
-    public  synchronized void put(K key, V value) {
+    public synchronized void put(K key, V value) {
         if (map.containsKey(key)) {
             Node<K, V> node = map.get(key);
             node.value = value; // update value

@@ -56,7 +56,6 @@ class MRUCache<K, V> {
         return segment.get(key);
     }
 
-
     public void put(K key, V value) {
         MRUSegment<K, V> segment = getSegment(key);
         segment.put(key, value);
@@ -142,7 +141,7 @@ class MRUSegment<K, V> {
 }
 public class MRUCacheDemo {
     static void main() {
-        MRUCache<Integer,String> cache=new MRUCache<>(3,1);
+        MRUCache<Integer, String> cache = new MRUCache<>(3, 1);
 
         cache.put(1, "1");
         cache.put(2, "2");

@@ -78,6 +78,12 @@ system_cpu_idle{host="server-01", region="us-east-1"} 42.5 1710283920000
 
 ### Alerting Data model
 
+RDBMS:
+```text
+alert_rules<ruleId,name, expression,duration_seconds,serverity,labels,isEnabled,createdBy>
+
+```
+
 ```yaml
 groups:
    - name: infrastructure_alerts
